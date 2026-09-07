@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1.9cm]{geometry}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage{lmodern}\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}\usepackage{graphicx}\usepackage{booktabs,tabularx,array,longtable}\usepackage{caption}\usepackage{enumitem}\usepackage{siunitx}\usepackage{hyperref}\usepackage{float}\usepackage{ragged2e}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={},pdftitle={Supplementary Information - From Cardiac Omics to Identifiable Dynamics}}
+\captionsetup{font=small,labelfont=bf}\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}\newcommand{\cthrc}{\textit{CTHRC1}}\newcommand{\tgfb}{TGF-$\beta$1}
+\title{\textbf{Supplementary Information}\\[4pt]\large From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model}
+\author{}
+\date{}
+\begin{document}\maketitle
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\section*{S1. Supplement scope}
+The main manuscript reports only the findings required to answer the study question. This Supplement retains the inferential units, mathematical provenance, consolidated numerical results, perturbation robustness, study-specific supporting analyses, Saudi-center provenance, and reproducibility limitations needed for specialist review. Numeric effects from different species, platforms, or experimental units are never pooled. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
+
+\begin{table}[H]\centering\caption{Dataset-level provenance and inferential unit.}\label{tab:sources}\scriptsize
+\begin{tabularx}{\linewidth}{p{2.0cm}p{2.7cm}YY}
+\toprule \textbf{Source} & \textbf{Unit} & \textbf{Analytical role} & \textbf{Boundary}\\\midrule
+GSE265828 & section/spot & transcript-axis spatial permutation & not ligand concentration or diffusion\\
+GSE267256 & released mouse sample & post-MI day effect and window sensitivity & day 5 singleton\\
+GSE261428 & mouse cardiac-fibroblast single-cell profiles, 3/5 dpi & published reparative-state trajectory context & not a biochemical reaction flux\\
+GSE123018 & donor within assay/time & RNA/Ribo direction and response-model diagnostic & not onset or myocardial delay\\
+GSE96991 & paired mouse line & Cthrc1 perturbation direction & selected system\\
+GSE96975 & paired human unit & small-cohort heterogeneity & not donor-universal\\
+GSE97358 & 84 donor-linked pairs & primary donor-derived \cthrc{} endpoint & in-vitro 24-h endpoint\\
+GSE225336 & culture replicate/time & independent human system-level direction & one defined source\\
+GSE132143 & within-species sample/pair & disease direction & no cross-species pooling\\
+KFSHRC 2016 & 5 DCM + 5 non-failing whole LV & Saudi-center disease-tissue context & not population validation\\
+E-TABM-480 / 2009 & 5 DCM + 4 control whole LV & original accession disease direction & manifest not assumed identical to 2016\\\bottomrule
+\end{tabularx}\end{table}
+
+\section*{S2. Mathematical provenance and selected benchmark}
+Three mathematical objects remain distinct.
+
+\textbf{Alfifi benchmark.} The reproduced object is Alfifi's one-dimensional delayed reaction--diffusion system with Dirichlet boundary conditions and the Appendix Galerkin reduction \cite{Alfifi}. The reproduction uses the Appendix reaction-delay placement; it is not a no-flux tissue model.
+
+\textbf{Homogeneous-reference identity.} For a pure-state-delay system,
+\[
+\partial_tX(x,t)=D\Delta X(x,t)+F\!\left(X(x,t),X(x,t-\tau);\theta\right),
+\]
+a time-independent field satisfies $X(x,t-\tau)=X(x,t)=X^*(x)$, so equilibrium compatibility is
+\[
+0=D\Delta X^*(x)+F\!\left(X^*(x),X^*(x);\theta\right).
+\]
+The equilibrium field therefore contains no independent information about a pure-state delay under the assumptions stated in the main manuscript.
+
+\textbf{Generic modal construct.} For $-\Delta\phi_m=\kappa_m\phi_m$, roots of the homogeneous-reference linearization satisfy
+\[
+\det[\lambda I_{n_X}+\kappa_mD-A-Be^{-\lambda\tau}]=0.
+\]
+This is a generic definition of the information needed for modal stability classification; it is not an inference from the Alfifi calculation and is not applied to cardiac tissue. Table~\ref{tab:alfifi} records the selected benchmark values.
+
+\begin{table}[H]\centering\caption{Selected Alfifi Hopf-threshold reproduction under the Appendix/Galerkin placement. Here $b_c$ is the critical value of the Schnakenberg control parameter $b$ at the selected Hopf threshold; the frequency column is retained only as a benchmark-scale numerical output and is not assigned a cardiac or dimensional interpretation.}\label{tab:alfifi}\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrr}\toprule
+$\tau_{\mathrm A}$ (benchmark units) & Reported $b_c$ & Reproduced $b_c$ & Relative difference (\%) & Reproduced frequency (benchmark scale)\\\midrule
+1 & 10.360 & 10.360024 & 0.000234 & 2.173823\\
+20 & 9.962 & 9.962434 & 0.004355 & 1.069819\\
+40 & 9.842 & 9.852307 & 0.104724 & 0.541718\\\bottomrule
+\end{tabular}%
+}\end{table}
+
+Figure~\ref{fig:s1benchmark} shows the reported and reproduced thresholds on the same benchmark scale.
+\begin{figure}[H]\centering\includegraphics[width=.85\linewidth]{figures/figS1_alfifi_benchmark.pdf}\caption{Selected formulation-specific reproduction. The small numerical discrepancy at $\tau_{\mathrm A}=40$ does not change the intended use: this is a benchmark check, not a cardiac parameter estimate.}\label{fig:s1benchmark}\end{figure}
+
+\section*{S3. GSE97358 cohort admission and transformation}
+The official GSE97358 series contains 168 primary human cardiac-fibroblast samples, 84 basal/control and 84 \tgfb{}-treated at 24 h. Donor admission required exactly one basal and one treated record with both columns present in the count matrix. All 168 samples formed 84 complete donor-linked pairs, with no duplicate or incomplete pairs and no identifier overlap with GSE96975.
+
+For genes with positive geometric means across all 168 libraries, size factors were the medians of count-to-geometric-mean ratios. For normalized count $c^{\mathrm{norm}}_{gs}$, transformed expression was $y_{gs}=\log_2(c^{\mathrm{norm}}_{gs}+0.5)$. The predefined primary endpoint was \cthrc{}. Secondary repair genes were \textit{POSTN}, \textit{FN1}, \textit{LOX}, \textit{COL1A1}, \textit{COL3A1}, and \textit{ASPN}. For transformed expression $y_{gs}$ of gene $g$ in sample $s$, standardization was performed across all 168 samples for each gene using the sample standard deviation ($ddof=1$): $\bar{y}_g=168^{-1}\sum_{s=1}^{168}y_{gs}$, $\widehat{\sigma}_g=\left[167^{-1}\sum_{s=1}^{168}(y_{gs}-\bar{y}_g)^2\right]^{1/2}$, and $z_{gs}=(y_{gs}-\bar{y}_g)/\widehat{\sigma}_g$. The repair-module score was $M_s=7^{-1}\sum_{g\in G}z_{gs}$ for the seven predefined genes. Module differences are therefore dimensionless equal-$z$ units, not log$_2$ expression units.
+
+\section*{S4. Donor-paired robustness and complete target results}
+The primary mean and median were computed over 84 paired donor effects. Two-sided randomization independently multiplied each effect by $-1$ or $+1$ for 200,000 replicates; seed 9735803 was fixed and a plus-one correction was used. Bootstrap intervals resampled 84 complete donors 100,000 times. Leave-one-donor-out sensitivity removed one complete pair and recomputed the mean. Wilcoxon signed rank was retained as a secondary non-parametric check. Benjamini--Hochberg adjustment applied to the six non-primary genes. Table~\ref{tab:gse97358} reports gene effects and the module on their correct, non-interchangeable units.
+
+\begin{table}[H]\centering\caption{GSE97358 donor-paired results. Gene effects and the equal-$z$ module are reported in their correct, non-interchangeable units.}\label{tab:gse97358}\scriptsize
+\begin{tabularx}{\linewidth}{p{1.55cm}p{2.25cm}p{2.2cm}p{2.2cm}p{1.25cm}Y}
+\toprule
+\textbf{Endpoint} & \textbf{Unit} & \textbf{Mean [95\% bootstrap]} & \textbf{Median [95\% bootstrap]} & \textbf{Positive} & \textbf{Inference}\\\midrule
+\cthrc{} & log$_2$ normalized expression & 0.882 [0.801, 0.962] & 0.952 [0.803, 1.020] & 82/84 & primary; sign-flip $5.0\times10^{-6}$; Wilcoxon $2.20\times10^{-15}$\\
+\textit{POSTN} & log$_2$ normalized expression & 0.491 [0.432, 0.548] & 0.493 [0.399, 0.576] & 81/84 & BH-positive\\
+\textit{FN1} & log$_2$ normalized expression & 0.099 [0.063, 0.135] & 0.112 [0.065, 0.138] & 65/84 & BH-positive\\
+\textit{LOX} & log$_2$ normalized expression & 0.576 [0.526, 0.625] & 0.596 [0.529, 0.650] & 82/84 & BH-positive\\
+\textit{COL1A1} & log$_2$ normalized expression & 0.503 [0.459, 0.545] & 0.526 [0.492, 0.574] & 80/84 & BH-positive\\
+\textit{COL3A1} & log$_2$ normalized expression & 0.600 [0.540, 0.656] & 0.622 [0.579, 0.713] & 79/84 & BH-positive\\
+\textit{ASPN} & log$_2$ normalized expression & 0.044 [$-0.034$, 0.126] & $-0.018$ [$-0.116$, 0.055] & 41/84 & $q=0.292$; no uniform support\\
+Equal-$z$ module & equal-$z$ module units & 0.637 [0.588, 0.684] & 0.668 [0.643, 0.720] & 81/84 & secondary context\\\bottomrule
+\end{tabularx}\end{table}
+
+All 84 leave-one-donor-out means for \cthrc{} remained positive (0.873--0.895). The analysis therefore answers a paired-response question on the defined transformed scale. A donor-blocked negative-binomial coefficient would be a related but not identical estimand. The primary analysis used the public count matrix, but the original raw-count file is not included in the accompanying analysis and source-traceability archive; therefore no additional donor-blocked negative-binomial sensitivity was rerun and no such result is claimed.
+
+\section*{S5. Supporting perturbation systems are kept on native scales}
+GSE96991 mouse Cthrc1 increased in all three paired lines (+0.910 log$_2$). GSE225336 showed positive human-culture \cthrc{} effects at 24, 48, and 72 h (+1.512, +1.354, +1.389 log$_2$). GSE96975 remains a four-pair heterogeneity observation: mean +0.373 log$_2$, 3/4 positive, exact two-sided sign-flip $P=0.625$, and leave-one-out direction unstable. These systems are not combined into a meta-analytic magnitude. Figure~\ref{fig:s2perturb} displays the supporting systems without a pooled numerical scale.
+
+\begin{figure}[H]\centering\includegraphics[width=.95\linewidth]{figures/figS2_perturbation_support.pdf}\caption{Perturbation support displayed in separate study-specific scales and units. The purpose is direction/support, not a pooled effect size.}\label{fig:s2perturb}\end{figure}
+
+\section*{S6. Spatial and day-scale analyses}
+The GSE265828 TGFB1--TGFBR1--TGFBR2 axis used 199 deterministic within-section permutations with Benjamini--Hochberg correction across the predefined axis-level Moran tests. Moran's $I$ was 0.24, 0.17, and 0.26 in the three post-infarction sections ($q=0.013$ each) and $-0.02$ in control ($q=0.895$). The inference is spatial organization of a transcript covariate, not physical ligand diffusion. The finite permutation count limits numerical resolution and is not used to support a stronger physical claim. Figure~\ref{fig:s3spatial} shows the section-level Moran summaries.
+
+\begin{figure}[H]\centering\includegraphics[width=.86\linewidth]{figures/figS3_spatial_axis.pdf}\caption{Predefined transcript-axis spatial organization. The statistic belongs to transcript organization and is not converted to a physical diffusion coefficient.}\label{fig:s3spatial}\end{figure}
+
+GSE267256 day-label tests used 50,000 permutations with fixed group sizes. Day explained 0.973 of Cthrc1 variability and 0.916 of the equal-$z$ repair-module score. Because day 5 has one sample, the robust summary is a 3--5-day reparative window rather than a precise day-5 peak. Excluding day 5, days 3--4 minus days 1--2 gave +3.03 log$_2$CPM for Cthrc1 ($q=0.00262$).
+
+The 2026 multimodal post-MI study further reports a 3--5 dpi transition window for Cthrc1$^+$ reparative cardiac fibroblasts, single-cell trajectories toward reparative states, and spatial enrichment progressing from remote/border regions toward the infarct zone \cite{Hernandez2026}. RNAscope provides a local transition from Postn$^+$, Aspn$^+$, Cthrc1$^-$ toward Postn$^+$, Aspn$^-$, Cthrc1$^+$ fibroblasts. These published observations are used as state-transition and anatomical-context evidence, not as a diffusion estimate or spontaneous Turing-pattern test.
+
+\section*{S7. Sub-day timing and the hard-delay boundary}
+GSE123018 keeps RNA and Ribo assays separate. The earliest sampled 4/4 donor concordance was 2 h for RNA and 6 h for Ribo. Those values are sampling landmarks, not onset times and not a myocardial delay.
+
+The diagnostic model comparison considered fixed-delay, sequential, Erlang, and independent-response candidate families. For the fixed-delay candidate, the available summary reported an optimum $\delta=0.116$ h, an originally calculated likelihood profile spanning 0--2.1 h under a $\chi_1^2=3.84$ reference, and an AICc 2.82 units above the best candidate. Here $\delta$ is a response-diagnostic parameter and is not identified with the mechanistic delay $\tau$. For a fitted model with $k$ parameters, maximized log-likelihood $\ell_{\max}$, and $n_{\mathrm{obs}}$ observations satisfying $n_{\mathrm{obs}}>k+1$, the standard corrected Akaike criterion is
+\[
+\mathrm{AICc}=2k-2\ell_{\max}+\frac{2k(k+1)}{n_{\mathrm{obs}}-k-1}.
+\]
+The exact parameterization of the four candidate families is not reconstructed because the original model-specification file used for that diagnostic is unavailable. The candidate-family comparison is therefore retained only as a supporting diagnostic and was not independently re-estimated here. More importantly, $\delta\ge0$ puts the null $\delta=0$ on a parameter boundary, for which standard interior likelihood-ratio asymptotics need not hold \cite{SelfLiang}. Thus the 0--2.1 h profile is retained only as evidence that zero was not excluded, not as a boundary-calibrated confidence interval. The manuscript's claim is correspondingly limited to: current data do not establish a strictly positive hard delay.
+
+\section*{S8. Disease-direction evidence without cross-species pooling}
+In GSE132143, human MI left ventricle minus healthy left ventricle was +0.926 log$_2$CPM for \cthrc{} ($q=0.0288$). Pig infarct-zone minus remote-zone means were +5.569, +5.275, and +3.709 log$_2$CPM at 8, 60, and 180 days post-infarction. Separate axes are used because species, tissue sampling, and normalization differ. Figure~\ref{fig:s4disease} keeps the human and pig summaries on separate axes.
+
+\begin{figure}[H]\centering\includegraphics[width=.88\linewidth]{figures/figS4_disease_direction.pdf}\caption{Within-species disease-direction summaries. No conserved cross-species magnitude is estimated.}\label{fig:s4disease}\end{figure}
+
+\section*{S9. Saudi-center source provenance}
+The 2016 PLOS ONE study reports 300 mg of left-ventricular myocardial tissue from five end-stage DCM hearts and five non-failing donor hearts and states that the same myocardial tissue was used for transcriptome profiling \cite{Colak2016}. Whole-genome expression used ABI Human Genome Survey Microarray version 2, described as 31,700 probes representing 27,868 genes. The detailed Results/S1 description reports 1549 probes corresponding to 1211 differentially expressed genes, including 597 downregulated and 614 upregulated genes at least 1.5-fold and FDR $<5\%$, whereas the article abstract states 1262 DEGs. The manuscript uses the detailed Results/S1 count when referring to the thresholded gene list. S1 Table is published as DOI \href{https://doi.org/10.1371/journal.pone.0162669.s005}{10.1371/journal.pone.0162669.s005}.
+
+A predefined target lookup of the published S1 table recorded a reported signed fold-change of $-2.01$ for TGFB1 and \cthrc{} as absent from the threshold-passing list. The original publisher-hosted XLS was not available for independent re-extraction in this study, so these two entries are retained as contextual reports from the published supplementary source rather than endpoints independently re-extracted from the original S1 XLS. This does not affect the source-level facts (human whole-LV KFSHRC tissue, 5+5 design, 1211 genes) or the directly published 2009 \textit{COL1A1} result.
+
+The original 2009 E-TABM-480 report describes five DCM and four control hearts and lists a 3.08-fold decrease in \textit{COL1A1} \cite{Colak2009}. Since the 2009 and 2016 reports differ in control count, exact sample-manifest identity is not assumed. Table~\ref{tab:saudi} records which Saudi-center statements are directly reported and which are reported from the published S1 source but not independently re-extracted.
+
+\begin{table}[H]\centering\caption{Saudi-center target/source status used in the manuscript.}\label{tab:saudi}\small
+\begin{tabularx}{\linewidth}{p{2.2cm}p{2.8cm}YY}
+\toprule \textbf{Item} & \textbf{Reported result} & \textbf{Verification status} & \textbf{Permitted use}\\\midrule
+KFSHRC 2016 cohort & 5 DCM + 5 non-failing whole LV; 1211 genes (597 down, 614 up) & directly reported in source article & Saudi-center whole-myocardium disease context\\
+TGFB1 & reported signed fold-change $-2.01$ & predefined S1 lookup; published-source report; original XLS not independently re-extracted & context description only\\
+\cthrc{} & not in threshold-passing DEG list & predefined S1 lookup; published-source report; original XLS not independently re-extracted & no whole-myocardium threshold-passing statement; not evidence of absence\\
+\textit{COL1A1} & 3.08-fold decrease & directly visible in 2009 accession report & original-study DCM direction\\
+Population identity & not documented for every participant & not established & do not infer Saudi nationality or ancestry\\\bottomrule
+\end{tabularx}\end{table}
+
+\section*{S10. Candidate-state topology admissibility}
+The 2026 mouse post-MI source provides an observationally resolved local transition from Postn$^+$, Aspn$^+$, Cthrc1$^-$ activated fibroblasts toward Postn$^+$, Aspn$^-$, Cthrc1$^+$ reparative fibroblasts \cite{Hernandez2026}. This makes ASPN the strongest opposite-transition observational candidate considered here. It does not establish that ASPN is consumed by the same reaction that produces CTHRC1, nor does it identify a rate law of the form $u^2v$ under an explicit mapping of CTHRC1- and ASPN-associated states to $u$ and $v$.
+
+Wang et al. report that recombinant WNT5A can partially rescue Cthrc1-deficient post-infarction repair phenotypes and place CTHRC1 within non-canonical WNT5A signaling \cite{Wang2023}. This makes WNT5A a mechanistic pathway candidate, but not an opposite-state readout. The roles are therefore complementary rather than interchangeable. GSE123018 RNA and Ribo remain two assays of the same target and are not treated as two independent dynamical states.
+
+\begin{table}[H]\centering\caption{Evidence roles for candidate second states.}\label{tab:stateaudit}\scriptsize
+\begin{tabularx}{\linewidth}{p{1.8cm}YYY}
+\toprule \textbf{Candidate} & \textbf{Observed support} & \textbf{Permitted interpretation} & \textbf{Missing for direct Schnakenberg $v$}\\\midrule
+ASPN & Local Aspn$^+$, Cthrc1$^-$ to Aspn$^-$, Cthrc1$^+$ transition in post-MI fibroblast states & Observational opposite-transition candidate & Shared flux, matched dynamics, perturbational topology discrimination, $u^2v$ evidence\\
+WNT5A & CTHRC1-associated non-canonical WNT5A signaling and recombinant-WNT5A rescue & Mechanistic pathway candidate & Opposite-state trajectory, shared opposite-sign flux, matched kinetics, $u^2v$ evidence\\
+CTHRC1 RNA/Ribo & Earliest sampled all-donor upward direction at 2 h / 6 h & Temporal observability of one target at two regulatory layers & Two independent states; assay layers do not define $u,v$\\
+\bottomrule\end{tabularx}\end{table}
+
+The direct cardiac Schnakenberg state map therefore remains unsupported under current public evidence. The predefined six-gene \tgfb{} repair panel is not retrospectively altered: ASPN remains in the panel, and the post-MI observations are used only as context for its state dependence.
+
+\section*{S11. Context-transfer rule}
+For a claim $C$ estimated in source design $\mathcal{S}$, transfer to target design $\mathcal{T}$ is permitted only when the inferential unit and measurement object needed by $C$ are preserved or independently bridged. The rule is qualitative, not a new score:
+\begin{enumerate}[leftmargin=1.5em]
+\item identify the source experimental object and estimand;
+\item identify what changes in the target (cell type, tissue mixture, perturbation, disease stage, platform, normalization, outcome);
+\item retain study-specific results without cross-study magnitude pooling;
+\item if the target does not measure the same object, restrict the transferred claim to the level supported by the target design and specify the measurement that would bridge the two objects.
+\end{enumerate}
+For the Saudi-center case, the source claim ``\tgfb{} increases \cthrc{} in primary cultured cardiac fibroblasts at 24 h'' cannot be relabeled as ``\cthrc{} is increased in whole end-stage DCM myocardium'' without a cell-state/tissue bridge. Conversely, whole-LV DCM cannot adjudicate fibroblast-specific \tgfb{} causality.
+
+\section*{S12. Consolidated numerical results and claim boundaries}
+Table~\ref{tab:ledger} consolidates every numerical result with its permitted interpretation and prohibited inference.
+\begin{longtable}{p{2.2cm}p{4.2cm}p{4.0cm}p{3.2cm}}
+\caption{Numerical results and their claim boundaries.}\label{tab:ledger}\\
+\toprule \textbf{Source} & \textbf{Result} & \textbf{Supported interpretation} & \textbf{Not established}\\\midrule\endfirsthead
+\toprule \textbf{Source} & \textbf{Result} & \textbf{Supported interpretation} & \textbf{Not established}\\\midrule\endhead
+Alfifi benchmark & $b_c$: 10.360024, 9.962434, 9.852307 at $\tau_{\mathrm A}=1,20,40$ & formulation-specific reproduction & cardiac parameter\\
+GSE265828 & Moran's $I$: $-0.02$ control; 0.24, 0.17, 0.26 post-MI & transcript-axis spatial organization & ligand diffusion\\
+GSE267256 & day $\eta^2$: 0.973 Cthrc1; 0.916 module; 3--4 vs 1--2 = +3.03 log$_2$CPM & day-scale repair structure & precise day-5 peak\\
+Hern\'andez 2026 multimodal source & published Cthrc1$^+$ RCF transition window 3--5 dpi; local Aspn$^+$, Cthrc1$^-$ to Aspn$^-$, Cthrc1$^+$ shift & repair-state timing and an opposite-transition pattern within a shared tissue/time context & human onset, reaction flux, or Schnakenberg $v$\\
+GSE123018 & earliest sampled 4/4: 2 h RNA, 6 h Ribo; $\delta=0.116$ h; zero in diagnostic profile & informative sampling window; no positive hard delay established & onset or myocardial $\tau$\\
+GSE97358 & \cthrc{} 82/84 up; mean 0.882 [0.801,0.962] & donor-paired in-vitro \tgfb{} response & in-vivo / clinical universality\\
+GSE97358 & repair module 81/84 positive; mean 0.637 [0.588,0.684] & secondary coordinated repair context & pathway causality\\
+GSE96991 & Cthrc1 +0.910; 3/3 up & system-specific direction & universal response\\
+GSE96975 & mean +0.373; 3/4 up; sign-flip $P=.625$ & small-cohort heterogeneity & contradiction to larger cohort / universality\\
+GSE225336 & +1.512, +1.354, +1.389 at 24/48/72 h & independent human culture direction & donor-level effect\\
+GSE132143 human & +0.926 log$_2$CPM; $q=.0288$ & within-human disease direction & causal perturbation\\
+GSE132143 pig & +5.569, +5.275, +3.709 at 8/60/180 d & within-pig regional direction & conserved human magnitude\\
+KFSHRC 2016 & 1211 genes; 597 down / 614 up & Saudi-center whole-LV DCM context & Saudi population identity\\
+KFSHRC S1 lookup & TGFB1 reported signed fold-change $-2.01$; \cthrc{} not threshold-passing & contextual report from published S1 source & independent target-level re-extraction from the original S1 XLS in this study\\
+Colak 2009 & \textit{COL1A1} 3.08-fold decrease & original accession DCM direction & identity with 2016 manifest\\
+\bottomrule
+\end{longtable}
+
+\section*{S13. Reproducibility and source traceability}
+The accompanying analysis and source-traceability archive contains the LaTeX sources, generated figures, the consolidated numerical-results table, a machine-readable Saudi source-status CSV, and an extraction helper that can be run when the original publisher-hosted XLS is supplied. The helper is not treated as an executed re-extraction because the XLS binary was unavailable in this study. No missing target values were inferred or imputed. Temporary repository placeholders used in the manuscript are GitHub: \href{https://github.com/REPLACE-WITH-ACCOUNT/Schnakenberg-ST-Project30-R9}{temporary GitHub review link} and Zenodo: \href{https://zenodo.org/records/REPLACE-WITH-RECORD-ID}{temporary Zenodo review link}; they are to be replaced by the final deposit URLs before publication.
+
+The main manuscript makes no claim that the accompanying archive independently reproduces the 2016 S1 target lookup. The remaining numerical results are traceable to the analysis outputs described above.
+
+\section*{S14. Measurements required for stronger inference}
+The following measurements would materially change what can be claimed. Table~\ref{tab:measurements} links each stronger claim to the minimum bridge measurement required.
+\begin{table}[H]\centering\caption{Measurement needed before stronger inference.}\label{tab:measurements}\small
+\begin{tabularx}{\linewidth}{p{3.0cm}YY}
+\toprule \textbf{Desired claim} & \textbf{Minimum additional measurement} & \textbf{Reason}\\\midrule
+Fibroblast signal is present in diseased human myocardium & cell-resolved/spatial human DCM target expression plus protein/ligand assay & bridges cell type and tissue mixture\\
+Positive myocardial hard delay & dense matched perturbation kinetics with a predefined delay-identification model and boundary-aware uncertainty & sampled landmarks do not identify onset or delay\\
+Direct two-state Schnakenberg map & matched CTHRC1/ASPN/WNT5A measurements with independent and joint perturbations; compare $u^2v$ with bilinear, saturating, pathway-forcing, and uncoupled alternatives & candidate markers/pathways do not identify a shared reaction topology\\
+Physical transport coefficient & calibrated active ligand/source, geometry, boundary/flux information, dynamic observations & static transcript field identifies composites/proxies only\\
+Cardiac Turing or stability class & identified cardiac $A,B,D,\tau$, geometry, relevant modes, and uncertainty set & modal class depends on the full dynamical parameter object\\\bottomrule
+\end{tabularx}\end{table}
+
+\renewcommand{\refname}{References used in Supplement}
+\begin{thebibliography}{9}
+\bibitem{Alfifi} H. Y. Alfifi, ``Stability analysis for Schnakenberg reaction-diffusion model with gene expression time delay,'' \emph{Chaos, Solitons \& Fractals}, 155, 111730, 2022. doi:10.1016/j.chaos.2021.111730.
+\bibitem{Hernandez2026} S. C. Hern\'andez, M. Ainciburu, L. Sudupe, \emph{et al.}, ``Single-cell and spatial transcriptomic profiling of cardiac fibroblasts following myocardial infarction,'' \emph{Scientific Data}, 13, 216, 2026. doi:10.1038/s41597-025-06533-0.
+\bibitem{SelfLiang} S. G. Self and K.-Y. Liang, ``Asymptotic Properties of Maximum Likelihood Estimators and Likelihood Ratio Tests under Nonstandard Conditions,'' \emph{Journal of the American Statistical Association}, 82(398), 605--610, 1987. doi:10.1080/01621459.1987.10478472.
+\bibitem{Colak2016} D. Colak \emph{et al.}, ``Integrated Left Ventricular Global Transcriptome and Proteome Profiling in Human End-Stage Dilated Cardiomyopathy,'' \emph{PLoS ONE}, 11(10), e0162669, 2016. doi:10.1371/journal.pone.0162669.
+\bibitem{Colak2009} D. Colak \emph{et al.}, ``Left ventricular global transcriptional profiling in human end-stage dilated cardiomyopathy,'' \emph{Genomics}, 94(1), 20--31, 2009. doi:10.1016/j.ygeno.2009.03.003.
+\bibitem{Wang2023} D. Wang, Y. Zhang, T. Ye, \emph{et al.}, ``Cthrc1 deficiency aggravates wound healing and promotes cardiac rupture after myocardial infarction via non-canonical WNT5A signaling pathway,'' \emph{International Journal of Biological Sciences}, 19(4), 1299--1315, 2023. doi:10.7150/ijbs.79260.
+\end{thebibliography}
+\end{document}
