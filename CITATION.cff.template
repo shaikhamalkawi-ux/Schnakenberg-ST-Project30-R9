@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated manuscript. Replace all placeholders before public release."
+title: "From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model"
+version: "Project30-R9R1-repository-draft"
+date-released: 2026-09-07
+authors:
+  - family-names: "REPLACE"
+    given-names: "REPLACE"
+repository-code: "https://github.com/REPLACE-WITH-ACCOUNT/Schnakenberg-ST-Project30-R9"
+# doi: "REPLACE-WITH-ZENODO-DOI"
