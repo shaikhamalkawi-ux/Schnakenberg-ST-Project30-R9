@@ -1,0 +1,400 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2.0cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx,array,longtable}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{float}
+\usepackage{ragged2e}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={},pdftitle={From Cardiac Omics to Identifiable Dynamics}}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlist[itemize]{leftmargin=1.35em,itemsep=2pt,topsep=3pt}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcommand{\cthrc}{\textit{CTHRC1}}
+\newcommand{\tgfb}{TGF-$\beta$1}
+\newcommand{\kfs}{King Faisal Specialist Hospital and Research Centre (KFSHRC)}
+\title{\textbf{From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Mechanistic cardiac models are often asked to explain transcript patterns, timing, and fibrosis signals that were not measured as physical model parameters. We ask a practical question: \emph{which conclusions can current cardiac-omics data support, and what must be measured before a delayed reaction--diffusion interpretation becomes identifiable?} The primary human result is a predefined analysis of 84 donor-linked primary human cardiac-fibroblast pairs: \cthrc{} increased after 24-h \tgfb{} exposure in 82/84 pairs, with a mean paired effect of 0.882 log$_2$ units (bootstrap 95\% interval 0.801--0.962) and positive leave-one-donor-out means. A Saudi-center case then tests portability rather than seeking sign agreement. Human whole-left-ventricular end-stage dilated-cardiomyopathy data generated at KFSHRC, Riyadh, represent a different experimental object; the 2016 study reported 1211 thresholded differentially expressed genes, while the original accession study reported a 3.08-fold decrease in \textit{COL1A1}. These data do not justify relabeling the controlled fibroblast response as a whole-myocardium or Saudi-population result. A multimodal post-infarction mouse resource adds a different layer: Cthrc1$^+$ reparative fibroblast emergence is concentrated in a published 3--5-day window, and in situ validation shows a local transition from Postn$^+$, Aspn$^+$, Cthrc1$^-$ to Postn$^+$, Aspn$^-$, Cthrc1$^+$ fibroblasts. This nominates ASPN as an observational opposite-transition candidate but does not identify a Schnakenberg second state. In parallel, equilibrium and static-field analyses show why pure-state delay and separate transport/source parameters are not identified from the available observations. A formulation-specific Alfifi benchmark is reproduced without treating it as a cardiac parameterization, and a generic modal stability classification is stated but not issued for cardiac tissue. Schnakenberg is used as a deliberately demanding mechanistic stress test rather than as an identified cardiac reaction topology. The practical output is a measurement-decision map: use current omics to prioritize experiments, and collect the missing state-resolved kinetics, perturbational topology, active-ligand/source, geometry, transport, and uncertainty information before assigning a two-state cardiac mechanism, myocardial delay, physical diffusion, or a cardiac Turing class.
+\end{abstract}
+
+\textbf{Keywords:} cardiac fibroblast; \textit{CTHRC1;} \tgfb; dilated cardiomyopathy; Saudi Arabia; identifiability; reaction--diffusion; time delay; Schnakenberg model; context transfer; measurement design
+
+\section{Introduction}
+A spatial or temporal omics pattern can be biologically informative without being a measurement of a mechanistic parameter. This distinction matters in cardiac modeling because delayed reaction--diffusion systems can change stability boundaries and pattern timing, yet their parameters---delay, transport, reaction Jacobians, boundary conditions, and geometry---are rarely observed together. The practical risk is straightforward: a model may fit a biological pattern while the fitted physical interpretation remains unidentified.
+
+The mathematical background is well established. The Schnakenberg reaction system is a canonical nonlinear model \cite{Schnakenberg1979}; Turing's reaction--diffusion mechanism motivates spatial instability analysis \cite{Turing1952,Kondo2010}; and delayed reaction--diffusion and Schnakenberg-family formulations can alter Hopf and Turing--Hopf boundaries \cite{Alfifi2022,Jiang2019,Sargood2022,Das2026}. These results establish what a mathematical system \emph{can} do. They do not by themselves establish a myocardial delay or diffusion coefficient.
+
+The inverse problem is equally important. Structural and practical identifiability determine whether a parameter is recoverable from the observation process \cite{Raue2009,Villaverde2016,Wieland2021,Simpson2020}. Recent work shows that mechanistic calibration from spatial and single-cell omics is possible when the source, geometry, interactions, and transport assumptions are explicitly supplied \cite{Daher2026}; conversely, static spatial inference can remain non-identifiable under insufficient source or boundary information \cite{MatasGil2024,Gu2026}. The relevant question is therefore not whether an optimizer converges, but what the experiment has actually measured.
+
+Cardiac fibrosis is a useful stress test because the biological program is real, dynamic, and strongly context dependent. Cardiac fibroblast states change after injury \cite{Tallquist2017,Farbehi2019}; extracellular-matrix remodeling is integral to inflammatory and reparative phases \cite{Dobaczewski2010,Frangogiannis2019}; \cthrc-positive fibroblasts participate in post-infarction repair \cite{RuizVillalba2020}; translational regulation contributes to human cardiac fibrosis \cite{Chothani2019}; and infarct tissue shows marked spatial organization \cite{Kuppe2022}. Primary human cardiac-fibroblast perturbation resources from the Sch\"afer/Cook program \cite{Schafer2017} provide direct experimental anchors, while human fibrosis-genetics work \cite{Nauffal2023} supplies complementary disease-association context. A cardiac single-cell/spatial dataset \cite{Hernandez2026} and the foundational spatial-transcriptomics method \cite{Stahl2016} further define where transcript programs can be localized. Prior work has already compared TGF-$\beta$-treated cardiac fibroblasts with failing ventricular tissue, including GSE97358 and GSE116250 \cite{Gao2021}; our contribution is therefore not a claim of being the first cross-dataset comparison.
+
+The unresolved problem is \emph{portability of inference}. A response measured in a controlled fibroblast experiment may be valid at that level while being invalid as the same claim in whole diseased myocardium. We test this boundary with human left-ventricular end-stage dilated-cardiomyopathy (DCM) data generated at KFSHRC in Riyadh \cite{Colak2009,Colak2016}. The location establishes a Saudi-center case, but it does not establish Saudi nationality or ancestry for every participant. The KFSHRC study does not constitute a direct extension of the 24-h fibroblast perturbation experiment: it differs in cell mixture, disease stage, exposure, assay, and inferential unit.
+
+Schnakenberg is used here as a deliberately demanding mechanistic test case, not because current cardiac data have identified its reaction topology. Its two-state nonlinear coupling, diffusion, and delay make the missing requirements for a mechanistic claim explicit: co-resolved state trajectories, interaction topology, transport, geometry, delay, and uncertainty. The observation-structure results below---loss of pure-state delay from an equilibrium condition and confounding of transport, source scale, and loss in a static field---do not depend on Schnakenberg kinetics. The Schnakenberg form therefore serves as a concrete, falsifiable reference model against which the evidence requirements can be stated rather than as a claimed cardiac truth.
+
+The study has five linked contributions. First, it identifies a strong human perturbation finding: \cthrc{} increases consistently across 84 donor-linked primary cardiac-fibroblast pairs. Second, it shows with a real Saudi-center whole-myocardium case why that finding cannot be transferred unchanged across biological context. Third, it uses multimodal post-infarction evidence to distinguish a biologically informative state transition from a mechanistically identified second state: ASPN provides an observational opposite-transition relationship, but the evidence does not establish a shared reaction flux or Schnakenberg $u^2v$ topology. Fourth, it gives mathematical reasons that equilibrium and static transcript fields do not identify pure-state delay or separate transport/source parameters. Fifth, it turns those findings into an applied measurement plan: what can be used now, what should be measured next, and which claims are not supported by the current evidence. \Cref{fig:action} summarizes this evidence-to-action framework.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig1_evidence_to_action.pdf}
+\caption{Evidence-to-action pathway. Each result is retained at its study-specific inferential unit and is linked to a next measurement and a claim boundary. The applied objective is not to force every dataset into one model, but to identify which measurements would make the next mechanistic claim testable.}
+\label{fig:action}
+\end{figure}
+
+\section{Study logic and closest prior work}
+\subsection{The question is claim portability, not method accumulation}
+The analysis was organized around one question: \emph{when does an observed cardiac signal support the next mechanistic statement, and when does the evidence cease to support a stronger mechanistic statement?} Mathematical reproduction, spatial analysis, timing analysis, perturbation analysis, disease-tissue comparison, and robustness checks are supporting components of that question rather than independent projects. Table~\ref{tab:novelty} positions that question against the closest prior work.
+
+\begin{table}[H]
+\centering
+\caption{Closest prior work and the specific addition of this study.}
+\label{tab:novelty}
+\small
+\begin{tabularx}{\linewidth}{p{2.5cm}YY}
+\toprule
+\textbf{Prior work} & \textbf{What it establishes} & \textbf{What this study adds}\\
+\midrule
+Alfifi \cite{Alfifi2022} & Delayed Schnakenberg analysis under a one-dimensional Dirichlet/Galerkin formulation. & Reproduces selected thresholds under the Appendix delay placement and keeps that numerical object separate from cardiac parameter claims.\\
+Jiang et al. \cite{Jiang2019} & Turing and Turing--Hopf behavior in a delayed diffusive Schnakenberg system with Neumann conditions. & Uses the shared nonlinear delay placement only as a comparator; does not equate the boundary-value problems.\\
+Gao et al. \cite{Gao2021} & Compared in-vitro cardiac-fibroblast and failing-ventricle expression, including GSE97358. & Moves beyond overlap/concordance to ask whether the \emph{same scientific claim} is portable across inferential units and demonstrates the boundary with a Saudi-center whole-myocardium case.\\
+Hern\'andez et al. \cite{Hernandez2026} and Wang et al. \cite{Wang2023} & Resolve post-MI fibroblast-state transitions, including local ASPN/CTHRC1 state changes, and provide CTHRC1--WNT5A pathway/rescue evidence. & Separates an observational opposite-transition candidate (ASPN) from a mechanistic pathway candidate (WNT5A) and requires matched kinetics plus topology discrimination before assigning either as Schnakenberg $v$.\\
+Daher et al. \cite{Daher2026} and identifiability literature \cite{Raue2009,Villaverde2016} & Mechanistic calibration is possible when the observation model and parameter-supporting measurements are explicit. & Specifies which missing cardiac measurements prevent delay, transport, and modal-stability claims and maps each missing quantity to a concrete experiment.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Mathematical claim boundaries}
+\subsection{Formulation-specific Schnakenberg benchmark}
+The numerical benchmark is Alfifi's one-dimensional delayed reaction--diffusion problem with prescribed Dirichlet boundary conditions followed by the Appendix Galerkin reduction \cite{Alfifi2022}. Let $x$ denote space, $t$ time, $u(x,t)$ and $v(x,t)$ the two Schnakenberg state variables, $a$ and $b$ the standard feed/control parameters, and $\tau_{\mathrm A}$ the delay used only in this Alfifi benchmark. The printed first reaction term contains a delayed linear loss and delayed nonlinear product,
+\begin{equation}
+ a-u(x,t-\tau_{\mathrm A})+\big[u(x,t-\tau_{\mathrm A})\big]^2v(x,t-\tau_{\mathrm A}),
+\label{eq:alfifi}
+\end{equation}
+whereas the Appendix reduction keeps the projected linear losses current and delays the nonlinear products. The selected Hopf reproduction uses only the Appendix placement. The benchmark delay $\tau_{\mathrm A}$ is not identified with the generic mechanistic delay $\tau$ introduced below or with the response-diagnostic parameter $\delta$ used later. Jiang et al. \cite{Jiang2019} use the same nonlinear reaction-delay placement but Neumann rather than Dirichlet boundary conditions; the two complete boundary-value problems are not treated as identical.
+
+\subsection{Why an equilibrium cannot identify a pure-state delay}
+Consider a generic delayed reaction--diffusion field
+\begin{equation}
+\partial_t X(x,t)=D\Delta X(x,t)+F\!\left(X(x,t),X(x,t-\tau);\theta\right),
+\label{eq:delay}
+\end{equation}
+where $X(x,t)\in\mathbb{R}^{n_X}$ is the state field, $D$ the diffusion matrix, $F$ the local reaction map, $\theta$ the remaining parameters, and $\tau$ a generic pure-state mechanistic delay. If neither the boundary operator nor the equilibrium observation model depends directly on $\tau$, a time-independent field satisfies $X(x,t-\tau)=X(x,t)=X^*(x)$. Therefore
+\begin{equation}
+0=D\Delta X^*(x)+F\!\left(X^*(x),X^*(x);\theta\right),
+\label{eq:eq}
+\end{equation}
+without setting $\tau=0$. Under these assumptions, the equilibrium field alone cannot identify a pure-state delay. In a Neumann or periodic Schnakenberg class admitting a homogeneous state, $(u^*,v^*)=(a+b,b/(a+b)^2)$, where $a$ and $b$ are the standard Schnakenberg feed/control parameters; that statement belongs to this homogeneous-reference object, not to Alfifi's Dirichlet benchmark.
+
+\subsection{Why a static transcript field does not separate transport and source scales}
+For a generic modeled static spatial field $T(x)$, which is not assumed to be a directly measured ligand concentration, consider
+\begin{equation}
+0=d_T\Delta T(x)-\mu T(x)+\beta S_0(x),
+\label{eq:static}
+\end{equation}
+Here $d_T>0$ is a scalar transport coefficient, $\mu>0$ a first-order loss rate, $S_0(x)$ a source-profile shape, and $\beta$ its scale. Division by $\mu$ exposes $d_T/\mu$ and $\beta/\mu$ when the source scale is not independently calibrated. Dynamic observations, calibrated source/loss measurements, or informative boundary fluxes are needed to separate $d_T$, $\mu$, and $\beta$; transcript smoothness is not itself a physical diffusivity measurement.
+
+\noindent\textbf{Proposition 1 (Observation-structure limits beyond Schnakenberg).} Consider any delayed reaction--diffusion model of the form in Eq.~\eqref{eq:delay} in which the delay enters only through state arguments, and any static source--transport--loss field of the form in Eq.~\eqref{eq:static} with $\mu\neq0$. Then (i) a time-independent equilibrium condition contains no independent information about the pure-state delay $\tau$, and (ii) a single static field identifies at most the combinations $d_T/\mu$ and $\beta/\mu$ unless one of $d_T$, $\mu$, or $\beta$ is independently calibrated. These conclusions are consequences of the observation structure and do not rely on Schnakenberg kinetics.
+
+\noindent\emph{Proof.} At equilibrium, $X(x,t-\tau)=X(x,t)=X^*(x)$, which removes $\tau$ from Eq.~\eqref{eq:delay}. Dividing Eq.~\eqref{eq:static} by $\mu$ leaves only $d_T/\mu$ and $\beta/\mu$. \hfill$\square$
+
+\subsection{What would be required for a mode-resolved stability statement}
+For a homogeneous-reference model under boundary conditions admitting a constant spatial mode (for example, Neumann or periodic conditions), write $X^*(x)\equiv X^*$ and let $-\Delta\phi_m=\kappa_m\phi_m$ define the $m$th Laplacian eigenfunction $\phi_m$ and eigenvalue $\kappa_m$, with $\kappa_0=0$ for the homogeneous spatial mode. Writing the reaction map as $F(X_1,X_2;\theta)$, define the current- and delayed-state Jacobians by $A=\partial_1F(X^*,X^*;\theta)$ and $B=\partial_2F(X^*,X^*;\theta)$. Modal linearization gives
+\begin{equation}
+\det\!\left[\lambda I_{n_X}+\kappa_mD-A-Be^{-\lambda\tau}\right]=0,
+\label{eq:char}
+\end{equation}
+Here $\lambda\in\mathbb{C}$ is a characteristic growth rate and $I_{n_X}$ is the $n_X\times n_X$ identity matrix. For mode $m$, define
+\[
+s_m=\sup\left\{\Re(\lambda):\det\!\left[\lambda I_{n_X}+\kappa_mD-A-Be^{-\lambda\tau}\right]=0\right\},
+\]
+with $\alpha_0=s_0$ for the homogeneous mode and $\alpha_S=\sup_{m\ge1}s_m$ across non-homogeneous spatial modes. A computational class can be assigned only after the relevant $A$, $B$, $D$, $\tau$, geometry, modes, and uncertainty set are defined. No cardiac stability certificate is issued in this study. Table~\ref{tab:mathclaims} summarizes the evidence requirement and present status of each mathematical statement.
+
+\begin{table}[H]
+\centering
+\caption{Mathematical statement, evidence requirement, and current status.}
+\label{tab:mathclaims}
+\small
+\begin{tabularx}{\linewidth}{YYY}
+\toprule
+\textbf{Statement} & \textbf{Minimum evidence} & \textbf{Current status}\\
+\midrule
+Reproduce selected Alfifi thresholds & Dirichlet/Galerkin equations, delay placement, parameters & Reproduced for three selected Appendix-placement values; Supplementary Fig.~S1.\\
+Infer a positive pure-state delay from equilibrium & Dynamic information beyond a time-independent state & Not identified: $\tau$ drops out of Eq.~\eqref{eq:eq}.\\
+Separate $d_T$, $\mu$, and $\beta$ in Eq.~\eqref{eq:static} & Calibrated source scale plus dynamic/boundary information & Not identified from the static transcript proxy.\\
+Assign a cardiac spatial-instability class & Cardiac $A$, $B$, $D$, $\tau$, geometry, relevant modes, uncertainty & Not supported by the datasets analyzed here.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Data and analysis}
+\subsection{Inferential units are kept separate}
+Public data came from GEO accessions GSE265828, GSE267256, GSE261428, GSE123018, GSE96991, GSE96975, GSE97358, GSE225336, and GSE132143. The Saudi-center context uses the published KFSHRC left-ventricular DCM studies and ArrayExpress accession E-TABM-480 \cite{Colak2009,Colak2016}. Numeric expression values were not pooled across species, platforms, or inferential units. Table~\ref{tab:data} records the unit, analytical role, and prohibited inference for each primary object.
+
+\begin{table}[H]
+\centering
+\caption{Primary analytical objects and the inference each can support.}
+\label{tab:data}
+\scriptsize
+\begin{tabularx}{\linewidth}{p{2.0cm}p{2.6cm}YY}
+\toprule
+\textbf{Source} & \textbf{Unit / design} & \textbf{Used for} & \textbf{Not used for}\\
+\midrule
+GSE97358 & 84 donor-linked primary human cardiac-fibroblast basal/\tgfb{} pairs & Primary donor-paired \cthrc{} response & In-vivo, clinical, or universal claim\\
+KFSHRC 2016 & Human whole LV; 5 end-stage DCM vs 5 non-failing hearts & Saudi-center disease-tissue context & Saudi nationality/ancestry; direct perturbation replication\\
+E-TABM-480 / 2009 & Human whole LV; 5 DCM vs 4 controls & Original accession disease-direction evidence & Assumed identity with the 2016 5+5 manifest\\
+GSE123018 & Human RNA/Ribo; donor within assay/time & Earliest sampled direction; timing diagnostic & Onset time or myocardial delay\\
+GSE267256 / GSE261428 / GSE265828 & Mouse post-MI bulk RNA-seq / scRNA-seq / spatial transcriptomics & Repair-state timing, cell-state trajectory, local ASPN/CTHRC1 transition, and anatomical organization & Human kinetics; shared reaction flux; $u^2v$; physical diffusion / Turing mechanism\\
+GSE96991 / GSE96975 / GSE225336 & Perturbation systems with native pairing or culture units & Supporting direction and heterogeneity & Cross-study pooled effect\\
+GSE132143 & Human and pig MI contrasts kept within species & Disease-direction support & Conserved cross-species magnitude\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Primary 84-pair human endpoint}
+For GSE97358, the primary analysis mapped all 168 samples one-to-one to 84 control and 84 \tgfb{}-at-24-h records, with exactly one of each per donor identifier. Size factors were median ratios across genes with positive geometric means. For normalized count $c^{\mathrm{norm}}_{gs}$, transformed expression was $y_{gs}=\log_2(c^{\mathrm{norm}}_{gs}+0.5)$. The predefined primary endpoint was the donor-paired \cthrc{} difference. Six secondary genes were \textit{POSTN}, \textit{FN1}, \textit{LOX}, \textit{COL1A1}, \textit{COL3A1}, and \textit{ASPN}. For transformed expression $y_{gs}$ of gene $g$ in sample $s$, each gene was standardized across all 168 samples using the sample standard deviation (\(ddof=1\)): $\bar{y}_g=168^{-1}\sum_{s=1}^{168}y_{gs}$, $\widehat{\sigma}_g=\left[167^{-1}\sum_{s=1}^{168}(y_{gs}-\bar{y}_g)^2\right]^{1/2}$, and $z_{gs}=(y_{gs}-\bar{y}_g)/\widehat{\sigma}_g$. The seven-gene module was $M_s=7^{-1}\sum_{g\in G}z_{gs}$, where $G$ contains \cthrc{}, \textit{POSTN}, \textit{FN1}, \textit{LOX}, \textit{COL1A1}, \textit{COL3A1}, and \textit{ASPN}. Module differences are therefore in equal-$z$ units, not log$_2$ expression units.
+
+The primary mean and median used 100,000 donor-level bootstrap resamples for percentile intervals. A two-sided randomization independently sign-flipped donor effects in 200,000 replicates with a fixed seed; Wilcoxon signed rank was a secondary check. Leave-one-donor-out recomputation assessed whether a single donor determined the mean direction. Benjamini--Hochberg adjustment was applied across the six non-primary repair genes only. Throughout, $q$ denotes a Benjamini--Hochberg-adjusted $P$ value; $\eta^2$ denotes a proportion-of-variance effect size; and log$_2$CPM denotes base-2 log counts per million on the processed scale supplied for the relevant dataset.
+
+\subsection{Spatial, day-scale, and sub-day timing analyses}
+GSE265828 used a predefined TGFB1--TGFBR1--TGFBR2 transcript-axis summary with within-section spatial permutation. GSE267256 used released mouse samples and day-label permutation; the day-5 singleton was not treated as a precise peak estimate. GSE123018 kept RNA and ribosome-profiling assays separate and retained donor-level directions; the use of partial observations for delay inference is discussed by Hong et al. \cite{Hong2023}. A previously computed timing diagnostic compared fixed-delay, sequential, Erlang, and independent-response candidate families. Let $\delta\ge0$ denote the fixed-response delay in that diagnostic; it is distinct from the mechanistic delay $\tau$ in Eq.~\eqref{eq:delay}. The originally reported fixed-delay likelihood profile used a $\chi^2_1$ reference cutoff of 3.84. Because $\delta=0$ lies on the parameter boundary, standard interior likelihood-ratio asymptotics need not apply \cite{SelfLiang1987}; consequently, the profile is retained only as supporting evidence that zero was not excluded, not as a boundary-calibrated confidence interval. This distinction weakens no primary biological result and prevents an unsupported hard-delay claim.
+
+\subsection{Candidate-state admissibility for a two-state kinetic map}
+A measured quantity was considered a candidate for a second dynamical state only if the evidence addressed the role required by the proposed kinetic claim. A direct two-state Schnakenberg map would require, at minimum, two co-resolved dynamic state variables, evidence that they participate in a common process with opposite-sign effective flux, and perturbational support that the dynamics depend on both states. Exact identification of the Schnakenberg interaction would additionally require evidence compatible with a $u^2v$ term relative to plausible alternatives such as bilinear, saturating, pathway-forcing, or uncoupled models.
+
+The 2026 post-infarction mouse resource provides an observational state-transition candidate: in situ validation shows a local shift from Postn$^+$, Aspn$^+$, Cthrc1$^-$ activated fibroblasts toward Postn$^+$, Aspn$^-$, Cthrc1$^+$ reparative fibroblasts \cite{Hernandez2026}. This supports ASPN as an opposite-transition marker within that tissue-state progression, not as a demonstrated consumed substrate or Schnakenberg $v$. Separately, Wang et al. report CTHRC1--WNT5A pathway coupling and partial rescue with recombinant WNT5A after myocardial infarction \cite{Wang2023}; WNT5A is therefore treated as a mechanistic pathway candidate, not as an interchangeable opposite-state marker. The GSE123018 RNA and Ribo measurements are two regulatory readouts of \cthrc{}, not two independent state variables. Table~\ref{tab:candidates} makes these roles explicit.
+
+\begin{table}[H]
+\centering
+\caption{Candidate-state evidence is separated from direct two-state kinetic identification.}
+\label{tab:candidates}
+\scriptsize
+\begin{tabularx}{\linewidth}{p{2.0cm}YYp{4.2cm}}
+\toprule
+\textbf{Candidate / readout} & \textbf{What the evidence supports} & \textbf{Why it is informative} & \textbf{What is still required before treating it as Schnakenberg $v$}\\
+\midrule
+ASPN & Local opposite-transition relationship to Cthrc1 in post-MI fibroblast-state progression & Supplies an opposite-transition pattern within a shared tissue/time context & Shared biochemical flux, matched dynamic measurements, perturbational topology discrimination, and evidence compatible with $u^2v$\\
+WNT5A & Mechanistic pathway partner of CTHRC1 in post-MI repair \cite{Wang2023} & Supplies pathway-level coupling and rescue evidence & Opposite-state trajectory, shared opposite-sign flux, matched kinetics, and $u^2v$ discrimination\\
+CTHRC1 RNA / Ribo & Ordered sampled response of the same target at two regulatory layers & Supplies temporal observability & Two independent biological states; neither assay pair defines $u,v$\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Saudi-center context-transfer test}
+The KFSHRC case was evaluated as a portability test rather than a search for matching signs. Colak et al. \cite{Colak2016} studied left-ventricular myocardium from five end-stage DCM hearts and five non-failing donor hearts and reported in the detailed Results/S1 description 1549 probes corresponding to 1211 differentially expressed genes, including 597 downregulated and 614 upregulated genes at least 1.5-fold and FDR $<5\%$; the article abstract separately states 1262 DEGs. We retain the detailed Results/S1 count when referring to the thresholded gene list. The same source provides its S1 table as a publisher-hosted XLS object. A predefined target lookup of that table had recorded a reported signed fold-change of $-2.01$ for TGFB1 and \cthrc{} as absent from the threshold-passing list. Because the original publisher-hosted XLS was not available for independent re-extraction in this study, those two target-level entries are retained as contextual evidence reported from the published supplementary source, not as numerical endpoints independently re-extracted from the original S1 XLS. Separately, the original E-TABM-480 report directly lists a 3.08-fold decrease in \textit{COL1A1} in the 5-DCM/4-control study \cite{Colak2009}. The two papers' reported control counts differ, so their sample manifests are not assumed to be identical.
+
+\section{Results}
+\subsection{Primary human perturbation result in 84 donor-linked pairs}
+\cthrc{} increased in 82/84 donor-linked pairs (97.6\%). The mean paired effect was 0.882 log$_2$ units (bootstrap 95\% interval 0.801--0.962), and the median was 0.952 (0.803--1.020). The two-sided 200,000-flip randomization value was $5.0\times10^{-6}$; Wilcoxon $P=2.20\times10^{-15}$. Every leave-one-donor-out mean remained positive, ranging from 0.873 to 0.895. Five of six secondary repair genes were BH-positive; \textit{ASPN} was not ($q=0.292$). The equal-$z$ seven-gene module was positive in 81/84 pairs, with mean 0.637 and bootstrap interval 0.588--0.684. \Cref{fig:human} separates the log$_2$ primary endpoint from the equal-$z$ module so that unlike units are not placed on one numerical axis.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/fig2_human_pair_result.pdf}
+\caption{Primary donor-paired human result and secondary repair-module summary shown on separate scales. Panel A uses log$_2$ normalized-expression units for \cthrc{}. Panel B uses equal-$z$ module units. Error bars are donor-bootstrap 95\% percentile intervals. The figure does not imply in-vivo, clinical, or population-level effects.}
+\label{fig:human}
+\end{figure}
+
+Supporting systems preserve direction without being pooled numerically. Mouse GSE96991 showed Cthrc1 increase in all three paired lines (+0.910 log$_2$), while GSE225336 showed positive \cthrc{} effects at 24, 48, and 72 h (+1.512, +1.354, +1.389 log$_2$) in one defined human culture system. The small GSE96975 cohort remains informative heterogeneity: three of four pairs were positive, the mean was +0.373 log$_2$, the exact two-sided sign-flip value was 0.625, and leave-one-out direction was unstable. These observations support a bounded perturbation claim rather than donor universality. Detailed study-specific displays are in Supplementary Fig.~S2.
+
+\subsection{The Saudi-center case defines the boundary of the perturbation claim}
+The KFSHRC whole-myocardium source is real human left-ventricular disease tissue generated in Riyadh, but it estimates a different object from the acute cultured-fibroblast perturbation. The 2016 study reports 1211 thresholded differentially expressed genes in 5 DCM versus 5 non-failing hearts \cite{Colak2016}. The predefined S1 lookup gives a different study-specific target context (TGFB1 reported signed fold-change $-2.01$; \cthrc{} not threshold-passing), while the 2009 accession study directly reports a 3.08-fold decrease in \textit{COL1A1} \cite{Colak2009}. These results are not pooled with GSE97358 and are not interpreted as failed replication.
+
+The useful finding is the boundary itself: a 24-h response inside primary fibroblasts cannot be relabeled as the disease direction of whole end-stage myocardium. Conversely, whole-LV DCM does not answer whether a \tgfb{}-responsive fibroblast subpopulation is active in vivo. \Cref{fig:saudi} turns that distinction into an experimental decision: the appropriate bridge is cell-resolved or spatially localized human DCM evidence, ideally paired with protein/ligand measurement, not another unsupported cross-study sign comparison.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig3_saudi_context_transfer.pdf}
+\caption{Saudi-center context transfer. The two panels deliberately have no shared numeric axis because they estimate different biological objects. The practical output is the bridge measurement required before a fibroblast perturbation statement can become a whole-myocardium statement.}
+\label{fig:saudi}
+\end{figure}
+
+\subsection{Post-infarction state-transition evidence narrows candidate interpretation without identifying $u,v$}
+Hern\'andez et al. place the emergence of Cthrc1$^+$ reparative cardiac fibroblasts within a published 3--5 days-post-infarction transition window and describe single-cell trajectories from activated Postn$^+$ fibroblasts toward Cthrc1$^+$ reparative states \cite{Hernandez2026}. Their RNAscope validation provides a more specific local observation: Postn$^+$, Aspn$^+$, Cthrc1$^-$ fibroblasts in the outer border region shift toward Postn$^+$, Aspn$^-$, Cthrc1$^+$ cells in the more internal fibrotic region. The same study also reports post-infarction Aspn upregulation and increasing ASPN$^+$ fibroblasts across 3--7 days in injured regions, so the ASPN--CTHRC1 relationship is state- and location-dependent rather than a universal inverse time course.
+
+This evidence changes the candidate-state interpretation but not the model-identification decision. ASPN is the strongest observational opposite-transition candidate reviewed here, whereas WNT5A remains a mechanistic pathway candidate because recombinant WNT5A partially rescues Cthrc1-deficient post-infarction repair phenotypes and the reported mechanism involves non-canonical WNT5A signaling \cite{Wang2023}. These roles are complementary, not interchangeable. Neither source demonstrates ASPN consumption, a shared opposite-sign biochemical reaction flux, or a rate law of the form $u^2v$ under an explicit mapping of CTHRC1- and ASPN-associated states to $u$ and $v$. The direct cardiac Schnakenberg state map therefore remains unsupported under the current evidence.
+
+The original six-gene \tgfb{} repair panel is not redefined in response to the myocardial-infarction data. ASPN remains in the predefined panel and its earlier perturbation discordance is preserved; the newer in-vivo observations are used only to explain why ASPN can be context- and state-dependent rather than to create a post-hoc five-gene panel.
+
+\subsection{Current timing and spatial data locate informative windows but do not identify physical parameters}
+The GSE265828 TGFB1--TGFBR1--TGFBR2 transcript axis had Moran's $I=0.24$, 0.17, and 0.26 in three post-infarction sections (BH $q=0.013$ each) but $I=-0.02$ in control ($q=0.895$). This is evidence of transcript organization, not active-ligand diffusion. The same 2026 multimodal source organizes injured myocardium into remote, border, and infarct zones and reports reparative-fibroblast enrichment progressing toward the infarct zone \cite{Hernandez2026}. Because this organization is aligned with externally imposed injury anatomy, it strengthens evidence of spatial structure while leaving spontaneous diffusion-driven pattern formation unestablished.
+
+In GSE267256, day explained 0.973 of Cthrc1 variability and 0.916 of the equal-$z$ repair-module score. Excluding the day-5 singleton, mean Cthrc1 at days 3--4 exceeded days 1--2 by 3.03 log$_2$CPM ($q=0.00262$). In GSE123018, the earliest sampled 4/4 donor concordance occurred at 2 h in RNA and 6 h in ribosome profiling. Those are sampled landmarks, not onset times. The previously computed fixed-delay diagnostic recorded an optimum $\delta=0.116$ h and a profile spanning 0--2.1 h. Since zero remains admissible and is a boundary value, the safe conclusion is that these data do not establish a strictly positive hard delay; the candidate-family comparison is retained only as a supporting diagnostic and was not independently re-estimated here. \Cref{fig:timing} shows the distinction visually.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig4_timing_boundary.pdf}
+\caption{Sampled timing and the original fixed-delay diagnostic. The 2 h and 6 h landmarks are observations; they are not a myocardial delay. The likelihood profile is used only as supporting evidence that zero was not excluded, because $\delta=0$ is on the parameter boundary.}
+\label{fig:timing}
+\end{figure}
+
+\subsection{Mathematical reproduction is valid within its own formulation}
+Under Alfifi's Appendix/Galerkin delay placement, reproduced Hopf thresholds were 10.360024, 9.962434, and 9.852307 at $\tau_{\mathrm A}=1$, 20, and 40, versus 10.360, 9.962, and 9.842 reported by Alfifi. The largest relative difference was 0.104724\%. This validates the selected numerical benchmark only. It does not identify a cardiac parameter or transfer Dirichlet/Galerkin thresholds to a Neumann myocardial model. Supplementary Fig.~S1 provides the comparison.
+
+\subsection{Disease-direction evidence is supportive but not a cross-species effect estimate}
+In GSE132143, human myocardial-infarction left ventricle had 0.926-log$_2$CPM higher \cthrc{} than healthy left ventricle ($q=0.0288$). Pig infarct-zone minus remote-zone means were 5.569, 5.275, and 3.709 log$_2$CPM at 8, 60, and 180 days post-infarction. These are retained as within-species disease-direction summaries and are shown on separate axes in Supplementary Fig.~S4.
+
+\section{What changes in practice?}
+Rather than proposing a new fitting algorithm, the study provides an evidence-to-measurement decision framework. \Cref{tab:actions} converts each central result into an immediate use, a next measurement, and an inference boundary.
+
+\begin{table}[H]
+\centering
+\caption{Question--finding--action table for experimental and modeling teams.}
+\label{tab:actions}
+\scriptsize
+\begin{tabularx}{\linewidth}{>{\RaggedRight\arraybackslash}p{2.7cm}YYY}
+\toprule
+\textbf{User / question} & \textbf{Finding} & \textbf{Action now / next measurement} & \textbf{Inference boundary}\\
+\midrule
+Fibrosis experiment / which signal merits follow-up? & \cthrc{} rose in 82/84 donor-linked primary human fibroblast pairs; mean +0.882 log$_2$. & Prioritize independent functional validation, protein measurement, and outcome-linked perturbation in new donors. & Do not claim clinical efficacy, donor universality, or in-vivo causality.\\
+Saudi-center translational / does the culture result describe diseased myocardium? & KFSHRC whole-LV DCM is a different study-specific context; the detailed 2016 Results/S1 report 1211 genes and the original accession report shows a 3.08-fold decrease in \textit{COL1A1}. & Measure cell-resolved/spatial target states and protein/ligand activity in relevant human DCM tissue. & Do not call this direct fibroblast replication or Saudi-population validation.\\
+Spatial-omics / can smooth transcript fields yield diffusion? & Post-MI transcript axis is spatially organized, but a static field exposes parameter composites. & Add calibrated source/ligand measurements, boundary information, and dynamics. & Do not convert transcript smoothness to a physical diffusion coefficient.\\
+Timing / can sampled response times yield myocardial $\tau$? & Earliest sampled concordance is 2 h RNA / 6 h Ribo; hard-delay diagnostic includes zero. & Collect dense matched early kinetics with biological replication and a delay-identification design. & Do not set $\tau$ equal to a sampled time or RNA--Ribo difference.\\
+Two-state model / can ASPN or WNT5A be assigned as $v$? & ASPN is an observational opposite-transition candidate; WNT5A is a mechanistic pathway candidate. Neither demonstrates a shared $u^2v$ reaction flux. & Measure CTHRC1, ASPN, and WNT5A in the same system with independent and joint perturbations; compare $u^2v$ with bilinear, saturating, pathway-forcing, and uncoupled alternatives. & Do not set $v=$ASPN, $v=$WNT5A, or use CTHRC1 RNA/Ribo as two independent states.\\
+Dynamical model / can a cardiac Turing class be issued? & Required $A,B,D,\tau$, geometry, and uncertainty are not jointly observed. & Identify these quantities first, then compute all relevant modes and propagate uncertainty. & No cardiac stability certificate from transcript association or benchmark reproduction alone.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Discussion}
+The main empirical finding is positive and useful: a predefined 84-pair human analysis supports a consistent \tgfb{}$\rightarrow$\cthrc{} perturbation response. That is enough to change what an experimental team does next: \cthrc{} is a defensible target for independent functional and protein-level follow-up. It is not enough to claim treatment benefit, direct promoter regulation, a universal fibroblast response, or a whole-heart disease direction. The distinction is not semantic; it helps determine which experiment should be prioritized next.
+
+The KFSHRC case makes that boundary concrete. Whole end-stage DCM myocardium changes the cell mixture, chronic disease state, causal exposure, assay, and unit of inference. A different study-specific gene pattern is therefore scientifically useful even when it is not concordant with the culture experiment. It prevents a common translational error---treating a controlled cell response as though it were automatically a property of an entire diseased organ. The study does not identify the reason for the difference. Cell composition, disease stage, etiology, treatment history, platform, normalization, and sampling are all plausible contributors, but none is established here. The next bridge should therefore measure the relevant cell state and molecule rather than speculate about mechanism.
+
+The post-infarction transition evidence illustrates a second boundary. Richer cell-state and spatial data can narrow the biological interpretation without crossing into kinetic-state identification. ASPN supplies a local opposite-transition relationship to Cthrc1, whereas WNT5A supplies pathway-level mechanistic coupling. Treating these as interchangeable would erase the difference between a state-transition marker and a mechanistic partner. A direct two-state model therefore requires a purpose-built experiment that measures the candidate states together and perturbs them independently and jointly before any $u^2v$ topology is selected.
+
+The same logic applies to the model. Eq.~\eqref{eq:eq} shows why equilibrium cannot identify pure-state delay. Eq.~\eqref{eq:static} shows why a static field may identify composites rather than separate physical parameters. Eq.~\eqref{eq:char} shows what is required before a modal stability class can even be defined for cardiac tissue. The negative findings are therefore not a failure to fit a sophisticated model; they are information about which measurements are missing.
+
+This framing also clarifies the relationship to prior literature. Delayed Schnakenberg studies establish dynamical possibilities \cite{Alfifi2022,Jiang2019,Sargood2022,Das2026}. Spatial-omics calibration work demonstrates what becomes possible when source and transport assumptions are supplied \cite{Daher2026}. Cardiac-fibrosis studies establish real biological programs and prior cross-context overlap \cite{RuizVillalba2020,Schafer2017,Gao2021}. The contribution here is to connect these literatures at the decision boundary: a mathematical possibility becomes a cardiac claim only when the measurement object supports the parameters and interpretation that the claim requires.
+
+\section{Limitations and reproducibility}
+The primary GSE97358 result is a donor-paired transformed-expression contrast at one 24-h in-vitro endpoint; it is not a negative-binomial regression coefficient, an in-vivo time course, or a clinical endpoint. Its randomization, bootstrap, Wilcoxon, and leave-one-donor-out checks address donor-paired direction and sampling stability for that estimand. The primary analysis used the public count matrix, but the original raw-count file is not included in the accompanying analysis and source-traceability archive; accordingly, no additional donor-blocked negative-binomial sensitivity is claimed here. GSE225336 is one defined human culture source. GSE267256 has a day-5 singleton. The newly integrated single-cell/RNAscope transition statements from the 2026 mouse study are used at the published-source level rather than as a new cross-species numerical fit. GSE132143 differs by species and normalization and is not pooled.
+
+The timing-model comparison is supporting rather than primary evidence. The original $\chi^2_1$ likelihood-profile reference was not recalibrated for the boundary case $\delta=0$ in this study; Self and Liang \cite{SelfLiang1987} provide the reason such calibration can matter. We therefore rely only on the conservative conclusion that the available data do not establish a strictly positive hard delay.
+
+For the Saudi-center evidence, the 2016 source and its S1-table DOI are public \cite{Colak2016}. The original publisher-hosted S1 XLS was not available for independent re-extraction in this study, so the TGFB1 and \cthrc{} target-level entries remain contextual source reports rather than endpoints independently re-extracted from the original S1 XLS. The directly published 2009 \textit{COL1A1} value and the 2016 cohort/DEG counts remain independently visible in the source articles. This distinction is stated explicitly in the supplementary source-traceability table and note.
+
+None of the datasets analyzed jointly provides a cardiac reaction Jacobian, diffusion matrix, myocardial delay distribution, geometry, calibrated source/ligand measurements, and uncertainty bounds. Consequently, no cardiac Turing or delay certificate is issued.
+
+\section{Data availability and ethics}
+The public GEO accessions used are GSE265828, GSE267256, GSE261428, GSE123018, GSE96991, GSE96975, GSE97358, GSE225336, and GSE132143. The Saudi-center transcriptome sources are Colak et al. \cite{Colak2009,Colak2016} and ArrayExpress E-TABM-480; the 2016 S1 table is identified by DOI \href{https://doi.org/10.1371/journal.pone.0162669.s005}{10.1371/journal.pone.0162669.s005}. The accompanying analysis and source-traceability archive contains LaTeX, generated figures, a consolidated results table, a Saudi-center target-evidence table, and a deterministic extraction helper for use when the original XLS is supplied. Temporary repository links for the review/deposit stage are GitHub: \href{https://github.com/REPLACE-WITH-ACCOUNT/Schnakenberg-ST-Project30-R9}{temporary GitHub review link} and Zenodo: \href{https://zenodo.org/records/REPLACE-WITH-RECORD-ID}{temporary Zenodo review link}. These temporary placeholders must be replaced by the final public repository URLs (and the Zenodo DOI, once minted) before final publication.
+
+This computational study recruited no new participants or animals. Original-study approvals and consent/animal-use oversight are described in the cited source publications and database records. Colak et al. \cite{Colak2016} report KFSHRC ethics approval and informed consent from patients or family members.
+
+\section{Conclusion}
+Current cardiac omics already support a useful decision: the \tgfb{}$\rightarrow$\cthrc{} response in 84 donor-linked primary human cardiac-fibroblast pairs is strong enough to justify independent functional follow-up. The KFSHRC whole-myocardium case defines the boundary of that result: a controlled fibroblast response is not automatically a whole-heart disease direction or a Saudi-population claim. Post-infarction cell-state evidence adds a second bridge: ASPN and WNT5A are informative but distinct candidate roles, and neither is an identified Schnakenberg second state. These boundaries identify the next measurements rather than forcing agreement between incomparable experimental objects.
+
+The same evidence does not identify myocardial hard delay, separate physical transport/source parameters, or a cardiac Turing class. Those statements require denser kinetics, calibrated molecular/source information, geometry, transport measurements, and uncertainty-aware modal analysis. The practical role of the model is therefore to specify what must be measured before a stronger mechanistic inference is made, not to turn every omics pattern into a physical parameter.
+
+\section*{Nomenclature and statistical notation}
+The benchmark delay $\tau_{\mathrm A}$, the generic mechanistic delay $\tau$, and the response-diagnostic parameter $\delta$ are distinct quantities; no numerical value is transferred among them.
+
+\small
+\begin{longtable}{p{2.4cm}p{8.5cm}p{3.9cm}}
+\toprule
+\textbf{Symbol / abbreviation} & \textbf{Definition} & \textbf{Units or role}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol / abbreviation} & \textbf{Definition} & \textbf{Units or role}\\
+\midrule
+\endhead
+$x$ & Spatial coordinate. & Model-dependent spatial unit.\\
+$t$ & Time. & Time unit of the relevant model or experiment.\\
+$u(x,t),\,v(x,t)$ & Two Schnakenberg state variables. & Model-state variables.\\
+$a,\,b$ & Standard Schnakenberg feed/control parameters; $b_c$ denotes a critical Hopf-threshold value of $b$ in the selected benchmark. & Benchmark/model parameters.\\
+$\tau_{\mathrm A}$ & Delay parameter used only in the Alfifi Appendix/Galerkin benchmark. & Source benchmark units; not hours and not a cardiac estimate.\\
+$X(x,t)$ & $n_X$-component state field in the generic delayed reaction--diffusion model. & State vector.\\
+$D$ & Diffusion matrix in the generic multi-state reaction--diffusion model. & Model-dependent transport units.\\
+$F(X_1,X_2;\theta)$ & Local reaction map evaluated at current and delayed states. & Reaction term.\\
+$\theta$ & Remaining model parameters not written separately. & Parameter vector.\\
+$\tau$ & Generic pure-state mechanistic delay in Eq.~\eqref{eq:delay}. & Not inferred from the sampled cardiac times.\\
+$X^*(x)$ & Time-independent equilibrium field. & Equilibrium state.\\
+$T(x)$ & Generic modeled static spatial field in Eq.~\eqref{eq:static}; not assumed to be a measured ligand concentration. & Static model field.\\
+$d_T$ & Scalar transport coefficient in the static-field identifiability example. & Transport coefficient.\\
+$\mu$ & First-order loss rate in the static-field example. & Inverse time.\\
+$\beta$ & Scale of the source term $S_0(x)$. & Source-scale parameter.\\
+$S_0(x)$ & Prescribed source-profile shape. & Spatial source profile.\\
+$\phi_m,\,\kappa_m$ & $m$th Laplacian eigenfunction and eigenvalue, $-\Delta\phi_m=\kappa_m\phi_m$. & Modal spatial quantities.\\
+$A,\,B$ & Current- and delayed-state Jacobians $\partial_1F(X^*,X^*;\theta)$ and $\partial_2F(X^*,X^*;\theta)$ in the homogeneous-reference model. & $n_X\times n_X$ matrices.\\
+$\lambda$ & Characteristic growth-rate root of the modal delay equation. & Complex spectral quantity.\\
+$I_{n_X}$ & $n_X\times n_X$ identity matrix in Eq.~\eqref{eq:char}. & Matrix operator.\\
+$s_m$ & Supremum of $\Re(\lambda)$ over characteristic roots for spatial mode $m$. & Modal spectral abscissa.\\
+$\alpha_0$ & Spectral abscissa of the homogeneous mode, $s_0$. & Stability summary.\\
+$\alpha_S$ & Supremum of $s_m$ over non-homogeneous modes $m\ge1$. & Spatial-mode stability summary.\\
+$\delta$ & Fixed-response delay parameter in the sub-day timing diagnostic. & Hours; distinct from $\tau$.\\
+$\Delta$ & Laplacian operator used in the reaction--diffusion and static-field equations. & Spatial differential operator.\\
+$G$ & Predefined seven-gene repair set used to construct the equal-$z$ module. & Gene set.\\
+$\bar{y}_g,\,\widehat{\sigma}_g$ & Across-sample mean and sample standard deviation for transformed expression of gene $g$; $\widehat{\sigma}_g$ uses denominator 167 ($ddof=1$) across 168 samples. & Standardization quantities.\\
+$c^{\mathrm{norm}}_{gs}$ & Normalized count for gene $g$ in sample $s$ after median-ratio size-factor normalization. & Count-scale quantity.\\
+$y_{gs}$ & Transformed normalized expression for gene $g$ in sample $s$ in GSE97358. & $\log_2(c^{\mathrm{norm}}_{gs}+0.5)$.\\
+$z_{gs}$ & Gene-wise standardized value, $(y_{gs}-\bar{y}_g)/\widehat{\sigma}_g$, with standardization across all 168 samples. & Dimensionless $z$ score.\\
+$M_s$ & Equal-weight seven-gene repair-module score, $7^{-1}\sum_{g\in G}z_{gs}$. & Equal-$z$ module units.\\
+$P,\,q$ & Raw $P$ value and Benjamini--Hochberg-adjusted $P$ value, respectively. & Statistical evidence measures.\\
+$\eta^2$ & Proportion-of-variance effect-size statistic used in the day-scale analysis. & Dimensionless.\\
+$I$ & Moran's $I$ spatial-autocorrelation statistic. & Dimensionless; distinct from $I_{n_X}$.\\
+$\log_2\mathrm{CPM}$ & Base-2 log counts per million on the processed scale supplied for the relevant dataset. & Dataset-specific expression scale.\\
+$k,\,\ell_{\max},\,n_{\mathrm{obs}}$ & Number of fitted parameters, maximized log-likelihood, and number of observations in AICc. & Timing-diagnostic quantities.\\
+$\chi_1^2$ & One-degree-of-freedom chi-square reference used in the timing-profile diagnostic; not treated as boundary-calibrated. & Supporting diagnostic reference.\\
+AICc & Corrected Akaike information criterion. & Model-comparison diagnostic.\\
+FC / DEG / FDR & Fold change / differentially expressed gene / false-discovery rate. & Reporting abbreviations.\\
+RNA / Ribo & RNA-seq / ribosome-profiling assay. & Assay abbreviations.\\
+DCM / LV / MI & Dilated cardiomyopathy / left ventricle / myocardial infarction. & Clinical/tissue abbreviations.\\
+KFSHRC & King Faisal Specialist Hospital and Research Centre, Riyadh. & Saudi-center source institution.\\
+RCF / dpi & Reparative cardiac fibroblast / days post-infarction. & Post-MI biological terms.\\
+RZ / BZ / IZ & Remote zone / border zone / infarct zone. & Anatomical regions in the post-MI spatial source.\\
+ASPN / WNT5A & Opposite-transition observational candidate / mechanistic pathway candidate considered in the candidate-state assessment. & Candidate-state roles; neither is identified as Schnakenberg $v$.\\
+BH / GEO & Benjamini--Hochberg / Gene Expression Omnibus. & Statistical / data-source abbreviations.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\begin{thebibliography}{99}
+\bibitem{Schnakenberg1979} J. Schnakenberg, ``Simple chemical reaction systems with limit cycle behaviour,'' \emph{Journal of Theoretical Biology}, vol. 81, no. 3, pp. 389--400, 1979. doi:10.1016/0022-5193(79)90042-0.
+\bibitem{Turing1952} A. M. Turing, ``The Chemical Basis of Morphogenesis,'' \emph{Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences}, vol. 237, no. 641, pp. 37--72, 1952. doi:10.1098/rstb.1952.0012.
+\bibitem{Kondo2010} S. Kondo and T. Miura, ``Reaction-Diffusion Model as a Framework for Understanding Biological Pattern Formation,'' \emph{Science}, vol. 329, no. 5999, pp. 1616--1620, 2010. doi:10.1126/science.1179047.
+\bibitem{Alfifi2022} H. Y. Alfifi, ``Stability analysis for Schnakenberg reaction-diffusion model with gene expression time delay,'' \emph{Chaos, Solitons \& Fractals}, vol. 155, 111730, 2022. doi:10.1016/j.chaos.2021.111730.
+\bibitem{Jiang2019} W. Jiang, H. Wang, and X. Cao, ``Turing Instability and Turing--Hopf Bifurcation in Diffusive Schnakenberg Systems with Gene Expression Time Delay,'' \emph{Journal of Dynamics and Differential Equations}, vol. 31, no. 4, pp. 2223--2247, 2019. doi:10.1007/s10884-018-9702-y.
+\bibitem{Sargood2022} A. Sargood, E. A. Gaffney, and A. L. Krause, ``Fixed and Distributed Gene Expression Time Delays in Reaction--Diffusion Systems,'' \emph{Bulletin of Mathematical Biology}, vol. 84, no. 9, 98, 2022. doi:10.1007/s11538-022-01052-0.
+\bibitem{Das2026} N. Das, I. Bal\'azs, B. Das, and G. R\H{o}st, ``Delayed Pattern Formation in Two-Dimensional Domains,'' \emph{Bulletin of Mathematical Biology}, vol. 88, 112, 2026. doi:10.1007/s11538-026-01669-5.
+\bibitem{Raue2009} A. Raue, C. Kreutz, T. Maiwald, \emph{et al.}, ``Structural and practical identifiability analysis of partially observed dynamical models by exploiting the profile likelihood,'' \emph{Bioinformatics}, vol. 25, no. 15, pp. 1923--1929, 2009. doi:10.1093/bioinformatics/btp358.
+\bibitem{Villaverde2016} A. F. Villaverde, A. Barreiro, and A. Papachristodoulou, ``Structural Identifiability of Dynamic Systems Biology Models,'' \emph{PLoS Computational Biology}, vol. 12, no. 10, e1005153, 2016. doi:10.1371/journal.pcbi.1005153.
+\bibitem{Wieland2021} F. G. Wieland, A. L. Hauber, M. Rosenblatt, C. T\"onsing, and J. Timmer, ``On structural and practical identifiability,'' \emph{Current Opinion in Systems Biology}, vol. 25, pp. 60--69, 2021. doi:10.1016/j.coisb.2021.03.005.
+\bibitem{Simpson2020} M. J. Simpson, R. E. Baker, S. T. Vittadello, and O. J. Maclaren, ``Practical parameter identifiability for spatio-temporal models of cell invasion,'' \emph{Journal of the Royal Society Interface}, vol. 17, no. 164, 20200055, 2020. doi:10.1098/rsif.2020.0055.
+\bibitem{Daher2026} A. Daher, D. Trucu, and R. Eftimie, ``Calibrating tissue level PDE models of ligand dynamics using single cell and spatial transcriptomics data,'' \emph{npj Systems Biology and Applications}, vol. 12, 44, 2026. doi:10.1038/s41540-026-00657-8.
+\bibitem{MatasGil2024} A. Matas-Gil and R. G. Endres, ``Unraveling biochemical spatial patterns: Machine learning approaches to the inverse problem of stationary Turing patterns,'' \emph{iScience}, vol. 27, no. 6, 109822, 2024. doi:10.1016/j.isci.2024.109822.
+\bibitem{Gu2026} R. Gu, R. Z. Zhang, and C. E. Miles, ``Identifiability Limits of Physics-Informed Inference for Spatial Stochastic Dynamics from Static Snapshots,'' arXiv:2607.01749, 2026. doi:10.48550/arXiv.2607.01749.
+\bibitem{Tallquist2017} M. D. Tallquist and J. D. Molkentin, ``Redefining the identity of cardiac fibroblasts,'' \emph{Nature Reviews Cardiology}, vol. 14, no. 8, pp. 484--491, 2017. doi:10.1038/nrcardio.2017.57.
+\bibitem{Farbehi2019} N. Farbehi, R. Patrick, A. Dorison, \emph{et al.}, ``Single-cell expression profiling reveals dynamic flux of cardiac stromal, vascular and immune cells in health and injury,'' \emph{eLife}, vol. 8, e43882, 2019. doi:10.7554/eLife.43882.
+\bibitem{Dobaczewski2010} M. Dobaczewski, C. Gonzalez-Quesada, and N. G. Frangogiannis, ``The extracellular matrix as a modulator of the inflammatory and reparative response following myocardial infarction,'' \emph{Journal of Molecular and Cellular Cardiology}, vol. 48, no. 3, pp. 504--511, 2010. doi:10.1016/j.yjmcc.2009.07.015.
+\bibitem{Frangogiannis2019} N. G. Frangogiannis, ``Cardiac fibrosis: Cell biological mechanisms, molecular pathways and therapeutic opportunities,'' \emph{Molecular Aspects of Medicine}, vol. 65, pp. 70--99, 2019. doi:10.1016/j.mam.2018.07.001.
+\bibitem{RuizVillalba2020} A. Ruiz-Villalba, J. P. Romero, S. C. Hern\'andez, \emph{et al.}, ``Single-Cell RNA Sequencing Analysis Reveals a Crucial Role for CTHRC1 (Collagen Triple Helix Repeat Containing 1) Cardiac Fibroblasts After Myocardial Infarction,'' \emph{Circulation}, vol. 142, no. 19, pp. 1831--1847, 2020. doi:10.1161/CIRCULATIONAHA.119.044557.
+\bibitem{Chothani2019} S. Chothani, S. Sch\"afer, E. Adami, \emph{et al.}, ``Widespread Translational Control of Fibrosis in the Human Heart by RNA-Binding Proteins,'' \emph{Circulation}, vol. 140, no. 11, pp. 937--951, 2019. doi:10.1161/CIRCULATIONAHA.119.039596.
+\bibitem{Kuppe2022} C. Kuppe, R. O. Ramirez Flores, Z. Li, \emph{et al.}, ``Spatial multi-omic map of human myocardial infarction,'' \emph{Nature}, vol. 608, no. 7924, pp. 766--777, 2022. doi:10.1038/s41586-022-05060-x.
+\bibitem{Schafer2017} S. Sch\"afer, S. Viswanathan, A. A. Widjaja, \emph{et al.}, ``IL-11 is a crucial determinant of cardiovascular fibrosis,'' \emph{Nature}, vol. 552, no. 7683, pp. 110--115, 2017. doi:10.1038/nature24676.
+\bibitem{Nauffal2023} V. Nauffal, P. Di Achille, M. D. R. Klarqvist, \emph{et al.}, ``Genetics of myocardial interstitial fibrosis in the human heart and association with disease,'' \emph{Nature Genetics}, vol. 55, no. 5, pp. 777--786, 2023. doi:10.1038/s41588-023-01371-5.
+\bibitem{Hernandez2026} S. C. Hern\'andez, M. Ainciburu, L. Sudupe, \emph{et al.}, ``Single-cell and spatial transcriptomic profiling of cardiac fibroblasts following myocardial infarction,'' \emph{Scientific Data}, vol. 13, 216, 2026. doi:10.1038/s41597-025-06533-0.
+\bibitem{Stahl2016} P. L. St\r{a}hl, F. Salm\'en, S. Vickovic, \emph{et al.}, ``Visualization and analysis of gene expression in tissue sections by spatial transcriptomics,'' \emph{Science}, vol. 353, no. 6294, pp. 78--82, 2016. doi:10.1126/science.aaf2403.
+\bibitem{Gao2021} Q.-Y. Gao, H.-F. Zhang, Z.-T. Chen, Y.-W. Li, S.-H. Wang, Z.-Z. Wen, Y. Xie, J.-T. Mai, J.-F. Wang, and Y.-X. Chen, ``Construction and Analysis of a ceRNA Network in Cardiac Fibroblast During Fibrosis Based on in vivo and in vitro Data,'' \emph{Frontiers in Genetics}, vol. 11, 503256, 2021. doi:10.3389/fgene.2020.503256.
+\bibitem{Colak2009} D. Colak, N. Kaya, J. Al-Zahrani, A. Al Bakheet, P. Muiya, E. Andres, \emph{et al.}, ``Left ventricular global transcriptional profiling in human end-stage dilated cardiomyopathy,'' \emph{Genomics}, vol. 94, no. 1, pp. 20--31, 2009. doi:10.1016/j.ygeno.2009.03.003.
+\bibitem{Colak2016} D. Colak, A. A. Alaiya, N. Kaya, N. P. Muiya, O. AlHarazi, Z. Shinwari, E. Andres, and N. Dzimiri, ``Integrated Left Ventricular Global Transcriptome and Proteome Profiling in Human End-Stage Dilated Cardiomyopathy,'' \emph{PLoS ONE}, vol. 11, no. 10, e0162669, 2016. doi:10.1371/journal.pone.0162669.
+\bibitem{Wang2023} D. Wang, Y. Zhang, T. Ye, \emph{et al.}, ``Cthrc1 deficiency aggravates wound healing and promotes cardiac rupture after myocardial infarction via non-canonical WNT5A signaling pathway,'' \emph{International Journal of Biological Sciences}, vol. 19, no. 4, pp. 1299--1315, 2023. doi:10.7150/ijbs.79260.
+\bibitem{Hong2023} H. Hong, M. J. Cortez, Y. Y. Cheng, \emph{et al.}, ``Inferring delays in partially observed gene regulation processes,'' \emph{Bioinformatics}, vol. 39, no. 11, btad670, 2023. doi:10.1093/bioinformatics/btad670.
+\bibitem{SelfLiang1987} S. G. Self and K.-Y. Liang, ``Asymptotic Properties of Maximum Likelihood Estimators and Likelihood Ratio Tests under Nonstandard Conditions,'' \emph{Journal of the American Statistical Association}, vol. 82, no. 398, pp. 605--610, 1987. doi:10.1080/01621459.1987.10478472.
+\end{thebibliography}
+\end{document}
