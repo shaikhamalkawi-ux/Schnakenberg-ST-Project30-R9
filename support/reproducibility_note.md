@@ -2,13 +2,13 @@
 
 ## Traceable in the accompanying archive
 - LaTeX source for the main manuscript and Supplementary Information.
-- All publication figures and deterministic Python figure generator.
+- Deterministic Python generator for all publication figures.
 - Consolidated numerical-results table and claim boundaries.
 - Formulation-specific Alfifi benchmark values and direct arithmetic comparison.
 - Main-manuscript claim-to-measurement logic.
 - Saudi-center source-status table and deterministic extraction helper.
 - Reference-audit register in manuscript first-appearance order, now including Wang et al. 2023.
-- Selectively integrated Project 29 evidence roles for Hernández 2026, ASPN, and WNT5A, retained in Project 30 R9 with the mechanistic stress-test framing.
+- Published-source evidence roles for Hernández 2026, ASPN, and WNT5A under the mechanistic stress-test framing.
 
 ## Post-infarction candidate-state evidence
 The Hernández et al. 2026 multimodal source is used at the published-source level for the 3–5 dpi reparative-fibroblast transition window, local Aspn+/Cthrc1− to Aspn−/Cthrc1+ state transition, and anatomy-linked spatial context. Wang et al. 2023 is used as mechanistic pathway evidence linking CTHRC1 with non-canonical WNT5A signaling and recombinant-WNT5A rescue. These sources narrow candidate interpretation but do not identify a shared biochemical flux, a u^2v rate law, or a direct cardiac Schnakenberg second state.
@@ -24,5 +24,5 @@ The locked primary paired result remains the 84-pair transformed-expression esti
 ## Timing diagnostic retained as supporting evidence only
 The original model-specification file for the fixed-delay, sequential, Erlang, and independent-response candidate families is unavailable. The available timing diagnostic therefore supports only the bounded conclusion that current data do not establish a strictly positive hard delay; sampled RNA/Ribo response landmarks are not converted into mechanistic tau.
 
-## Current closure
+## Interpretation boundary
 The manuscript remains an identifiability / evidence-boundary / measurement-decision paper. Schnakenberg is used as a deliberately demanding mechanistic stress test, not as identified cardiac truth. Proposition 1 makes explicit that the equilibrium-delay and static source/transport/loss observation-structure limits are broader than Schnakenberg kinetics. The integrated post-infarction evidence improves temporal observability, candidate-state interpretation, and concrete next-measurement design without identifying a cardiac Schnakenberg mechanism.
