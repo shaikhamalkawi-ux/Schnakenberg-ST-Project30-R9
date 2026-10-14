@@ -47,7 +47,7 @@ Three mathematical objects remain distinct.
 
 The observation-structure and modal equations used to define identifiability and stability requirements are given in the main manuscript. They are not repeated here as Supplementary Methods. Table~\ref{tab:alfifi} records the selected formulation-specific benchmark values.
 
-\begin{table}[H]\centering\caption{Selected Alfifi Hopf-threshold reproduction under the Appendix/Galerkin placement. Here $b_c$ is the critical value of the Schnakenberg control parameter $b$ at the selected Hopf threshold; the frequency column is retained only as a benchmark-scale numerical output and is not assigned a cardiac or dimensional interpretation.}\label{tab:alfifi}\small
+\begin{table}[H]\centering\caption{Selected Alfifi Hopf-threshold reproduction under the Appendix/Galerkin placement. Here $b_c$ is the critical value of the Schnakenberg control parameter $b$ at the selected Hopf threshold; the frequency column is reported only as a benchmark-scale numerical output and is not assigned a cardiac or dimensional interpretation.}\label{tab:alfifi}\small
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{rrrrr}\toprule
 $\tau_{\mathrm A}$ (benchmark units) & Reported $b_c$ & Reproduced $b_c$ & Relative difference (\%) & Reproduced frequency (benchmark scale)\\\midrule
@@ -115,7 +115,7 @@ The 2026 multimodal post-MI study further reports a 3--5 dpi transition window f
 \section*{S7. Sub-day timing and the hard-delay boundary}
 In GSE123018, the earliest sampled 4/4 donor concordance was 2 h for RNA and 6 h for ribosome profiling. These are sampling landmarks, not onset times and not a myocardial delay.
 
-The retained fixed-delay diagnostic summary reports an optimum $\delta=0.116$ h, an originally calculated profile spanning 0--2.1 h, and an AICc 2.82 units above the best candidate. Here $\delta$ is a response-diagnostic quantity and is distinct from the mechanistic delay $\tau$. Zero remains admissible, and the original four-family model-specification file is unavailable. The full interpretation and boundary-aware statistical rationale are therefore reported in the main Methods. The permitted conclusion is limited to: current data do not establish a strictly positive hard delay.
+The fixed-delay diagnostic summary reports an optimum $\delta=0.116$ h, an originally calculated profile spanning 0--2.1 h, and an AICc 2.82 units above the best candidate. Here $\delta$ is a response-diagnostic quantity and is distinct from the mechanistic delay $\tau$. Zero remains admissible, and the original four-family model-specification file is unavailable. The full interpretation and boundary-aware statistical rationale are therefore reported in the main Methods. The conclusion supported by these data is limited to: current data do not establish a strictly positive hard delay.
 \section*{S8. Disease-direction evidence without cross-species pooling}
 In GSE132143, human MI left ventricle minus healthy left ventricle was +0.926 log$_2$CPM for \cthrc{} ($q=0.0288$). Pig infarct-zone minus remote-zone means were +5.569, +5.275, and +3.709 log$_2$CPM at 8, 60, and 180 days post-infarction. Separate axes are used because species, tissue sampling, and normalization differ. Figure~\ref{fig:s4disease} keeps the human and pig summaries on separate axes.
 
@@ -124,13 +124,13 @@ In GSE132143, human MI left ventricle minus healthy left ventricle was +0.926 lo
 \section*{S9. Saudi-center source provenance}
 The 2016 PLOS ONE study reports 300 mg of left-ventricular myocardial tissue from five end-stage DCM hearts and five non-failing donor hearts and states that the same myocardial tissue was used for transcriptome profiling \cite{Colak2016}. Whole-genome expression used ABI Human Genome Survey Microarray version 2, described as 31,700 probes representing 27,868 genes. The detailed Results/S1 description reports 1549 probes corresponding to 1211 differentially expressed genes, including 597 downregulated and 614 upregulated genes at least 1.5-fold and FDR $<5\%$, whereas the article abstract states 1262 DEGs. The manuscript uses the detailed Results/S1 count when referring to the thresholded gene list. S1 Table is published as DOI \href{https://doi.org/10.1371/journal.pone.0162669.s005}{10.1371/journal.pone.0162669.s005}.
 
-A predefined target lookup of the published S1 table recorded a reported signed fold-change of $-2.01$ for TGFB1 and \cthrc{} as absent from the threshold-passing list. The original publisher-hosted XLS was not available for independent re-extraction in this study, so these two entries are retained as contextual reports from the published supplementary source rather than endpoints independently re-extracted from the original S1 XLS. This does not affect the source-level facts (human whole-LV KFSHRC tissue, 5+5 design, 1211 genes) or the directly published 2009 \textit{COL1A1} result.
+A predefined target lookup of the published S1 table recorded a reported signed fold-change of $-2.01$ for TGFB1 and \cthrc{} as absent from the threshold-passing list. The original publisher-hosted XLS was not available for independent re-extraction in this study, so these two entries are treated as contextual reports from the published supplementary source rather than endpoints independently re-extracted from the original S1 XLS. This does not affect the source-level facts (human whole-LV KFSHRC tissue, 5+5 design, 1211 genes) or the directly published 2009 \textit{COL1A1} result.
 
 The original 2009 E-TABM-480 report describes five DCM and four control hearts and lists a 3.08-fold decrease in \textit{COL1A1} \cite{Colak2009}. Since the 2009 and 2016 reports differ in control count, exact sample-manifest identity is not assumed. Table~\ref{tab:saudi} records which Saudi-center statements are directly reported and which are reported from the published S1 source but not independently re-extracted.
 
 \begin{table}[H]\centering\caption{Saudi-center target/source status used in the manuscript.}\label{tab:saudi}\small
 \begin{tabularx}{\linewidth}{p{2.2cm}p{2.8cm}YY}
-\toprule \textbf{Item} & \textbf{Reported result} & \textbf{Verification status} & \textbf{Permitted use}\\\midrule
+\toprule \textbf{Item} & \textbf{Reported result} & \textbf{Verification status} & \textbf{Supported use}\\\midrule
 KFSHRC 2016 cohort & 5 DCM + 5 non-failing whole LV; 1211 genes (597 down, 614 up) & directly reported in source article & Saudi-center whole-myocardial disease context\\
 TGFB1 & reported signed fold-change $-2.01$ & predefined S1 lookup; reported in the published S1 source; original XLS not independently re-extracted & context description only\\
 \cthrc{} & not in threshold-passing DEG list & predefined S1 lookup; published-source report; original XLS not independently re-extracted & no whole-myocardial threshold-passing statement; not evidence of absence\\
@@ -145,7 +145,7 @@ Wang et al. report that recombinant WNT5A can partially rescue Cthrc1-deficient 
 
 \begin{table}[H]\centering\caption{Evidence roles for candidate second states.}\label{tab:stateaudit}\scriptsize
 \begin{tabularx}{\linewidth}{p{1.8cm}YYY}
-\toprule \textbf{Candidate} & \textbf{Observed support} & \textbf{Permitted interpretation} & \textbf{Missing for direct Schnakenberg $v$}\\\midrule
+\toprule \textbf{Candidate} & \textbf{Observed support} & \textbf{Supported interpretation} & \textbf{Missing for direct Schnakenberg $v$}\\\midrule
 ASPN & Local Aspn$^+$, Cthrc1$^-$ to Aspn$^-$, Cthrc1$^+$ transition in post-MI fibroblast states & Observational state-transition candidate & Shared flux, matched dynamics, perturbational topology discrimination, $u^2v$ evidence\\
 WNT5A & CTHRC1-associated non-canonical WNT5A signaling and recombinant-WNT5A rescue & Mechanistic pathway candidate & Opposite-state trajectory, shared opposite-sign flux, matched kinetics, $u^2v$ evidence\\
 CTHRC1 RNA/Ribo & Earliest sampled all-donor upward direction at 2 h / 6 h & Temporal observability of one target at two regulatory layers & Two independent states; assay layers do not define $u,v$\\
