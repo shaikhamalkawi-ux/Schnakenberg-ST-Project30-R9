@@ -9,12 +9,12 @@ def save(fig,name):
     fig.savefig(OUT/f'{name}.png',bbox_inches='tight',pad_inches=.08,dpi=220)
     plt.close(fig)
 
-# Main Fig 1: five-stage evidence-to-action pathway
+# Main Fig 1: five-stage measurement-requirements summary
 fig,ax=plt.subplots(figsize=(7.2,6.1)); ax.set_xlim(0,1); ax.set_ylim(0,1); ax.axis('off')
 stages=[
  ('1  Human perturbation','84 paired donors; CTHRC1 rose in 82/84','Independent functional and protein-level follow-up','No clinical or in-vivo universality claim'),
  ('2  Saudi-center context','Whole-LV DCM is a different study-specific object','Bridge with cell-resolved/spatial and protein measurements','Not direct replication or Saudi-population validation'),
- ('3  Candidate-state assessment','ASPN: opposite-transition candidate; WNT5A: pathway candidate','Matched independent + joint perturbations and kinetics','Neither candidate is identified as Schnakenberg v'),
+ ('3  Candidate-state assessment','ASPN: state-transition candidate; WNT5A: pathway candidate','Matched independent + joint perturbations and kinetics','Neither candidate is identified as Schnakenberg v'),
  ('4  Spatial and timing evidence','Transcript organization and sampled response windows are observable','Dense kinetics plus calibrated source/ligand measurements','No physical diffusivity or myocardial hard delay'),
  ('5  Dynamical classification','A stability class requires identified ' + r'$A, B, D, \tau$' + ' and geometry','Propagate parameter uncertainty before classification','No cardiac Turing certificate from transcript patterns')]
 ys=[.805,.64,.475,.31,.145]
@@ -27,9 +27,9 @@ for (title,finding,nextm,boundary),y in zip(stages,ys):
     ax.text(x+.155,y+h-.060,finding,fontsize=7.5,va='top')
     ax.text(x+.020,y+h-.088,'Next:',weight='bold',fontsize=7.7,va='top')
     ax.text(x+.155,y+h-.088,nextm,fontsize=7.5,va='top')
-    ax.text(x+.020,y+h-.116,'Boundary:',weight='bold',fontsize=7.7,va='top')
+    ax.text(x+.020,y+h-.116,'Limit:',weight='bold',fontsize=7.7,va='top')
     ax.text(x+.155,y+h-.116,boundary,fontsize=7.5,va='top')
-ax.text(.5,.985,'Evidence is useful when it changes the next measurement and states the claim boundary.',ha='center',va='top',fontsize=9.1,style='italic')
+ax.text(.5,.985,'Each analysis links an observed result to the measurement required for a stronger inference.',ha='center',va='top',fontsize=9.1,style='italic')
 save(fig,'fig1_evidence_to_action')
 
 # Main Fig 2: separate units for primary expression and equal-z module
@@ -67,8 +67,8 @@ for (x,y,w,h),title,lines in zip(boxes,titles,items):
         ax.text(x+.03,yy,u'• '+line,ha='left',va='top',fontsize=8.0,wrap=True)
         yy -= 0.04*(line.count('\n')+1) + 0.015
 ax.add_patch(FancyArrowPatch((.445,.50),(.555,.50),arrowstyle='<->',mutation_scale=13,linewidth=1.1,color='.3'))
-ax.text(.5,.91,'Context transfer',ha='center',va='center',fontsize=8.6,weight='bold')
-ax.text(.5,.125,'Practical consequence: use discordance to choose the bridge measurement, not to force a replication label.',ha='center',fontsize=8.8,style='italic')
+ax.text(.5,.91,'Cross-context comparison',ha='center',va='center',fontsize=8.6,weight='bold')
+ax.text(.5,.125,'Discordant study-specific results indicate the measurement needed to bridge the two designs; they are not interpreted as direct replication.',ha='center',fontsize=8.6,style='italic')
 ax.text(.5,.06,'The Riyadh source establishes a Saudi-center case, not nationality or ancestry of all participants.',ha='center',fontsize=8.1)
 save(fig,'fig3_saudi_context_transfer')
 
