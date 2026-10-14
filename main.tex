@@ -15,7 +15,7 @@
 \usepackage{cleveref}
 \usepackage{float}
 \usepackage{ragged2e}
-\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={},pdftitle={From Cardiac Omics to Identifiable Dynamics}}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,pdfauthor={Ghassan Malkawi; Ahmed Elsayed; Hassan Y. Alfifi},pdftitle={From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model}}
 \captionsetup{font=small,labelfont=bf}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
@@ -25,20 +25,20 @@
 \newcommand{\tgfb}{TGF-$\beta$1}
 \newcommand{\kfs}{King Faisal Specialist Hospital and Research Centre (KFSHRC)}
 \title{\textbf{From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model}}
-\author{
+\author{\parbox{0.94\textwidth}{\centering
 Ghassan Malkawi$^{1,*}$, Ahmed Elsayed$^{2}$, Hassan Y. Alfifi$^{3,4}$\\[4pt]
 \small $^{1}$Faculty of Computer Information Science, Higher Colleges of Technology, Al Ain, United Arab Emirates\\
 \small $^{2}$Department of Computer Engineering and Computational Sciences, Canadian University Dubai, Dubai, United Arab Emirates\\
 \small $^{3}$Mathematics Department, College of Science, Imam Abdulrahman Bin Faisal University, Dammam 31441, Saudi Arabia\\
 \small $^{4}$Basic \& Applied Scientific Research Center, Imam Abdulrahman Bin Faisal University, Dammam 31441, Saudi Arabia\\
 \small $^{*}$Correspondence: gmalkawi@hct.ac.ae
-}
+}}
 \date{}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Mechanistic cardiac models often assign physical meaning to transcript patterns not measured as physical parameters. We ask which claims current cardiac-omics data support and what must be measured before a delayed reaction--diffusion interpretation becomes identifiable. In 84 donor-linked primary human cardiac-fibroblast pairs, \cthrc{} increased after 24-h \tgfb{} exposure in 82/84 pairs, with mean paired effect 0.882 log$_2$ units (bootstrap 95\% interval 0.801--0.962) and positive leave-one-donor-out means. An independent human primary-cell dataset reproduced the 24-h direction: mean \cthrc{} was 108.6 versus 171.0 FPKM in control and \tgfb{} cultures, respectively, with all three treated replicates above all three controls; the direction remained positive at 48 h but was near-null at 6 h. A KFSHRC whole-left-ventricular end-stage dilated-cardiomyopathy case tests claim portability, showing why a controlled fibroblast response cannot be relabeled as a whole-myocardium or Saudi-population result. Published multimodal post-infarction data localize Cthrc1$^+$ reparative fibroblast emergence to a 3--5-day window and nominate ASPN as an observational opposite-transition candidate without identifying a Schnakenberg second state. Equilibrium and static-field analyses show that pure-state delay and separate transport/source parameters are not identified by the available observations. A formulation-specific Alfifi benchmark is reproduced only as a mathematical reference; no myocardial delay, physical diffusion coefficient, or cardiac Turing class is inferred. Schnakenberg is therefore a mechanistic stress test, not identified cardiac topology. The resulting measurement-decision map specifies the state-resolved kinetics, perturbational topology, active-ligand/source calibration, geometry, transport, and uncertainty needed before a two-state delayed reaction--diffusion claim becomes testable.
+Mechanistic cardiac models can assign physical meaning to transcript patterns without measuring the corresponding physical parameters. We ask which claims current cardiac-omics data support and what must be measured before delayed reaction--diffusion dynamics become identifiable. In 84 donor-linked primary human cardiac-fibroblast pairs, \cthrc{} increased after 24-h \tgfb{} exposure in 82/84 pairs (mean paired effect 0.882 log$_2$ units; bootstrap 95\% interval 0.801--0.962), with all leave-one-donor-out means positive. An independent primary-cell dataset reproduced the 24-h direction (log$_2$ ratio of mean expression $+0.655$; all three treated replicates above all three controls), remained positive at 48 h, and was near-null at 6 h. A Saudi-center whole-left-ventricular end-stage dilated-cardiomyopathy case shows why a controlled fibroblast response cannot be relabeled as a whole-myocardium or population result. Published post-infarction data localize Cthrc1$^+$ reparative fibroblast emergence to a 3--5-day window and nominate ASPN as an observational opposite-transition candidate without identifying a second Schnakenberg state. Observation-structure analyses show that equilibrium data cannot identify pure-state delay and that a single static field cannot separately identify transport, loss, and source scale. A formulation-specific Alfifi benchmark is retained only as a mathematical reference. The resulting measurement-decision map specifies the kinetics, perturbations, geometry, transport, source calibration, and uncertainty required before a two-state delayed reaction--diffusion claim becomes testable.
 \end{abstract}
 
 \textbf{Keywords:} cardiac fibroblast; \textit{CTHRC1;} \tgfb; dilated cardiomyopathy; Saudi Arabia; identifiability; reaction--diffusion; time delay; Schnakenberg model; context transfer; measurement design
@@ -52,7 +52,7 @@ The inverse problem is equally important. Structural and practical identifiabili
 
 Cardiac fibrosis is a useful stress test because the biological program is real, dynamic, and strongly context dependent. Cardiac fibroblast states change after injury \cite{Tallquist2017,Farbehi2019}; extracellular-matrix remodeling is integral to inflammatory and reparative phases \cite{Dobaczewski2010,Frangogiannis2019}; \cthrc-positive fibroblasts participate in post-infarction repair \cite{RuizVillalba2020}; translational regulation contributes to human cardiac fibrosis \cite{Chothani2019}; and infarct tissue shows marked spatial organization \cite{Kuppe2022}. Primary human cardiac-fibroblast perturbation resources from the Sch\"afer/Cook program \cite{Schafer2017} provide direct experimental anchors, while human fibrosis-genetics work \cite{Nauffal2023} supplies complementary disease-association context. A cardiac single-cell/spatial dataset \cite{Hernandez2026} and the foundational spatial-transcriptomics method \cite{Stahl2016} further define where transcript programs can be localized. Prior work has already compared TGF-$\beta$-treated cardiac fibroblasts with failing ventricular tissue, including GSE97358 and GSE116250 \cite{Gao2021}; our contribution is therefore not a claim of being the first cross-dataset comparison.
 
-The unresolved problem is \emph{portability of inference}. A response measured in a controlled fibroblast experiment may be valid at that level while being invalid as the same claim in whole diseased myocardium. We test this boundary with human left-ventricular end-stage dilated-cardiomyopathy (DCM) data generated at KFSHRC in Riyadh \cite{Colak2009,Colak2016}. The location establishes a Saudi-center case, but it does not establish Saudi nationality or ancestry for every participant. The KFSHRC study does not constitute a direct extension of the 24-h fibroblast perturbation experiment: it differs in cell mixture, disease stage, exposure, assay, and inferential unit.
+The unresolved problem is \emph{portability of inference}. A response measured in a controlled fibroblast experiment may be valid at that level while being invalid as the same claim in whole diseased myocardium. We test this boundary with human left-ventricular end-stage dilated-cardiomyopathy (DCM) data generated at \kfs{} in Riyadh \cite{Colak2009,Colak2016}. The location establishes a Saudi-center case, but it does not establish Saudi nationality or ancestry for every participant. The KFSHRC study does not constitute a direct extension of the 24-h fibroblast perturbation experiment: it differs in cell mixture, disease stage, exposure, assay, and inferential unit.
 
 Schnakenberg is used here as a deliberately demanding mechanistic test case, not because current cardiac data have identified its reaction topology. Its two-state nonlinear coupling, diffusion, and delay make the missing requirements for a mechanistic claim explicit: co-resolved state trajectories, interaction topology, transport, geometry, delay, and uncertainty. The observation-structure results below---loss of pure-state delay from an equilibrium condition and confounding of transport, source scale, and loss in a static field---do not depend on Schnakenberg kinetics. The Schnakenberg form therefore serves as a concrete, falsifiable reference model against which the evidence requirements can be stated rather than as a claimed cardiac truth.
 
@@ -292,14 +292,14 @@ The same logic applies to the model. Eq.~\eqref{eq:eq} shows why equilibrium can
 
 This framing also clarifies the relationship to prior literature. Delayed Schnakenberg studies establish dynamical possibilities \cite{Alfifi2022,Jiang2019,Sargood2022,Das2026}. Spatial-omics calibration work demonstrates what becomes possible when source and transport assumptions are supplied \cite{Daher2026}. Cardiac-fibrosis studies establish real biological programs and prior cross-context overlap \cite{RuizVillalba2020,Schafer2017,Gao2021}. The contribution here is to connect these literatures at the decision boundary: a mathematical possibility becomes a cardiac claim only when the measurement object supports the parameters and interpretation that the claim requires.
 
-A bounded future extension is to represent residual experimental and parameter uncertainty with fuzzy quantities only after the corresponding biological quantities have first become structurally identifiable. For example, spatial discretization of Eq.~\eqref{eq:static}, with $L$ denoting the discrete Laplacian and tildes denoting fuzzy quantities, would lead to
+A bounded future extension is to represent residual experimental and parameter uncertainty with fuzzy quantities only after the corresponding biological quantities have first become structurally identifiable. For example, spatial discretization of Eq.~\eqref{eq:static}, with $L$ denoting the discrete Laplacian, $I$ the identity matrix of matching dimension, $\tilde{\mathbf T}$ the discretized fuzzy field, $\mathbf S_0$ the discretized source-profile vector, and tildes denoting fuzzy quantities, would lead to
 \begin{equation}
 (\tilde{\mu}I-\tilde d_T L)\tilde{\mathbf T}
 =
 \tilde{\beta}\mathbf S_0 ,
 \label{eq:fuzzy-static}
 \end{equation}
-which connects the present transport setting to earlier work on consistency and positive solutions of fully fuzzy linear systems \cite{MalkawiAlfifi2017}. Likewise, a finite-dimensional stability subproblem arising after an explicitly justified linearization or model reduction could be paired with a fuzzy Lyapunov/Sylvester relation
+which connects the present transport setting to earlier work on consistency and positive solutions of fully fuzzy linear systems \cite{MalkawiAlfifi2017}. Likewise, a finite-dimensional stability subproblem arising after an explicitly justified linearization or model reduction could be paired with a fuzzy Lyapunov/Sylvester relation, where $\tilde M_m$ is the uncertain mode-specific state matrix, $\tilde P$ is the candidate Lyapunov matrix, $\tilde Q$ is the prescribed weighting matrix, and ${\mathsf T}$ denotes transpose,
 \begin{equation}
 \tilde M_m^{\mathsf T}\tilde P+\tilde P\tilde M_m=-\tilde Q ,
 \label{eq:fuzzy-lyap}
