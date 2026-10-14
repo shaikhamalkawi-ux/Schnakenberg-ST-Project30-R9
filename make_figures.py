@@ -32,24 +32,27 @@ for (title,finding,nextm,boundary),y in zip(stages,ys):
 ax.text(.5,.985,'Evidence is useful when it changes the next measurement and states the claim boundary.',ha='center',va='top',fontsize=9.1,style='italic')
 save(fig,'fig1_evidence_to_action')
 
-# Main Fig 2
-fig,(ax1,ax2)=plt.subplots(1,2,figsize=(7.2,3.35)); fig.subplots_adjust(bottom=.25,wspace=.42)
+# Main Fig 2: separate units for primary expression and equal-z module
+fig,(ax1,ax2)=plt.subplots(1,2,figsize=(7.2,3.35))
+fig.subplots_adjust(bottom=.25,wspace=.42)
 m,lo,hi=.882,.801,.962
 ax1.errorbar([m],[0],xerr=[[m-lo],[hi-m]],fmt='o',capsize=4,elinewidth=1.5,markersize=6)
 ax1.axvline(0,linewidth=.8,color='.45'); ax1.set_yticks([]); ax1.set_xlim(.72,1.04); ax1.grid(axis='x',alpha=.22)
-ax1.set_xlabel('Paired effect (log2 units)'); ax1.set_title('A  CTHRC1 primary endpoint',loc='left',fontsize=9.5)
+ax1.set_xlabel('Paired effect (log2 units)')
+ax1.set_title('A  CTHRC1 primary endpoint',loc='left',fontsize=9.5)
 ax1.text(m,.13,'82/84 donors increased\n95% bootstrap 0.801-0.962',ha='center',va='bottom',fontsize=8.2)
 m,lo,hi=.637,.588,.684
 ax2.errorbar([m],[0],xerr=[[m-lo],[hi-m]],fmt='o',capsize=4,elinewidth=1.5,markersize=6)
 ax2.axvline(0,linewidth=.8,color='.45'); ax2.set_yticks([]); ax2.set_xlim(.50,.73); ax2.grid(axis='x',alpha=.22)
-ax2.set_xlabel('Module difference (equal-z units)'); ax2.set_title('B  Seven-gene repair module',loc='left',fontsize=9.5)
+ax2.set_xlabel('Module difference (equal-z units)')
+ax2.set_title('B  Seven-gene repair module',loc='left',fontsize=9.5)
 ax2.text(m,.13,'81/84 positive\n95% bootstrap 0.588-0.684',ha='center',va='bottom',fontsize=8.2)
 for a in (ax1,ax2):
     a.set_ylim(-.16,.34); a.spines['top'].set_visible(False); a.spines['right'].set_visible(False); a.spines['left'].set_visible(False)
 fig.text(.5,.06,'Panels use different units by design; their numerical magnitudes are not directly comparable.',ha='center',fontsize=7.9,style='italic')
 save(fig,'fig2_human_pair_result')
 
-# Main Fig 3
+# Main Fig 3 context transfer
 fig,ax=plt.subplots(figsize=(7.2,4.6)); ax.set_xlim(0,1); ax.set_ylim(0,1); ax.axis('off')
 boxes=[(.035,.20,.405,.66),(.56,.20,.405,.66)]
 titles=['Controlled primary human\ncardiac fibroblasts','KFSHRC whole left-ventricular\nend-stage DCM tissue']
@@ -69,8 +72,9 @@ ax.text(.5,.125,'Practical consequence: use discordance to choose the bridge mea
 ax.text(.5,.06,'The Riyadh source establishes a Saudi-center case, not nationality or ancestry of all participants.',ha='center',fontsize=8.1)
 save(fig,'fig3_saudi_context_transfer')
 
-# Main Fig 4
-fig,(ax1,ax2)=plt.subplots(1,2,figsize=(7.2,3.25),gridspec_kw={'width_ratios':[1.05,1]}); fig.subplots_adjust(bottom=.25,wspace=.32)
+# Main Fig 4 timing
+fig,(ax1,ax2)=plt.subplots(1,2,figsize=(7.2,3.25),gridspec_kw={'width_ratios':[1.05,1]})
+fig.subplots_adjust(bottom=.25,wspace=.32)
 ax1.set_ylim(0,1); ax1.set_xlim(-.5,25.5); ax1.set_yticks([]); ax1.set_xlabel('Hours after perturbation'); ax1.hlines(.5,0,24,linewidth=1,color='.35')
 pts=[(2,'RNA 2 h\nearliest sampled 4/4',.72),(6,'Ribo 6 h\nearliest sampled 4/4',.27),(24,'84-pair\n24 h endpoint',.72)]
 for x,lab,yv in pts:
@@ -83,13 +87,14 @@ for s in ['top','right','left']: ax2.spines[s].set_visible(False)
 fig.text(.5,.06,'Since δ≥0 puts zero on a boundary, the original profile is used only as a diagnostic; it is not a boundary-calibrated confidence interval.',ha='center',fontsize=7.5,style='italic')
 save(fig,'fig4_timing_boundary')
 
-# Supplementary figures
+# Sup S1
 fig,ax=plt.subplots(figsize=(6.4,3.6)); tau=np.array([1,20,40]); reported=np.array([10.360,9.962,9.842]); reproduced=np.array([10.360024,9.962434,9.852307])
 ax.plot(tau,reported,'o-',label='Reported'); ax.plot(tau,reproduced,'s--',label='Reproduced')
 for x,yv in zip(tau,reported): ax.annotate(f'{yv:.3f}',(x,yv),xytext=(0,7),textcoords='offset points',ha='center',fontsize=8)
 ax.set_xlabel(r'Benchmark delay $\tau_A$ (benchmark units)'); ax.set_ylabel('Hopf threshold $b_c$'); ax.set_title('Formulation-specific Alfifi Appendix/Galerkin benchmark'); ax.legend(frameon=False); ax.grid(alpha=.22); ax.margins(x=.08,y=.16)
 save(fig,'figS1_alfifi_benchmark')
 
+# Sup S2
 fig,axes=plt.subplots(1,3,figsize=(7.2,3.05)); fig.subplots_adjust(bottom=.25,wspace=.35)
 axes[0].bar(['GSE96991'],[.910],width=.55); axes[0].set_ylim(0,1.2); axes[0].set_ylabel('Native log2 effect'); axes[0].text(0,.96,'3/3 up',ha='center',fontsize=8); axes[0].set_title('Mouse paired lines',fontsize=9)
 axes[1].errorbar([0],[.882],yerr=[[.081],[.080]],fmt='o',capsize=3); axes[1].set_xlim(-.6,.6); axes[1].set_xticks([0],['GSE97358']); axes[1].set_ylim(0,1.2); axes[1].text(0,1.02,'82/84 up',ha='center',fontsize=8); axes[1].set_title('84 human donor pairs',fontsize=9)
@@ -98,15 +103,17 @@ for a in axes: a.grid(axis='y',alpha=.2); a.spines['top'].set_visible(False); a.
 fig.text(.5,.07,'Each panel uses its study-specific scale and unit; effect magnitudes are not pooled.',ha='center',fontsize=7.8,style='italic')
 save(fig,'figS2_perturbation_support')
 
-fig,ax=plt.subplots(figsize=(6.3,3.25)); sec=['Control','Post-MI 1','Post-MI 2','Post-MI 3']; vals=[-.02,.24,.17,.26]; qs=[.895,.013,.013,.013]; x=np.arange(4); ax.axhline(0,color='.4',linewidth=.8); ax.scatter(x,vals,s=45)
-for i,(v,q) in enumerate(zip(vals,qs)): ax.text(i,v+(.03 if v>=0 else -.035),f'I={v:.2f}\nq={q:.3f}',ha='center',va='bottom' if v>=0 else 'top',fontsize=8)
-ax.set_xticks(x,sec); ax.set_ylabel("Moran's I for transcript axis"); ax.set_ylim(-.12,.37); ax.grid(axis='y',alpha=.2); ax.set_title('Spatial transcript organization is observable; physical diffusion is not')
-for s in ['top','right']: ax.spines[s].set_visible(False)
-save(fig,'figS3_spatial_axis')
-
+# Sup S3
 fig,(a1,a2)=plt.subplots(1,2,figsize=(7.0,3.2)); fig.subplots_adjust(bottom=.25,wspace=.35)
 a1.bar(['MI LV vs healthy'],[.926],width=.55); a1.set_ylim(0,1.2); a1.set_ylabel('Human log2CPM difference'); a1.text(0,1.0,'q=0.0288',ha='center',fontsize=8); a1.set_title('Human contrast',fontsize=9.5)
 a2.plot([8,60,180],[5.569,5.275,3.709],'o-'); a2.set_xlabel('days post-infarction'); a2.set_ylabel('Pig IZ-RZ log2CPM difference'); a2.set_title('Pig regional contrast',fontsize=9.5)
 for a in (a1,a2): a.grid(axis='y',alpha=.2); a.spines['top'].set_visible(False); a.spines['right'].set_visible(False)
 fig.text(.5,.07,'Separate axes prevent a visual claim of conserved cross-species magnitude.',ha='center',fontsize=7.8,style='italic')
 save(fig,'figS4_disease_direction')
+
+# Sup S4
+fig,ax=plt.subplots(figsize=(6.3,3.25)); sec=['Control','Post-MI 1','Post-MI 2','Post-MI 3']; vals=[-.02,.24,.17,.26]; qs=[.895,.013,.013,.013]; x=np.arange(4); ax.axhline(0,color='.4',linewidth=.8); ax.scatter(x,vals,s=45)
+for i,(v,q) in enumerate(zip(vals,qs)): ax.text(i,v+(.03 if v>=0 else -.035),f'I={v:.2f}\nq={q:.3f}',ha='center',va='bottom' if v>=0 else 'top',fontsize=8)
+ax.set_xticks(x,sec); ax.set_ylabel("Moran's I for transcript axis"); ax.set_ylim(-.12,.37); ax.grid(axis='y',alpha=.2); ax.set_title('Spatial transcript organization is observable; physical diffusion is not')
+for s in ['top','right']: ax.spines[s].set_visible(False)
+save(fig,'figS3_spatial_axis')
