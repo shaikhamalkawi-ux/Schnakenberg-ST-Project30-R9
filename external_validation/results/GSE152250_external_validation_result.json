@@ -1,0 +1,17 @@
+{
+  "dataset": "GSE152250",
+  "source_file": "GSE152250_Fibroblasts_FPKM.txt.gz",
+  "annotation_column": "geneid",
+  "CTHRC1_identifier": "ENSG00000164932",
+  "primary_time_h": 24,
+  "prespecified_primary_criterion": "mean CTHRC1 FPKM in TGFb1 > CTRL at 24 h",
+  "primary_criterion_pass": true,
+  "decision": "GO",
+  "donor_pairing_assumed": false,
+  "cross_study_numeric_pooling": false,
+  "timepoints": [
+    {"time_h": 6, "CTRL_mean_FPKM": 98.47933333333333, "TGFb1_mean_FPKM": 101.49090000000001, "log2_ratio_of_mean_FPKM": 0.043457476053764946, "all_TGF_above_all_CTRL": false, "exact_perm_p_one_sided_directional": 0.4, "exact_perm_p_two_sided": 0.8, "direction": "UP"},
+    {"time_h": 24, "CTRL_mean_FPKM": 108.60493333333334, "TGFb1_mean_FPKM": 170.99986666666666, "log2_ratio_of_mean_FPKM": 0.6549055617572554, "all_TGF_above_all_CTRL": true, "exact_perm_p_one_sided_directional": 0.05, "exact_perm_p_two_sided": 0.1, "direction": "UP"},
+    {"time_h": 48, "CTRL_mean_FPKM": 76.42473333333334, "TGFb1_mean_FPKM": 91.59259999999999, "log2_ratio_of_mean_FPKM": 0.26119143084889085, "all_TGF_above_all_CTRL": true, "exact_perm_p_one_sided_directional": 0.05, "exact_perm_p_two_sided": 0.1, "direction": "UP"}
+  ]
+}

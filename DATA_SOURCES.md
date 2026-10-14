@@ -5,6 +5,7 @@ Third-party raw data are not redistributed in this repository. Obtain all data f
 | Source | Role in manuscript | Claim boundary |
 |---|---|---|
 | GSE97358 | Primary 84 donor-linked human cardiac-fibroblast basal/TGF-beta1 paired analysis | In-vitro donor-paired response; not whole-heart or clinical effect |
+| GSE152250 | Independent human primary cardiac-fibroblast TGF-beta1 external validation at 6/24/48 h; 3 control + 3 treated culture replicates per time | Direction/time-course replication; not donor-level inference, cross-study magnitude pooling, or onset/hard-delay identification |
 | GSE123018 | Time-resolved RNA/Ribo response landmarks | 2 h RNA and 6 h Ribo are sampled landmarks, not onset/lag/Schnakenberg tau |
 | GSE265828 | Spatial transcript organization | Spatial organization, not physical ligand diffusion |
 | GSE267256 / GSE261428 | Supporting perturbation/time-course evidence | Study-specific support only; no cross-study pooled effect |

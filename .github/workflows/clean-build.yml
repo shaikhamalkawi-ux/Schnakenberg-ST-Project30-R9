@@ -76,6 +76,7 @@ jobs:
           mkdir -p release_source
           cp main.tex supplement.tex make_figures.py requirements.txt BUILD.md README.md DATA_SOURCES.md REPRODUCIBILITY.md release_source/
           cp -r support release_source/
+          cp -r external_validation release_source/
           cp -r figures release_source/
           zip -qr Overleaf_Source_and_Figures.zip release_source
 
@@ -91,13 +92,14 @@ jobs:
           The clean build regenerated all publication figures from make_figures.py, compiled the main manuscript and Supplementary Information from source, created the combined review PDF, checked for undefined citations/references, checked Type 3 fonts, and recorded SHA-256 hashes and PDF metadata.
 
           Editorial items closed in the current public source:
-          - Abstract compressed without changing the central claims or locked numerical results.
+          - Abstract is concise while retaining the primary donor-paired result and independent GSE152250 external validation.
           - Supplement equations are numbered and local notation is defined.
-          - The fifth Supplement table has an explicit text callout before appearance.
+          - All Supplement tables have explicit text callouts before appearance.
+          - GSE152250 independently reproduces the prespecified 24-h CTHRC1 direction in a separate human primary cardiac-fibroblast experiment; the 48-h direction remains positive and the 6-h contrast is near-null.
           - Repository wording matches the source-first contents actually present.
           - The repository is public and the manuscript/supplement point to the actual public record.
 
-          Scientific claim boundaries are unchanged. The repository does not claim independent re-extraction of the Saudi S1 target rows, a newly rerun donor-blocked negative-binomial coefficient, reconstruction of the unavailable four-family timing model, myocardial delay, physical cardiac diffusion coefficients, or a cardiac Turing/Hopf certificate.
+          Scientific claim boundaries remain bounded. GSE152250 is culture-level directional/time-course external validation, not donor-level evidence, and its FPKM-scale magnitude is not pooled with GSE97358. The repository does not claim independent re-extraction of the Saudi S1 target rows, a newly rerun donor-blocked negative-binomial coefficient, reconstruction of the unavailable four-family timing model, myocardial delay, physical cardiac diffusion coefficients, or a cardiac Turing/Hopf certificate.
 
           Submission note: the public GitHub URL identifies the repository owner. It is appropriate for identity-visible review. If a target journal mandates double-blind review, an anonymized submission copy would be required by journal policy.
           EOF
@@ -134,14 +136,16 @@ jobs:
           - All publication figures regenerated deterministically before compilation
 
           The latest pre-submission editorial closure already:
-          - reduced the abstract to about 247 words;
+          - kept the abstract at about 238 words while adding the independent external validation;
           - numbered Supplement equations and defined local mathematical notation;
-          - added the missing callout before Supplement Table S5;
+          - retained explicit callouts before every Supplement table;
+          - added GSE152250 as an independently executed human primary cardiac-fibroblast external validation: 24-h CTHRC1 mean 108.605 versus 171.000 FPKM, log2 ratio +0.655, all three treated replicates above all three controls; 48 h remains positive and 6 h is near-null;
           - aligned repository/data-availability wording with actual public contents;
           - made the GitHub record public and retained the actual repository link in the manuscript.
 
           Preserve the scientific boundaries:
           - primary 84 donor-linked human cardiac-fibroblast paired result remains the primary empirical anchor;
+          - GSE152250 is independent culture-level external direction/time-course replication and is not donor-level evidence or a pooled cross-study effect;
           - Saudi-center whole-LV evidence is contextual and not Saudi-population validation;
           - no independent re-extraction of the Saudi 2016 S1 target rows is claimed;
           - no newly rerun donor-blocked negative-binomial coefficient is claimed;
