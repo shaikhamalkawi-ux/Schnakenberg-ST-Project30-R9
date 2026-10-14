@@ -26,7 +26,7 @@ import numpy as np
 import pandas as pd
 
 
-TARGET_GENES = ["CTHRC1", "POSTN", "FN1", "LOX", "COL1A1", "COL3A1", "ASPN"]
+TARGET_GENES = ["CTHRC1"]\nGENE_IDS = {"CTHRC1": "ENSG00000164932"}
 TIMEPOINTS = [6, 24, 48]
 PSEUDOCOUNT = 0.5
 
@@ -164,12 +164,17 @@ def map_sample_columns(meta: pd.DataFrame, expr: pd.DataFrame, symbol_col: str) 
 
 
 def extract_gene_rows(expr: pd.DataFrame, symbol_col: str, genes: list[str]) -> pd.DataFrame:
-    symbols = expr[symbol_col].astype(str).str.upper().str.strip()
-    sub = expr.loc[symbols.isin([g.upper() for g in genes])].copy()
+    raw = expr[symbol_col].astype(str).str.upper().str.strip()
+    base = raw.str.replace(r"\\.\\d+$", "", regex=True)
+    canonical = pd.Series(index=expr.index, dtype="object")
+    for gene in genes:
+        ens = GENE_IDS.get(gene, "").upper()
+        hit = raw.eq(gene.upper()) | base.eq(ens)
+        canonical.loc[hit] = gene.upper()
+    sub = expr.loc[canonical.notna()].copy()
     if sub.empty:
         raise RuntimeError("No target-gene rows found")
-    sub["_SYMBOL_"] = symbols.loc[sub.index]
-    # Collapse duplicate symbol rows conservatively by summing FPKM columns.
+    sub["_SYMBOL_"] = canonical.loc[sub.index]
     return sub
 
 
