@@ -33,7 +33,7 @@ GSE123018 & donor within assay/time & RNA-seq / ribosome-profiling direction and
 GSE96991 & paired mouse line & Cthrc1 perturbation direction & selected system\\
 GSE96975 & paired human unit & small-cohort heterogeneity & not donor-universal\\
 GSE97358 & 84 donor-linked pairs & primary donor-derived \cthrc{} endpoint & in-vitro 24-h endpoint\\
-GSE152250 & independent human primary cardiac-fibroblast culture replicates; 3 CTRL + 3 \tgfb{} per 6/24/48 h & external \cthrc{} direction/time-course validation with 24 h prespecified as primary & not donor-paired; no cross-study magnitude pooling; no onset/hard-delay inference\\
+GSE152250 & independent human primary cardiac-fibroblast culture replicates; 3 CTRL + 3 \tgfb{} per 6/24/48 h & external \cthrc{} directional and temporal validation with 24 h designated as the primary comparison before target-result inspection & not donor-paired; no cross-study magnitude pooling; no onset/hard-delay inference\\
 GSE225336 & culture replicate/time & independent human system-level direction & one defined source\\
 GSE132143 & within-species sample/pair & disease direction & no cross-species pooling\\
 KFSHRC 2016 & 5 DCM + 5 non-failing whole LV & Saudi-center disease-tissue context & not population validation\\
@@ -85,7 +85,7 @@ All 84 leave-one-donor-out means for \cthrc{} remained positive (0.873--0.895). 
 \section*{S5. Independent external validation and supporting perturbation systems}
 Table~\ref{tab:gse152250} reports the independent GSE152250 validation associated with the fibrosis transcriptomic study of Zhang et al. \cite{Zhang2020} on its native expression scale. At 24 h, mean \cthrc{} was 108.605 versus 171.000 FPKM (log$_2$ ratio of means $+0.655$), and all three treated replicates exceeded all three controls. The exact one-sided value was 0.05 and the two-sided value 0.10. The positive direction persisted at 48 h, whereas the 6-h contrast was near-null. These observations support independent directional and temporal replication, not donor-level inference, cross-study magnitude pooling, or an onset/hard-delay estimate. Dataset mapping and exact-permutation procedures are specified in the main Methods.
 \begin{table}[H]\centering
-\caption{Independent GSE152250 \cthrc{} external validation on the study-native FPKM scale. The 24-h comparison was prespecified as primary because it matches the GSE97358 primary time point.}
+\caption{Independent GSE152250 \cthrc{} external validation on the study-native FPKM scale. The 24-h comparison was designated as the primary validation point before inspection of the target \cthrc{} result because it matches the GSE97358 primary time point.}
 \label{tab:gse152250}
 \small
 \begin{tabularx}{\linewidth}{p{1.2cm}YYYYY}
@@ -181,7 +181,7 @@ Colak 2009 & \textit{COL1A1} 3.08-fold decrease & original accession DCM directi
 \end{longtable}
 
 \section*{S13. Reproducibility and source provenance}
-The accompanying reproducibility materials contain the LaTeX sources, figure-generation code, the consolidated numerical-results table, the executable GSE152250 external-validation script and derived CSV/JSON summaries with SHA-256 hashes of the official GEO inputs, a machine-readable Saudi source-status CSV, and an extraction helper that can be run when the original publisher-hosted XLS is supplied. The helper is not treated as an executed re-extraction because the XLS binary was unavailable in this study. No missing target values were inferred or imputed. The repository is maintained at \href{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}.
+The accompanying reproducibility materials contain the LaTeX sources, figure-generation code, the consolidated numerical-results table, the executable GSE152250 external-validation script and derived CSV/JSON summaries with SHA-256 hashes of the official GEO inputs, a machine-readable Saudi-source provenance CSV, and an extraction helper that can be run when the original publisher-hosted XLS is supplied. The helper is not treated as an executed re-extraction because the XLS binary was unavailable in this study. No missing target values were inferred or imputed. The repository is maintained at \href{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}.
 
 The main manuscript makes no claim that the accompanying archive independently reproduces the 2016 S1 target lookup. The remaining numerical results are traceable to the analysis outputs described above.
 
