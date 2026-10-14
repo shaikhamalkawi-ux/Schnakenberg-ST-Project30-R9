@@ -1,0 +1,51 @@
+name: GSE152250 external validation
+
+on:
+  push:
+    branches: [external-validation-gse152250]
+    paths:
+      - 'external_validation/gse152250_validate.py'
+      - '.github/workflows/gse152250-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install analysis dependencies
+        run: python -m pip install --upgrade pandas numpy
+
+      - name: Download official GEO processed expression and metadata
+        run: |
+          mkdir -p external_validation/input external_validation/output
+          curl -L --fail --retry 3             -o external_validation/input/GSE152250_Fibroblasts_FPKM.txt.gz             'https://ftp.ncbi.nlm.nih.gov/geo/series/GSE152nnn/GSE152250/suppl/GSE152250_Fibroblasts_FPKM.txt.gz'
+          curl -L --fail --retry 3             -o external_validation/input/GSE152250_family.soft.gz             'https://ftp.ncbi.nlm.nih.gov/geo/series/GSE152nnn/GSE152250/soft/GSE152250_family.soft.gz'
+          sha256sum external_validation/input/* > external_validation/output/GSE152250_input_sha256.txt
+
+      - name: Run prespecified validation
+        run: |
+          python external_validation/gse152250_validate.py             --fpkm external_validation/input/GSE152250_Fibroblasts_FPKM.txt.gz             --soft external_validation/input/GSE152250_family.soft.gz             --outdir external_validation/output             | tee external_validation/output/GSE152250_console_result.json
+
+      - name: Inventory
+        run: |
+          {
+            echo "Commit: $GITHUB_SHA"
+            echo "Run: $GITHUB_RUN_ID"
+            echo
+            find external_validation/output -maxdepth 1 -type f -printf '%f\n' | sort
+            echo
+            sha256sum external_validation/output/* || true
+          } > external_validation/output/VALIDATION_MANIFEST.txt
+
+      - name: Upload validation package
+        uses: actions/upload-artifact@v4
+        with:
+          name: gse152250-external-validation
+          retention-days: 30
+          if-no-files-found: error
+          path: external_validation/output/
