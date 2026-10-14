@@ -28,7 +28,9 @@ jobs:
           sha256sum external_validation/input/* > external_validation/output/GSE152250_input_sha256.txt
 
       - name: Run prespecified validation
+        shell: bash
         run: |
+          set -o pipefail
           python external_validation/gse152250_validate.py             --fpkm external_validation/input/GSE152250_Fibroblasts_FPKM.txt.gz             --soft external_validation/input/GSE152250_family.soft.gz             --outdir external_validation/output             | tee external_validation/output/GSE152250_console_result.json
 
       - name: Inventory
