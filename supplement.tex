@@ -11,6 +11,7 @@
 \begin{document}\maketitle
 \renewcommand{\thefigure}{S\arabic{figure}}
 \renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
 
 \section*{S1. Supplement scope}
 The main manuscript reports only the findings required to answer the study question. This Supplement retains the inferential units, mathematical provenance, consolidated numerical results, perturbation robustness, study-specific supporting analyses, Saudi-center provenance, and reproducibility limitations needed for specialist review. Numeric effects from different species, platforms, or experimental units are never pooled. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
@@ -36,20 +37,23 @@ Three mathematical objects remain distinct.
 
 \textbf{Alfifi benchmark.} The reproduced object is Alfifi's one-dimensional delayed reaction--diffusion system with Dirichlet boundary conditions and the Appendix Galerkin reduction \cite{Alfifi}. The reproduction uses the Appendix reaction-delay placement; it is not a no-flux tissue model.
 
-\textbf{Homogeneous-reference identity.} For a pure-state-delay system,
-\[
-\partial_tX(x,t)=D\Delta X(x,t)+F\!\left(X(x,t),X(x,t-\tau);\theta\right),
-\]
-a time-independent field satisfies $X(x,t-\tau)=X(x,t)=X^*(x)$, so equilibrium compatibility is
-\[
+\textbf{Homogeneous-reference identity.} Let $X(x,t)\in\mathbb{R}^{n_X}$ denote the state field, $D$ the diffusion matrix, $F$ the local reaction map, $\tau$ a pure-state mechanistic delay, and $\theta$ the remaining model parameters. The delayed reaction--diffusion system is
+\begin{equation}
+\partial_tX(x,t)=D\Delta X(x,t)+F\!\left(X(x,t),X(x,t-\tau);\theta\right).
+\label{eq:s-delay}
+\end{equation}
+A time-independent field satisfies $X(x,t-\tau)=X(x,t)=X^*(x)$, where $X^*(x)$ is the equilibrium field, so equilibrium compatibility is
+\begin{equation}
 0=D\Delta X^*(x)+F\!\left(X^*(x),X^*(x);\theta\right).
-\]
+\label{eq:s-equilibrium}
+\end{equation}
 The equilibrium field therefore contains no independent information about a pure-state delay under the assumptions stated in the main manuscript.
 
-\textbf{Generic modal construct.} For $-\Delta\phi_m=\kappa_m\phi_m$, roots of the homogeneous-reference linearization satisfy
-\[
+\textbf{Generic modal construct.} Let $\phi_m$ be a Laplacian eigenmode satisfying $-\Delta\phi_m=\kappa_m\phi_m$, with eigenvalue $\kappa_m$. Let $\lambda$ denote a characteristic root, $I_{n_X}$ the $n_X\times n_X$ identity matrix, and let $A=\partial_1F(X^*,X^*;\theta)$ and $B=\partial_2F(X^*,X^*;\theta)$ be the current-state and delayed-state Jacobians at the homogeneous reference. The modal roots satisfy
+\begin{equation}
 \det[\lambda I_{n_X}+\kappa_mD-A-Be^{-\lambda\tau}]=0.
-\]
+\label{eq:s-modal}
+\end{equation}
 This is a generic definition of the information needed for modal stability classification; it is not an inference from the Alfifi calculation and is not applied to cardiac tissue. Table~\ref{tab:alfifi} records the selected benchmark values.
 
 \begin{table}[H]\centering\caption{Selected Alfifi Hopf-threshold reproduction under the Appendix/Galerkin placement. Here $b_c$ is the critical value of the Schnakenberg control parameter $b$ at the selected Hopf threshold; the frequency column is retained only as a benchmark-scale numerical output and is not assigned a cardiac or dimensional interpretation.}\label{tab:alfifi}\small
@@ -107,9 +111,10 @@ The 2026 multimodal post-MI study further reports a 3--5 dpi transition window f
 GSE123018 keeps RNA and Ribo assays separate. The earliest sampled 4/4 donor concordance was 2 h for RNA and 6 h for Ribo. Those values are sampling landmarks, not onset times and not a myocardial delay.
 
 The diagnostic model comparison considered fixed-delay, sequential, Erlang, and independent-response candidate families. For the fixed-delay candidate, the available summary reported an optimum $\delta=0.116$ h, an originally calculated likelihood profile spanning 0--2.1 h under a $\chi_1^2=3.84$ reference, and an AICc 2.82 units above the best candidate. Here $\delta$ is a response-diagnostic parameter and is not identified with the mechanistic delay $\tau$. For a fitted model with $k$ parameters, maximized log-likelihood $\ell_{\max}$, and $n_{\mathrm{obs}}$ observations satisfying $n_{\mathrm{obs}}>k+1$, the standard corrected Akaike criterion is
-\[
+\begin{equation}
 \mathrm{AICc}=2k-2\ell_{\max}+\frac{2k(k+1)}{n_{\mathrm{obs}}-k-1}.
-\]
+\label{eq:s-aicc}
+\end{equation}
 The exact parameterization of the four candidate families is not reconstructed because the original model-specification file used for that diagnostic is unavailable. The candidate-family comparison is therefore retained only as a supporting diagnostic and was not independently re-estimated here. More importantly, $\delta\ge0$ puts the null $\delta=0$ on a parameter boundary, for which standard interior likelihood-ratio asymptotics need not hold \cite{SelfLiang}. Thus the 0--2.1 h profile is retained only as evidence that zero was not excluded, not as a boundary-calibrated confidence interval. The manuscript's claim is correspondingly limited to: current data do not establish a strictly positive hard delay.
 
 \section*{S8. Disease-direction evidence without cross-species pooling}
@@ -137,7 +142,7 @@ Population identity & not documented for every participant & not established & d
 \section*{S10. Candidate-state topology admissibility}
 The 2026 mouse post-MI source provides an observationally resolved local transition from Postn$^+$, Aspn$^+$, Cthrc1$^-$ activated fibroblasts toward Postn$^+$, Aspn$^-$, Cthrc1$^+$ reparative fibroblasts \cite{Hernandez2026}. This makes ASPN the strongest opposite-transition observational candidate considered here. It does not establish that ASPN is consumed by the same reaction that produces CTHRC1, nor does it identify a rate law of the form $u^2v$ under an explicit mapping of CTHRC1- and ASPN-associated states to $u$ and $v$.
 
-Wang et al. report that recombinant WNT5A can partially rescue Cthrc1-deficient post-infarction repair phenotypes and place CTHRC1 within non-canonical WNT5A signaling \cite{Wang2023}. This makes WNT5A a mechanistic pathway candidate, but not an opposite-state readout. The roles are therefore complementary rather than interchangeable. GSE123018 RNA and Ribo remain two assays of the same target and are not treated as two independent dynamical states.
+Wang et al. report that recombinant WNT5A can partially rescue Cthrc1-deficient post-infarction repair phenotypes and place CTHRC1 within non-canonical WNT5A signaling \cite{Wang2023}. This makes WNT5A a mechanistic pathway candidate, but not an opposite-state readout. The roles are therefore complementary rather than interchangeable. GSE123018 RNA and Ribo remain two assays of the same target and are not treated as two independent dynamical states. Table~\ref{tab:stateaudit} summarizes the distinct evidence roles and the missing requirements for direct Schnakenberg-state assignment.
 
 \begin{table}[H]\centering\caption{Evidence roles for candidate second states.}\label{tab:stateaudit}\scriptsize
 \begin{tabularx}{\linewidth}{p{1.8cm}YYY}
