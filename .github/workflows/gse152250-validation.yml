@@ -1,11 +1,6 @@
 name: GSE152250 external validation
 
 on:
-  push:
-    branches: [external-validation-gse152250]
-    paths:
-      - 'external_validation/gse152250_validate_v2.py'
-      - '.github/workflows/gse152250-validation.yml'
   workflow_dispatch:
 
 permissions:
