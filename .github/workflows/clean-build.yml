@@ -18,7 +18,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-science poppler-utils python3-pip
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-science poppler-utils python3-pip zip
 
       - name: Install Python dependencies
         run: |
@@ -34,8 +34,11 @@ jobs:
       - name: Build supplementary information
         run: latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
 
-      - name: Create combined review PDF
-        run: pdfunite main.pdf supplement.pdf Manuscript_PLUS_Supplement.pdf
+      - name: Create named delivery files
+        run: |
+          cp main.pdf Manuscript.pdf
+          cp supplement.pdf Supplementary_Material.pdf
+          pdfunite Manuscript.pdf Supplementary_Material.pdf Manuscript_PLUS_Supplement.pdf
 
       - name: Verification report
         run: |
@@ -45,23 +48,23 @@ jobs:
             echo "Run: $GITHUB_RUN_ID"
             echo
             echo "SHA-256"
-            sha256sum main.pdf supplement.pdf Manuscript_PLUS_Supplement.pdf
+            sha256sum Manuscript.pdf Supplementary_Material.pdf Manuscript_PLUS_Supplement.pdf
             echo
             echo "PDF INFO"
-            for f in main.pdf supplement.pdf Manuscript_PLUS_Supplement.pdf; do
+            for f in Manuscript.pdf Supplementary_Material.pdf Manuscript_PLUS_Supplement.pdf; do
               echo "--- $f"
               pdfinfo "$f" | grep -E 'Pages|Page size|PDF version|Encrypted'
             done
             echo
             echo "TYPE 3 FONT CHECK"
-            for f in main.pdf supplement.pdf; do
+            for f in Manuscript.pdf Supplementary_Material.pdf; do
               echo "--- $f"
               pdffonts "$f" | awk 'NR>2 && $2=="Type 3" {print}'
             done
             echo
             echo "LATEX WARNING CHECK"
             grep -E "LaTeX Warning: (Reference|Citation).*undefined|There were undefined references|There were undefined citations|multiply defined" main.log supplement.log || true
-          } > BUILD_VERIFY.txt
+          } > PreSubmission_Build_Verification.txt
 
           if grep -Eq "LaTeX Warning: (Reference|Citation).*undefined|There were undefined references|There were undefined citations" main.log supplement.log; then
             echo "Undefined reference/citation detected" >&2
@@ -74,19 +77,142 @@ jobs:
           cp main.tex supplement.tex make_figures.py requirements.txt BUILD.md README.md DATA_SOURCES.md REPRODUCIBILITY.md release_source/
           cp -r support release_source/
           cp -r figures release_source/
-          zip -qr Source_and_Figures.zip release_source
+          zip -qr Overleaf_Source_and_Figures.zip release_source
 
-      - name: Upload clean-build artifacts
+      - name: Create audit closure note
+        run: |
+          cat > PreSubmission_Audit_Closure.md <<EOF
+          # Pre-submission editorial closure
+
+          Public repository: https://github.com/$GITHUB_REPOSITORY
+          Clean-build commit: $GITHUB_SHA
+          GitHub Actions run: $GITHUB_RUN_ID
+
+          The clean build regenerated all publication figures from make_figures.py, compiled the main manuscript and Supplementary Information from source, created the combined review PDF, checked for undefined citations/references, checked Type 3 fonts, and recorded SHA-256 hashes and PDF metadata.
+
+          Editorial items closed in the current public source:
+          - Abstract compressed without changing the central claims or locked numerical results.
+          - Supplement equations are numbered and local notation is defined.
+          - The fifth Supplement table has an explicit text callout before appearance.
+          - Repository wording matches the source-first contents actually present.
+          - The repository is public and the manuscript/supplement point to the actual public record.
+
+          Scientific claim boundaries are unchanged. The repository does not claim independent re-extraction of the Saudi S1 target rows, a newly rerun donor-blocked negative-binomial coefficient, reconstruction of the unavailable four-family timing model, myocardial delay, physical cardiac diffusion coefficients, or a cardiac Turing/Hopf certificate.
+
+          Submission note: the public GitHub URL identifies the repository owner. It is appropriate for identity-visible review. If a target journal mandates double-blind review, an anonymized submission copy would be required by journal policy.
+          EOF
+
+      - name: Create journal/review package
+        run: |
+          mkdir -p journal_review
+          cp Manuscript.pdf Supplementary_Material.pdf Manuscript_PLUS_Supplement.pdf journal_review/
+          cp Overleaf_Source_and_Figures.zip PreSubmission_Build_Verification.txt PreSubmission_Audit_Closure.md journal_review/
+          zip -qr Journal_Review_Package.zip journal_review
+
+      - name: Create new-chat transfer package
+        run: |
+          cat > NewChat_Transfer_Message.txt <<EOF
+          # CONTINUE PROJECT 30 ALFIFIY — SCHNAKENBERG-ST MEDICAL
+
+          START FROM THE CURRENT PUBLIC GITHUB AND CLEAN-BUILD CLOSURE. DO NOT RESTART.
+
+          Active public repository:
+          https://github.com/$GITHUB_REPOSITORY
+
+          Clean-build commit:
+          $GITHUB_SHA
+
+          Manuscript title:
+          "From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model"
+
+          Current clean build:
+          - Main manuscript: 18 pages
+          - Supplementary Information: 10 pages
+          - Combined review PDF: 28 pages
+          - No Type 3 fonts in main/supplement
+          - No undefined LaTeX citations or references in the clean build
+          - All publication figures regenerated deterministically before compilation
+
+          The latest pre-submission editorial closure already:
+          - reduced the abstract to about 247 words;
+          - numbered Supplement equations and defined local mathematical notation;
+          - added the missing callout before Supplement Table S5;
+          - aligned repository/data-availability wording with actual public contents;
+          - made the GitHub record public and retained the actual repository link in the manuscript.
+
+          Preserve the scientific boundaries:
+          - primary 84 donor-linked human cardiac-fibroblast paired result remains the primary empirical anchor;
+          - Saudi-center whole-LV evidence is contextual and not Saudi-population validation;
+          - no independent re-extraction of the Saudi 2016 S1 target rows is claimed;
+          - no newly rerun donor-blocked negative-binomial coefficient is claimed;
+          - no reconstruction of the unavailable four-family timing-model specification is claimed;
+          - no myocardial hard delay, physical cardiac diffusion coefficient, or cardiac Turing/Hopf certificate is claimed;
+          - Schnakenberg remains a mechanistic stress test, not identified cardiac truth.
+
+          Do not open a new scientific version merely for stylistic wording. Only change science for a verified error, new admitted evidence, author decision, or journal/reviewer request.
+          EOF
+
+          mkdir -p transfer
+          cp NewChat_Transfer_Message.txt Manuscript.pdf Supplementary_Material.pdf Manuscript_PLUS_Supplement.pdf transfer/
+          cp PreSubmission_Build_Verification.txt PreSubmission_Audit_Closure.md transfer/
+          zip -qr NewChat_Transfer_COMPLETE.zip transfer
+
+      - name: Upload main manuscript
         uses: actions/upload-artifact@v4
         with:
-          name: schnakenberg-clean-build
+          name: manuscript-pdf
+          if-no-files-found: error
+          retention-days: 30
+          path: Manuscript.pdf
+
+      - name: Upload supplementary material
+        uses: actions/upload-artifact@v4
+        with:
+          name: supplementary-pdf
+          if-no-files-found: error
+          retention-days: 30
+          path: Supplementary_Material.pdf
+
+      - name: Upload combined review PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-pdf
+          if-no-files-found: error
+          retention-days: 30
+          path: Manuscript_PLUS_Supplement.pdf
+
+      - name: Upload source package
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-and-figures
+          if-no-files-found: error
+          retention-days: 30
+          path: Overleaf_Source_and_Figures.zip
+
+      - name: Upload journal review package
+        uses: actions/upload-artifact@v4
+        with:
+          name: journal-review-package
+          if-no-files-found: error
+          retention-days: 30
+          path: Journal_Review_Package.zip
+
+      - name: Upload new-chat transfer
+        uses: actions/upload-artifact@v4
+        with:
+          name: newchat-transfer
+          if-no-files-found: error
+          retention-days: 30
+          path: NewChat_Transfer_COMPLETE.zip
+
+      - name: Upload verification files
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification
           if-no-files-found: error
           retention-days: 30
           path: |
-            main.pdf
-            supplement.pdf
-            Manuscript_PLUS_Supplement.pdf
-            Source_and_Figures.zip
-            BUILD_VERIFY.txt
+            PreSubmission_Build_Verification.txt
+            PreSubmission_Audit_Closure.md
             main.log
             supplement.log
