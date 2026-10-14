@@ -6,6 +6,7 @@ Hernandez 2026 multimodal source,published Cthrc1+ RCF transition window 3-5 dpi
 GSE123018,"earliest sampled 4/4: 2 h RNA, 6 h Ribo; delta=0.116 h; zero in diagnostic profile",informative sampling window; no positive hard delay established,onset or myocardial tau
 GSE97358,"CTHRC1 82/84 up; mean 0.882 [0.801,0.962]",donor-paired in-vitro TGF-beta1 response,in-vivo / clinical universality
 GSE97358,"repair module 81/84 positive; mean 0.637 [0.588,0.684]",secondary coordinated repair context,pathway causality
+GSE152250,"CTHRC1 24 h: 108.605 vs 171.000 mean FPKM; log2 ratio +0.655; all 3 treated above all controls; 48 h +0.261; 6 h +0.043",independent human-culture directional/time-course external replication,"donor-level effect; pooled cross-study magnitude; onset or hard delay"
 GSE96991,Cthrc1 +0.910; 3/3 up,system-specific direction,universal response
 GSE96975,mean +0.373; 3/4 up; sign-flip P=.625,small-cohort heterogeneity,contradiction to larger cohort / universality
 GSE225336,"+1.512, +1.354, +1.389 at 24/48/72 h",independent human culture direction,donor-level effect
