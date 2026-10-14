@@ -92,19 +92,19 @@ jobs:
           The clean build regenerated all publication figures from make_figures.py, compiled the main manuscript and Supplementary Information from source, created the combined review PDF, checked for undefined citations/references, checked Type 3 fonts, and recorded SHA-256 hashes and PDF metadata.
 
           Editorial items closed in the current public source:
-          - Promot4 pre-submission audit applied to Main, Supplement, figures, references, metadata, and package consistency.
+          - Promot4 pre-submission audit and a final human editorial pass were applied to Main, Supplement, figures, references, metadata, and package consistency.
           - Title-page affiliations are wrapped within page bounds; author metadata are synchronized across Main and Supplement.
           - Abstract is concise while retaining the primary donor-paired result and independent GSE152250 external validation.
           - All analysis methods and statistical procedures are reported in the Main Methods; the Supplement contains extended results, provenance, traceability, and nomenclature rather than Supplementary Methods.
           - Statistics and reproducibility, Code availability, Data Availability, Ethics, AI-use disclosure, Acknowledgements/funding, Author contributions, and Competing interests are aligned to the current npj submission guidance.
           - Formal citations for all analyzed GEO/ArrayExpress/source datasets are included in the reference list.
           - All Main and Supplement tables/figures have prior text callouts, local notation is defined, and summary bar displays were replaced by point displays where appropriate.
-          - GSE152250 independently reproduces the prespecified 24-h CTHRC1 direction in a separate human primary cardiac-fibroblast experiment; the 48-h direction remains positive and the 6-h contrast is near-null.
+          - GSE152250 independently reproduces the 24-h CTHRC1 direction, designated as the primary validation point before target-result inspection; the 48-h direction remains positive and the 6-h contrast is near-null.
           - Repository wording matches the source-first contents actually present, and the repository remains public.
 
-          Scientific claim boundaries remain bounded. GSE152250 is culture-level directional/time-course external validation, not donor-level evidence, and its FPKM-scale magnitude is not pooled with GSE97358. The repository does not claim independent re-extraction of the Saudi S1 target rows, a newly rerun donor-blocked negative-binomial coefficient, reconstruction of the unavailable four-family timing model, myocardial delay, physical cardiac diffusion coefficients, or a cardiac Turing/Hopf certificate.
+          Scientific inference limits remain unchanged. GSE152250 is culture-level directional and temporal external validation, not donor-level evidence, and its FPKM-scale magnitude is not pooled with GSE97358. The repository does not claim independent re-extraction of the Saudi S1 target rows, a newly rerun donor-blocked negative-binomial coefficient, reconstruction of the unavailable four-family timing model, myocardial delay, physical cardiac diffusion coefficients, or a cardiac Turing/Hopf certificate.
 
-          Submission note: the public GitHub URL identifies the repository owner. It is appropriate for identity-visible review. If a target journal mandates double-blind review, an anonymized submission copy would be required by journal policy.
+          Submission note: npj Systems Biology and Applications uses single-anonymized review, so the named manuscript and public GitHub repository are compatible with the selected review model. The authors have confirmed approval of the submitted version, author order, and submission to npj; no substantially similar manuscript is under concurrent consideration.
           EOF
 
       - name: Create journal/review package
@@ -139,23 +139,23 @@ jobs:
           - All publication figures regenerated deterministically before compilation
 
           The latest pre-submission editorial closure already:
-          - applied the full Promot4 audit and current npj-specific structure/declaration checks;
+          - applied the full Promot4 audit, current npj-specific structure/declaration checks, and a final human editorial pass removing repetitive, promotional, audit-like, and formulaic transitional wording;
           - synchronized Ghassan Malkawi, Ahmed Elsayed, and Hassan Y. Alfifi across Main and Supplement;
           - moved all analysis methods/statistical procedures to the Main Methods and removed Supplementary Methods;
           - added formal dataset citations, Data Availability, Code availability, Ethics, AI-use disclosure, funding/acknowledgements, Author contributions, and Competing interests;
           - retained explicit callouts before every Main and Supplement table/figure;
-          - added GSE152250 as an independently executed human primary cardiac-fibroblast external validation: 24-h CTHRC1 mean 108.605 versus 171.000 FPKM, log2 ratio +0.655, all three treated replicates above all three controls; 48 h remains positive and 6 h is near-null;
+          - retained GSE152250 as an independently executed human primary cardiac-fibroblast external validation: 24-h CTHRC1 mean 108.605 versus 171.000 FPKM, log2 ratio +0.655, all three treated replicates above all three controls; 48 h remains positive and 6 h is near-null;
           - retained the public GitHub record and aligned repository/data-availability wording with actual contents.
 
           Preserve the scientific boundaries:
           - primary 84 donor-linked human cardiac-fibroblast paired result remains the primary empirical anchor;
-          - GSE152250 is independent culture-level external direction/time-course replication and is not donor-level evidence or a pooled cross-study effect;
+          - GSE152250 is independent culture-level external directional and temporal replication and is not donor-level evidence or a pooled cross-study effect;
           - Saudi-center whole-LV evidence is contextual and not Saudi-population validation;
           - no independent re-extraction of the Saudi 2016 S1 target rows is claimed;
           - no newly rerun donor-blocked negative-binomial coefficient is claimed;
           - no reconstruction of the unavailable four-family timing-model specification is claimed;
           - no myocardial hard delay, physical cardiac diffusion coefficient, or cardiac Turing/Hopf certificate is claimed;
-          - Schnakenberg remains a mechanistic stress test, not identified cardiac truth.
+          - Schnakenberg remains a reference model for stating measurement requirements, not an identified cardiac mechanism.
 
           Do not open a new scientific version merely for stylistic wording. Only change science for a verified error, new admitted evidence, author decision, or journal/reviewer request.
           EOF
