@@ -285,6 +285,20 @@ The same logic applies to the model. Eq.~\eqref{eq:eq} shows why equilibrium can
 
 This framing also clarifies the relationship to prior literature. Delayed Schnakenberg studies establish dynamical possibilities \cite{Alfifi2022,Jiang2019,Sargood2022,Das2026}. Spatial-omics calibration work demonstrates what becomes possible when source and transport assumptions are supplied \cite{Daher2026}. Cardiac-fibrosis studies establish real biological programs and prior cross-context overlap \cite{RuizVillalba2020,Schafer2017,Gao2021}. The contribution here is to connect these literatures at the decision boundary: a mathematical possibility becomes a cardiac claim only when the measurement object supports the parameters and interpretation that the claim requires.
 
+A bounded future extension is to represent residual experimental and parameter uncertainty with fuzzy quantities only after the corresponding biological quantities have first become structurally identifiable. For example, spatial discretization of Eq.~\eqref{eq:static}, with $L$ denoting the discrete Laplacian and tildes denoting fuzzy quantities, would lead to
+\begin{equation}
+(\tilde{\mu}I-\tilde d_T L)\tilde{\mathbf T}
+=
+\tilde{\beta}\mathbf S_0 ,
+\label{eq:fuzzy-static}
+\end{equation}
+which connects the present transport setting to earlier work on consistency and positive solutions of fully fuzzy linear systems \cite{MalkawiAlfifi2017}. Likewise, a finite-dimensional stability subproblem arising after an explicitly justified linearization or model reduction could be paired with a fuzzy Lyapunov/Sylvester relation
+\begin{equation}
+\tilde M_m^{\mathsf T}\tilde P+\tilde P\tilde M_m=-\tilde Q ,
+\label{eq:fuzzy-lyap}
+\end{equation}
+linking to prior numerical work on trapezoidal fully fuzzy Sylvester and Lyapunov equations \cite{Elsayed2022FuzzySylvester}. These are future extensions rather than analyses performed here: fuzzy uncertainty propagation can describe uncertainty in quantities that have become identifiable, but it cannot by itself recover a delay, transport coefficient, or source scale that is structurally absent or confounded in the observation model.
+
 \section{Limitations and reproducibility}
 The primary GSE97358 result is a donor-paired transformed-expression contrast at one 24-h in-vitro endpoint; it is not a negative-binomial regression coefficient, an in-vivo time course, or a clinical endpoint. Its randomization, bootstrap, Wilcoxon, and leave-one-donor-out checks address donor-paired direction and sampling stability for that estimand. The primary analysis used the public count matrix, but the original raw-count file is not included in the accompanying analysis and source-traceability archive; accordingly, no additional donor-blocked negative-binomial sensitivity is claimed here. GSE152250 contributes three independent culture replicates per arm and time point, not donor-paired observations; its FPKM-scale effect is therefore used only for within-study external direction/time-course replication and is not pooled numerically with GSE97358. GSE225336 is one defined human culture source. GSE267256 has a day-5 singleton. The newly integrated single-cell/RNAscope transition statements from the 2026 mouse study are used at the published-source level rather than as a new cross-species numerical fit. GSE132143 differs by species and normalization and is not pooled.
 
@@ -400,5 +414,7 @@ BH / GEO & Benjamini--Hochberg / Gene Expression Omnibus. & Statistical / data-s
 \bibitem{Hong2023} H. Hong, M. J. Cortez, Y. Y. Cheng, \emph{et al.}, ``Inferring delays in partially observed gene regulation processes,'' \emph{Bioinformatics}, vol. 39, no. 11, btad670, 2023. doi:10.1093/bioinformatics/btad670.
 \bibitem{SelfLiang1987} S. G. Self and K.-Y. Liang, ``Asymptotic Properties of Maximum Likelihood Estimators and Likelihood Ratio Tests under Nonstandard Conditions,'' \emph{Journal of the American Statistical Association}, vol. 82, no. 398, pp. 605--610, 1987. doi:10.1080/01621459.1987.10478472.
 \bibitem{Zhang2020} J. Zhang, E. S. Muise, S. Han, \emph{et al.}, ``Molecular Profiling Reveals a Common Metabolic Signature of Tissue Fibrosis,'' \emph{Cell Reports Medicine}, vol. 1, no. 4, 100056, 2020. doi:10.1016/j.xcrm.2020.100056.
+\bibitem{MalkawiAlfifi2017} G. O. Malkawi and H. Y. Alfifi, ``The consistency of positive fully fuzzy linear system,'' \emph{AIP Conference Proceedings}, vol. 1905, 020004, 2017. doi:10.1063/1.5012144.
+\bibitem{Elsayed2022FuzzySylvester} A. A. Elsayed, N. Ahmad, and G. Malkawi, ``Numerical Solutions for Coupled Trapezoidal Fully Fuzzy Sylvester Matrix Equations,'' \emph{Advances in Fuzzy Systems}, vol. 2022, 8926038, 29 pp., 2022. doi:10.1155/2022/8926038.
 \end{thebibliography}
 \end{document}
