@@ -5,7 +5,7 @@ This repository supports source verification, LaTeX compilation, figure regenera
 ## Included
 
 - Main and supplementary LaTeX sources
-- Final PDF figure assets and deterministic figure-generation code
+- Deterministic figure-generation code for all manuscript and supplementary figures
 - Consolidated numerical-results CSV
 - Saudi-center target-status CSV
 - Saudi target-extraction helper
