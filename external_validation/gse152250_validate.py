@@ -241,7 +241,7 @@ def summarize_gene(gene: str, row: pd.Series, mapping: pd.DataFrame) -> tuple[pd
                 "TGFb1_median_FPKM": float(tgf.FPKM.median()),
                 "log2_ratio_of_mean_FPKM": float(log2_ratio_means),
                 "mean_log2_FPKM_plus_0.5_difference": float(
-                    tgf.log2_FPKM_plus_0.5.mean() - ctrl.log2_FPKM_plus_0.5.mean()
+                    tgf["log2_FPKM_plus_0.5"].mean() - ctrl["log2_FPKM_plus_0.5"].mean()
                 ),
                 "all_TGF_above_all_CTRL": bool(tgf.FPKM.min() > ctrl.FPKM.max()),
                 "exact_perm_p_one_sided_directional": p_one,
