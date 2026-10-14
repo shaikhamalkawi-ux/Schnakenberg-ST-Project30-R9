@@ -25,7 +25,14 @@
 \newcommand{\tgfb}{TGF-$\beta$1}
 \newcommand{\kfs}{King Faisal Specialist Hospital and Research Centre (KFSHRC)}
 \title{\textbf{From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model}}
-\author{}
+\author{
+Ghassan Malkawi$^{1,*}$, Ahmed Elsayed$^{2}$, Hassan Y. Alfifi$^{3,4}$\\[4pt]
+\small $^{1}$Faculty of Computer Information Science, Higher Colleges of Technology, Al Ain, United Arab Emirates\\
+\small $^{2}$Department of Computer Engineering and Computational Sciences, Canadian University Dubai, Dubai, United Arab Emirates\\
+\small $^{3}$Mathematics Department, College of Science, Imam Abdulrahman Bin Faisal University, Dammam 31441, Saudi Arabia\\
+\small $^{4}$Basic \& Applied Scientific Research Center, Imam Abdulrahman Bin Faisal University, Dammam 31441, Saudi Arabia\\
+\small $^{*}$Correspondence: gmalkawi@hct.ac.ae
+}
 \date{}
 \begin{document}
 \maketitle
@@ -308,10 +315,14 @@ For the Saudi-center evidence, the 2016 source and its S1-table DOI are public \
 
 None of the datasets analyzed jointly provides a cardiac reaction Jacobian, diffusion matrix, myocardial delay distribution, geometry, calibrated source/ligand measurements, and uncertainty bounds. Consequently, no cardiac Turing or delay certificate is issued.
 
-\section{Data availability and ethics}
-The public GEO accessions used are GSE265828, GSE267256, GSE261428, GSE123018, GSE96991, GSE96975, GSE97358, GSE152250, GSE225336, and GSE132143. The Saudi-center transcriptome sources are Colak et al. \cite{Colak2009,Colak2016} and ArrayExpress E-TABM-480; the 2016 S1 table is identified by DOI \href{https://doi.org/10.1371/journal.pone.0162669.s005}{10.1371/journal.pone.0162669.s005}. Manuscript sources, figure-generation code, the consolidated numerical-results table, Saudi source-status files, and the deterministic extraction helper are maintained in the accompanying GitHub repository: \href{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}.
+\section{Data availability}
+All datasets analyzed in this study are publicly available. The Gene Expression Omnibus (GEO) accessions used are GSE265828, GSE267256, GSE261428, GSE123018, GSE96991, GSE96975, GSE97358, GSE152250, GSE225336, and GSE132143. The Saudi-center transcriptomic context additionally includes ArrayExpress accession E-TABM-480 and the published supplementary dataset associated with Colak et al. \cite{Colak2016}, available at \href{https://doi.org/10.1371/journal.pone.0162669.s005}{10.1371/journal.pone.0162669.s005}. No new primary human or animal data were generated in this study.
 
-This computational study recruited no new participants or animals. Original-study approvals and consent/animal-use oversight are described in the cited source publications and database records. Colak et al. \cite{Colak2016} report KFSHRC ethics approval and informed consent from patients or family members.
+\section{Code availability}
+The manuscript source, figure-generation code, reproducibility materials, consolidated numerical-results table, GSE152250 external-validation analysis and derived results, Saudi source-status files, and deterministic extraction utilities are publicly available at \href{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}{https://github.com/shaikhamalkawi-ux/Schnakenberg-ST-Project30-R9}. Third-party GEO and ArrayExpress source datasets are not redistributed in the repository and should be obtained directly from their respective public repositories.
+
+\section{Ethics statement}
+This computational study recruited no new human participants or animals and analyzed previously collected public datasets. Ethics approvals, informed-consent procedures, and animal-use oversight for the original studies are reported in the respective source publications and database records. Colak et al. \cite{Colak2016} report ethics approval from King Faisal Specialist Hospital and Research Centre and informed consent from patients or family members.
 
 \section{Conclusion}
 Current cardiac omics already support a useful decision: the \tgfb{}$\rightarrow$\cthrc{} response in 84 donor-linked primary human cardiac-fibroblast pairs is strong enough to justify independent functional follow-up, and GSE152250 independently reproduces the 24-h direction in a separate human primary-cell experiment while retaining a positive 48-h direction. The KFSHRC whole-myocardium case defines the boundary of that result: a controlled fibroblast response is not automatically a whole-heart disease direction or a Saudi-population claim. Post-infarction cell-state evidence adds a second bridge: ASPN and WNT5A are informative but distinct candidate roles, and neither is an identified Schnakenberg second state. These boundaries identify the next measurements rather than forcing agreement between incomparable experimental objects.
@@ -380,6 +391,24 @@ BH / GEO & Benjamini--Hochberg / Gene Expression Omnibus. & Statistical / data-s
 \bottomrule
 \end{longtable}
 \normalsize
+
+\section*{Funding}
+This research received no specific external funding.
+
+\section*{Author contributions}
+Ghassan Malkawi: Conceptualization; Data curation; Formal analysis; Investigation; Software; Visualization; Writing -- original draft; Writing -- review \& editing.
+
+Ahmed Elsayed: Methodology; Formal analysis; Validation; Writing -- review \& editing.
+
+Hassan Y. Alfifi: Conceptualization; Methodology; Formal analysis; Validation; Writing -- review \& editing, with particular responsibility for the reaction--diffusion, bifurcation, delay, and identifiability mathematics.
+
+All authors reviewed and approved the final manuscript.
+
+\section*{Competing interests}
+The authors declare no competing interests.
+
+\section*{Use of generative AI and AI-assisted technologies}
+During the preparation of this manuscript, the authors used OpenAI's ChatGPT to assist with manuscript writing, editing, and coding. The authors reviewed and verified the AI-assisted content and code, made all necessary revisions, and take full responsibility for the accuracy, integrity, and final content of the manuscript.
 
 \begin{thebibliography}{99}
 \bibitem{Schnakenberg1979} J. Schnakenberg, ``Simple chemical reaction systems with limit cycle behaviour,'' \emph{Journal of Theoretical Biology}, vol. 81, no. 3, pp. 389--400, 1979. doi:10.1016/0022-5193(79)90042-0.
