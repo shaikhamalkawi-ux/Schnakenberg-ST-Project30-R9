@@ -13,6 +13,9 @@
 ## Post-infarction candidate-state evidence
 The Hernández et al. 2026 multimodal source is used at the published-source level for the 3–5 dpi reparative-fibroblast transition window, local Aspn+/Cthrc1− to Aspn−/Cthrc1+ state transition, and anatomy-linked spatial context. Wang et al. 2023 is used as mechanistic pathway evidence linking CTHRC1 with non-canonical WNT5A signaling and recombinant-WNT5A rescue. These sources narrow candidate interpretation but do not identify a shared biochemical flux, a u^2v rate law, or a direct cardiac Schnakenberg second state.
 
+## Independent GSE152250 external validation
+GSE152250 was analyzed from the official NCBI GEO fibroblast FPKM table and family SOFT metadata. The 24-h contrast was prespecified as the primary validation point because it matches GSE97358. The analysis maps all 18 cardiac samples exactly, identifies CTHRC1 by Ensembl ID ENSG00000164932, reports the 6/24/48-h within-study contrasts, and hash-locks the two official input files. Raw third-party GEO files are not redistributed. The result is interpreted as culture-level directional/time-course replication only; no donor pairing or cross-study effect pooling is assumed.
+
 ## Saudi S1 target lookup not independently re-extracted
 The original publisher binary `pone.0162669.s005.xls` was not available for independent re-extraction. The recorded target-level statuses (TGFB1 reported signed fold-change -2.01; CTHRC1 not in the threshold-passing list) remain contextual reports from the published supplementary source. No missing target value was inferred or imputed.
 
