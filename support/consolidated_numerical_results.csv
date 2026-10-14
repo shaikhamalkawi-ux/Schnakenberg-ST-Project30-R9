@@ -1,0 +1,16 @@
+source,result,supported_interpretation,not_established
+Alfifi benchmark,"b_c: 10.360024, 9.962434, 9.852307 at tau_A=1,20,40",formulation-specific reproduction,cardiac parameter
+GSE265828,"Moran's I: -0.02 control; 0.24, 0.17, 0.26 post-MI",transcript-axis spatial organization,ligand diffusion
+GSE267256,day eta^2: 0.973 Cthrc1; 0.916 module; 3-4 vs 1-2 = +3.03 log2CPM,day-scale repair structure,precise day-5 peak
+Hernandez 2026 multimodal source,published Cthrc1+ RCF transition window 3-5 dpi; local Aspn+/Cthrc1- to Aspn-/Cthrc1+ shift,repair-state timing and an opposite-transition pattern within a shared tissue/time context,"human onset, reaction flux, or Schnakenberg v"
+GSE123018,"earliest sampled 4/4: 2 h RNA, 6 h Ribo; delta=0.116 h; zero in diagnostic profile",informative sampling window; no positive hard delay established,onset or myocardial tau
+GSE97358,"CTHRC1 82/84 up; mean 0.882 [0.801,0.962]",donor-paired in-vitro TGF-beta1 response,in-vivo / clinical universality
+GSE97358,"repair module 81/84 positive; mean 0.637 [0.588,0.684]",secondary coordinated repair context,pathway causality
+GSE96991,Cthrc1 +0.910; 3/3 up,system-specific direction,universal response
+GSE96975,mean +0.373; 3/4 up; sign-flip P=.625,small-cohort heterogeneity,contradiction to larger cohort / universality
+GSE225336,"+1.512, +1.354, +1.389 at 24/48/72 h",independent human culture direction,donor-level effect
+GSE132143 human,+0.926 log2CPM; q=.0288,within-human disease direction,causal perturbation
+GSE132143 pig,"+5.569, +5.275, +3.709 at 8/60/180 d",within-pig regional direction,conserved human magnitude
+KFSHRC 2016,1211 genes; 597 down / 614 up,Saudi-center whole-LV DCM context,Saudi population identity
+KFSHRC S1 lookup,TGFB1 reported signed fold-change -2.01; CTHRC1 not threshold-passing,contextual report from published S1 source,independent target-level re-extraction from the original S1 XLS in this study
+Colak 2009,COL1A1 3.08-fold decrease,original accession DCM direction,identity with 2016 manifest
