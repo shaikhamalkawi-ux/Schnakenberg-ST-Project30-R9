@@ -21,7 +21,7 @@ Ghassan Malkawi$^{1,*}$, Ahmed Elsayed$^{2}$, Hassan Y. Alfifi$^{3,4}$\\[4pt]
 \renewcommand{\theequation}{S\arabic{equation}}
 
 \section*{S1. Supplement scope}
-The main manuscript contains the complete analysis methods and statistical procedures. This Supplement provides extended numerical results, mathematical provenance, perturbation robustness, study-specific supporting results, Saudi-center source provenance, reproducibility traceability, and measurement-design detail needed for specialist review. It does not introduce additional analysis methods. Numeric effects from different species, platforms, or experimental units are never pooled. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
+The main manuscript contains the complete analysis methods and statistical procedures. This Supplement provides extended numerical results, mathematical provenance, perturbation robustness, study-specific supporting results, Saudi-center source provenance, reproducibility traceability, and measurement-design detail needed for specialist review. It does not introduce additional analysis methods. Numeric effects from different species, platforms, or experimental units are never pooled. In Table~\ref{tab:sources}, MI denotes myocardial infarction, DCM dilated cardiomyopathy, LV left ventricle, KFSHRC King Faisal Specialist Hospital and Research Centre, and dpi days post-infarction. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
 
 \begin{table}[H]\centering\caption{Dataset-level provenance and inferential unit.}\label{tab:sources}\scriptsize
 \begin{tabularx}{\linewidth}{p{2.0cm}p{2.7cm}YY}
@@ -29,7 +29,7 @@ The main manuscript contains the complete analysis methods and statistical proce
 GSE265828 & section/spot & transcript-axis spatial permutation & not ligand concentration or diffusion\\
 GSE267256 & released mouse sample & post-MI day effect and window sensitivity & day 5 singleton\\
 GSE261428 & mouse cardiac-fibroblast single-cell profiles, 3/5 dpi & published reparative-state trajectory context & not a biochemical reaction flux\\
-GSE123018 & donor within assay/time & RNA/Ribo direction and response-model diagnostic & not onset or myocardial delay\\
+GSE123018 & donor within assay/time & RNA-seq / ribosome-profiling direction and response-model diagnostic & not onset or myocardial delay\\
 GSE96991 & paired mouse line & Cthrc1 perturbation direction & selected system\\
 GSE96975 & paired human unit & small-cohort heterogeneity & not donor-universal\\
 GSE97358 & 84 donor-linked pairs & primary donor-derived \cthrc{} endpoint & in-vitro 24-h endpoint\\
@@ -219,9 +219,9 @@ $X(x,t)$ & $n_X$-component state field in the generic delayed reaction--diffusio
 $D$ & Diffusion matrix in the generic multi-state reaction--diffusion model. & Model-dependent transport units.\\
 $F(X_1,X_2;\theta)$ & Local reaction map evaluated at current and delayed states. & Reaction term.\\
 $\theta$ & Remaining model parameters not written separately. & Parameter vector.\\
-$\tau$ & Generic pure-state mechanistic delay in Eq.~\eqref{eq:delay}. & Not inferred from the sampled cardiac times.\\
+$\tau$ & Generic pure-state mechanistic delay in the delayed reaction--diffusion model defined in the main manuscript. & Not inferred from the sampled cardiac times.\\
 $X^*(x)$ & Time-independent equilibrium field. & Equilibrium state.\\
-$T(x)$ & Generic modeled static spatial field in Eq.~\eqref{eq:static}; not assumed to be a measured ligand concentration. & Static model field.\\
+$T(x)$ & Generic modeled static spatial field in the source--transport--loss example defined in the main manuscript; not assumed to be a measured ligand concentration. & Static model field.\\
 $d_T$ & Scalar transport coefficient in the static-field identifiability example. & Transport coefficient.\\
 $\mu$ & First-order loss rate in the static-field example. & Inverse time.\\
 $\beta$ & Scale of the source term $S_0(x)$. & Source-scale parameter.\\
@@ -229,7 +229,7 @@ $S_0(x)$ & Prescribed source-profile shape. & Spatial source profile.\\
 $\phi_m,\,\kappa_m$ & $m$th Laplacian eigenfunction and eigenvalue, $-\Delta\phi_m=\kappa_m\phi_m$. & Modal spatial quantities.\\
 $A,\,B$ & Current- and delayed-state Jacobians $\partial_1F(X^*,X^*;\theta)$ and $\partial_2F(X^*,X^*;\theta)$ in the homogeneous-reference model. & $n_X\times n_X$ matrices.\\
 $\lambda$ & Characteristic growth-rate root of the modal delay equation. & Complex spectral quantity.\\
-$I_{n_X}$ & $n_X\times n_X$ identity matrix in Eq.~\eqref{eq:char}. & Matrix operator.\\
+$I_{n_X}$ & $n_X\times n_X$ identity matrix in the modal characteristic equation defined in the main manuscript. & Matrix operator.\\
 $s_m$ & Supremum of $\Re(\lambda)$ over characteristic roots for spatial mode $m$. & Modal spectral abscissa.\\
 $\alpha_0$ & Spectral abscissa of the homogeneous mode, $s_0$. & Stability summary.\\
 $\alpha_S$ & Supremum of $s_m$ over non-homogeneous modes $m\ge1$. & Spatial-mode stability summary.\\
