@@ -96,7 +96,7 @@ save(fig,'figS1_alfifi_benchmark')
 
 # Sup S2
 fig,axes=plt.subplots(1,3,figsize=(7.2,3.05)); fig.subplots_adjust(bottom=.25,wspace=.35)
-axes[0].bar(['GSE96991'],[.910],width=.55); axes[0].set_ylim(0,1.2); axes[0].set_ylabel('Native log2 effect'); axes[0].text(0,.96,'3/3 up',ha='center',fontsize=8); axes[0].set_title('Mouse paired lines',fontsize=9)
+axes[0].scatter([0],[.910],s=45); axes[0].set_xlim(-.6,.6); axes[0].set_xticks([0],['GSE96991']); axes[0].set_ylim(0,1.2); axes[0].set_ylabel('Native log2 effect'); axes[0].text(0,.96,'3/3 up',ha='center',fontsize=8); axes[0].set_title('Mouse paired lines',fontsize=9)
 axes[1].errorbar([0],[.882],yerr=[[.081],[.080]],fmt='o',capsize=3); axes[1].set_xlim(-.6,.6); axes[1].set_xticks([0],['GSE97358']); axes[1].set_ylim(0,1.2); axes[1].text(0,1.02,'82/84 up',ha='center',fontsize=8); axes[1].set_title('84 human donor pairs',fontsize=9)
 vals=[1.512,1.354,1.389]; axes[2].plot([24,48,72],vals,'o-'); axes[2].set_ylim(1.2,1.6); axes[2].set_xticks([24,48,72]); axes[2].set_xlabel('hours'); axes[2].set_title('Defined human culture',fontsize=9)
 for a in axes: a.grid(axis='y',alpha=.2); a.spines['top'].set_visible(False); a.spines['right'].set_visible(False)
@@ -105,7 +105,7 @@ save(fig,'figS2_perturbation_support')
 
 # Sup S3
 fig,(a1,a2)=plt.subplots(1,2,figsize=(7.0,3.2)); fig.subplots_adjust(bottom=.25,wspace=.35)
-a1.bar(['MI LV vs healthy'],[.926],width=.55); a1.set_ylim(0,1.2); a1.set_ylabel('Human log2CPM difference'); a1.text(0,1.0,'q=0.0288',ha='center',fontsize=8); a1.set_title('Human contrast',fontsize=9.5)
+a1.scatter([0],[.926],s=45); a1.set_xlim(-.6,.6); a1.set_xticks([0],['MI LV vs healthy']); a1.set_ylim(0,1.2); a1.set_ylabel('Human log2CPM difference'); a1.text(0,1.0,'q=0.0288',ha='center',fontsize=8); a1.set_title('Human contrast',fontsize=9.5)
 a2.plot([8,60,180],[5.569,5.275,3.709],'o-'); a2.set_xlabel('days post-infarction'); a2.set_ylabel('Pig IZ-RZ log2CPM difference'); a2.set_title('Pig regional contrast',fontsize=9.5)
 for a in (a1,a2): a.grid(axis='y',alpha=.2); a.spines['top'].set_visible(False); a.spines['right'].set_visible(False)
 fig.text(.5,.07,'Separate axes prevent a visual claim of conserved cross-species magnitude.',ha='center',fontsize=7.8,style='italic')
