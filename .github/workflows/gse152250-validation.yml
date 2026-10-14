@@ -4,7 +4,7 @@ on:
   push:
     branches: [external-validation-gse152250]
     paths:
-      - 'external_validation/gse152250_validate.py'
+      - 'external_validation/gse152250_validate_v2.py'
       - '.github/workflows/gse152250-validation.yml'
   workflow_dispatch:
 
@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python external_validation/gse152250_validate.py             --fpkm external_validation/input/GSE152250_Fibroblasts_FPKM.txt.gz             --soft external_validation/input/GSE152250_family.soft.gz             --outdir external_validation/output             | tee external_validation/output/GSE152250_console_result.json
+          python external_validation/gse152250_validate_v2.py             --fpkm external_validation/input/GSE152250_Fibroblasts_FPKM.txt.gz             --soft external_validation/input/GSE152250_family.soft.gz             --outdir external_validation/output             | tee external_validation/output/GSE152250_console_result.json
 
       - name: Inventory
         run: |
