@@ -2,7 +2,7 @@
 
 This repository accompanies the manuscript **From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model**.
 
-It contains the manuscript and Supplementary Information LaTeX sources, deterministic figure-generation code, final figure assets, source-traceability tables, and limited helper code. Third-party raw GEO/ArrayExpress data and the publisher-hosted PLOS S1 XLS are not redistributed; obtain them from their original sources.
+It contains the manuscript and Supplementary Information LaTeX sources, deterministic figure-generation code, source-traceability tables, and limited helper code. Third-party raw GEO/ArrayExpress data and the publisher-hosted PLOS S1 XLS are not redistributed; obtain them from their original sources.
 
 ## Primary empirical anchor
 
@@ -12,8 +12,7 @@ The primary human analysis uses 84 donor-linked primary human cardiac-fibroblast
 
 - `main.tex` - main manuscript source
 - `supplement.tex` - Supplementary Information source
-- `figures/` - final PDF figure assets used by LaTeX
-- `make_figures.py` - deterministic figure-generation code
+- `make_figures.py` - deterministic figure-generation code; run it before LaTeX compilation to create the figure assets
 - `support/consolidated_numerical_results.csv` - machine-readable counterpart of the consolidated numerical-results table
 - `support/saudi_target_status.csv` - Saudi-center source-status table
 - `support/extract_saudi_targets.py` - deterministic helper for target extraction when the original PLOS S1 XLS is supplied
