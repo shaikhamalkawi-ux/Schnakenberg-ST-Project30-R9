@@ -1,5 +1,7 @@
 # From Cardiac Omics to Identifiable Dynamics
 
+> **For BioSystems reviewers:** [START HERE — public code, verified source files, reproduction commands, and inference limits](REVIEWERS_START_HERE.md). The exact public repository URL is a clickable link in the 22-page submission manuscript, under **Code availability** (page 18). The manuscript and Supplement LaTeX sources and all released GEO extension code are readable without an account. Original third-party GEO binaries are not hosted here.
+
 This repository accompanies the manuscript **From Cardiac Omics to Identifiable Dynamics: Evidence Boundaries and Measurement Decisions for a Delayed Schnakenberg Model**.
 
 It contains the manuscript and Supplementary Information LaTeX sources, deterministic figure-generation code, source-traceability tables, and limited helper code. Third-party raw GEO/ArrayExpress data and the publisher-hosted PLOS S1 XLS are not redistributed; obtain them from their original sources.
