@@ -16,7 +16,7 @@ jobs:
       - name: Install TeX and PDF utilities
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-science poppler-utils python3-pip zip
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-science texlive-publishers poppler-utils python3-pip zip
       - name: Install reproducibility requirements
         run: |
           python -m pip install --upgrade pip
