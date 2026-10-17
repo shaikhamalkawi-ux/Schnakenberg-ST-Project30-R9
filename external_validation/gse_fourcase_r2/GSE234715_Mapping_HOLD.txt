@@ -1,0 +1,2 @@
+HOLD: Matrix groups P3F2/P3dF2/P3F4/P3dF4 are not publicly joined to the 12 GEO GSM identifiers in the admitted evidence.
+Native column data and full gene library normalized log2(CPM+1) extracted, but no assumed F vs dF biological labels.

@@ -1,0 +1,28 @@
+[
+  {
+    "status": "EXPLORATORY_ORGANOID_EFFECTS_REPRODUCED",
+    "n_rows": 25099,
+    "n_samples": 9,
+    "dataset": "GSE246298"
+  },
+  {
+    "status": "EXPLORATORY_CULTURE_EFFECTS_COMPUTED",
+    "n_raw_gene_rows": 25779,
+    "n_expression_columns": 18,
+    "n_genes": 8,
+    "dataset": "GSE202714"
+  },
+  {
+    "status": "COEXPRESSION_COMPUTED_HISTOLOGY_HOLD",
+    "n_rows": 25635,
+    "n_DCM": 58,
+    "n_nonfailing": 12,
+    "dataset": "GSE245825"
+  },
+  {
+    "status": "EXPRESSION_NORMALIZED_ONLY__INJURY_LABELS_HOLD",
+    "n_samples": 12,
+    "n_rows": 32643,
+    "dataset": "GSE234715"
+  }
+]

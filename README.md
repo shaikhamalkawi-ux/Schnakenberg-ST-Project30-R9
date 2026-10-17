@@ -30,3 +30,18 @@ GSE152250 provides an independent human primary cardiac-fibroblast TGF-beta expe
 ## Reproducibility boundaries
 
 The repository does not claim independent re-extraction of the Saudi TGFB1/CTHRC1 rows from the original publisher XLS, a newly rerun donor-blocked negative-binomial coefficient for GSE97358, or reconstruction of the unavailable four-family timing-model specification. No myocardial delay, physical diffusion coefficient, or cardiac Turing/Hopf/Turing-Hopf certificate is asserted from the current evidence.
+
+## BioSystems ED3R1 — additional four-case GEO reproducibility (17 October 2026)
+
+The author-approved **public code and derived-summary release** is in
+[`external_validation/gse_fourcase_r2/`](external_validation/gse_fourcase_r2/).
+It contains SHA-256-checked GEO download/replay scripts and exploratory summary
+outputs for GSE202714, GSE246298 and GSE245825, plus a source-mapping HOLD for
+GSE234715. The nine-comparison DCM coexpression multiplicity correction is
+documented and reproducible.
+
+Original GEO files and detailed patient/sample-level expression matrices are
+**not redistributed**. The existing root `main.tex` and `supplement.tex` are
+not overwritten by this code release and may represent an earlier manuscript
+build; the BioSystems ED3R1 manuscript is separately maintained. The research
+remains nonclinical and has not been submitted through GitHub.

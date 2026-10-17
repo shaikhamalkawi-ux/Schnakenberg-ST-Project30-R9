@@ -1,0 +1,10 @@
+# Keep third-party datasets and locally reconstructed per-sample matrices out of git
+*.gz
+*.xls
+*.xlsx
+source_data/
+source_files/
+replay_results/
+__pycache__/
+*.pyc
+*.part

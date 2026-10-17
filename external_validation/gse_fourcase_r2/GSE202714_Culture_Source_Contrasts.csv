@@ -1,0 +1,25 @@
+gene,cell_source,n_control,n_treated,delta_log2_normalized_plus_1,mean_control_log2_normp1,mean_treated_log2_normp1,exact_p_two_sided,n_treated_greater_than_max_control,interpretation,q_BH_24_tests
+CTHRC1,hiPSC-CF,3,3,0.8525371140882392,9.149078329446313,10.001615443534552,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+CTHRC1,aHCF,3,3,1.3472383129400907,8.579407302214372,9.926645615154463,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+CTHRC1,fHCF,3,3,1.3870541834121983,8.91274890691563,10.299803090327828,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+ASPN,hiPSC-CF,3,3,-3.0184087268044437,3.8109345200293316,0.7925257932248879,0.1,0,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+ASPN,aHCF,3,3,-0.26497333859841277,5.839879999369611,5.574906660771198,0.6,0,unpaired culture replicate comparison; not donor-level replication,0.6260869565217391
+ASPN,fHCF,3,3,-0.14671922515347546,3.86683214838286,3.7201129232293844,1.0,0,unpaired culture replicate comparison; not donor-level replication,1.0
+WNT5A,hiPSC-CF,3,3,1.853674440690921,7.877422771505247,9.731097212196168,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+WNT5A,aHCF,3,3,1.0985830444003586,7.043406798342971,8.14198984274333,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+WNT5A,fHCF,3,3,1.652755692748407,5.949648758085458,7.602404450833865,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+COL1A1,hiPSC-CF,3,3,1.851108513652811,14.289680096973179,16.14078861062599,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+COL1A1,aHCF,3,3,1.3211116556914622,15.631508350899095,16.952620006590557,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+COL1A1,fHCF,3,3,1.459685059774431,15.013356058700706,16.473041118475138,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+POSTN,hiPSC-CF,3,3,-0.8158377126828569,12.286018830171193,11.470181117488336,0.1,0,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+POSTN,aHCF,3,3,3.830260762943043,8.472774764448221,12.303035527391264,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+POSTN,fHCF,3,3,1.0615050926108704,12.89776335151575,13.95926844412662,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+FGFR1,hiPSC-CF,3,3,-0.06633953278026716,9.035138086184167,8.9687985534039,0.6,1,unpaired culture replicate comparison; not donor-level replication,0.6260869565217391
+FGFR1,aHCF,3,3,-0.05520501752095619,10.034009230594462,9.978804213073506,0.6,0,unpaired culture replicate comparison; not donor-level replication,0.6260869565217391
+FGFR1,fHCF,3,3,-0.3289138401953906,8.465039495360983,8.136125655165593,0.1,0,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+FSTL3,hiPSC-CF,3,3,2.320922089198157,6.073380771891794,8.394302861089951,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+FSTL3,aHCF,3,3,1.034548471469309,7.117871938667278,8.152420410136587,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+FSTL3,fHCF,3,3,1.482510335103444,6.427865316094284,7.910375651197728,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+MMP2,hiPSC-CF,3,3,0.17633243841090795,8.304607308912182,8.48093974732309,0.4,2,unpaired culture replicate comparison; not donor-level replication,0.4800000000000001
+MMP2,aHCF,3,3,1.1552085780220267,9.57703193011738,10.732240508139407,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424
+MMP2,fHCF,3,3,1.8047126309511503,7.620318724146235,9.425031355097385,0.1,3,unpaired culture replicate comparison; not donor-level replication,0.12631578947368424

@@ -1,0 +1,10 @@
+gene,comparator,n_DCM,spearman_within_DCM,p_unadjusted,interpretation,q_BH_9_tests
+CTHRC1,COL1A1,58,0.5412065103915417,1.1518225330149053e-05,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,3.455467599044716e-05
+CTHRC1,POSTN,58,0.24883871213307457,0.05962020097856408,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.10731636176141535
+CTHRC1,FSTL3,58,0.12646506930140555,0.3441646665143021,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.3441646665143021
+ASPN,COL1A1,58,0.8037466547725246,3.080117618961835e-14,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,2.7721058570656517e-13
+ASPN,POSTN,58,0.5690424190224247,3.149436408386903e-06,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,1.4172463837741063e-05
+ASPN,FSTL3,58,0.3228336768279554,0.01344796480254911,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.0302579208057355
+WNT5A,COL1A1,58,-0.14694392322126182,0.2710192229907346,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.30489662586457644
+WNT5A,POSTN,58,-0.18908609923405828,0.1551572200226601,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.1994878543148487
+WNT5A,FSTL3,58,-0.21732443323387374,0.1012725450223875,DCM coexpression only; neither a gene-vs-histology relation nor a cross-site control comparison,0.15190881753358124

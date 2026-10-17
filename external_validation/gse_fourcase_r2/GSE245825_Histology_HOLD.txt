@@ -1,0 +1,3 @@
+HOLD: No verified individual biopsy fibrosis percentages keyed to DCM_1–58/Hh# in downloaded datasets.
+All 12 historical controls come from GSE116250 and non-failing left ventricle, vs 58 DCM right ventricular septum.
+Do not treat between-control differences as biological replication; do not claim histology correlation.

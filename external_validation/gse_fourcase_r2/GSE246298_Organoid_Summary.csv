@@ -1,0 +1,17 @@
+gene,comparison,n_source_lines,mean_delta,min_delta,max_delta,n_positive,interpretation
+CTHRC1,fibrotic_vehicle_minus_control,3,1.1886978289578805,0.9712743249667115,1.5156141571390362,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+CTHRC1,inhibitor_minus_fibrotic_vehicle,3,-1.2330769881611643,-1.408972991540634,-1.0172583948775493,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+ASPN,fibrotic_vehicle_minus_control,3,1.5249730531356782,1.4712290030990953,1.5735438100035353,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+ASPN,inhibitor_minus_fibrotic_vehicle,3,-1.1397167404835826,-1.281011097884031,-1.0283926011190179,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+WNT5A,fibrotic_vehicle_minus_control,3,-0.3328204664681606,-0.5017371366180061,-0.1620520609015461,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+WNT5A,inhibitor_minus_fibrotic_vehicle,3,-0.2881425233073707,-0.34196223304803297,-0.2508644972798155,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+COL1A1,fibrotic_vehicle_minus_control,3,1.0860980344492432,0.8003653591140356,1.5843821666392905,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+COL1A1,inhibitor_minus_fibrotic_vehicle,3,-1.1386898601673703,-1.22334740060289,-1.0379326091786147,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+POSTN,fibrotic_vehicle_minus_control,3,1.4957969530883855,1.3102556664902725,1.8649297723060503,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+POSTN,inhibitor_minus_fibrotic_vehicle,3,-1.7636682213879358,-1.8760397298445035,-1.6616165587641287,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+FGFR1,fibrotic_vehicle_minus_control,3,-0.5823426469777283,-0.6492879280125496,-0.47039569152805605,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+FGFR1,inhibitor_minus_fibrotic_vehicle,3,0.4740113486415816,0.4348914216871247,0.5066971568699223,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+FSTL3,fibrotic_vehicle_minus_control,3,0.8007028476605432,0.7907966151694676,0.8101905944597441,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+FSTL3,inhibitor_minus_fibrotic_vehicle,3,-0.3732847399695481,-0.4336614083315222,-0.3265056057976512,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+MMP2,fibrotic_vehicle_minus_control,3,0.7173018625408218,0.5666829267840576,0.8791781322097467,3,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
+MMP2,inhibitor_minus_fibrotic_vehicle,3,-0.3128883439823931,-0.3705798456023768,-0.24461658142871556,0,descriptive 3-source-line contrast; no clinical efficacy or CTHRC1-specific perturbation
