@@ -31,17 +31,22 @@ GSE152250 provides an independent human primary cardiac-fibroblast TGF-beta expe
 
 The repository does not claim independent re-extraction of the Saudi TGFB1/CTHRC1 rows from the original publisher XLS, a newly rerun donor-blocked negative-binomial coefficient for GSE97358, or reconstruction of the unavailable four-family timing-model specification. No myocardial delay, physical diffusion coefficient, or cardiac Turing/Hopf/Turing-Hopf certificate is asserted from the current evidence.
 
-## BioSystems ED3R1 — additional four-case GEO reproducibility (17 October 2026)
 
-The author-approved **public code and derived-summary release** is in
-[`external_validation/gse_fourcase_r2/`](external_validation/gse_fourcase_r2/).
-It contains SHA-256-checked GEO download/replay scripts and exploratory summary
-outputs for GSE202714, GSE246298 and GSE245825, plus a source-mapping HOLD for
-GSE234715. The nine-comparison DCM coexpression multiplicity correction is
-documented and reproducible.
+## BioSystems ED3R1 source-locked GEO replay (17 October 2026)
 
-Original GEO files and detailed patient/sample-level expression matrices are
-**not redistributed**. The existing root `main.tex` and `supplement.tex` are
-not overwritten by this code release and may represent an earlier manuscript
-build; the BioSystems ED3R1 manuscript is separately maintained. The research
-remains nonclinical and has not been submitted through GitHub.
+The companion `external_validation/gse_fourcase_r2/` includes `download_sources.py`, `replay.py`, and `additional_tests.py`.
+The corrected reproducibility contract limits the GSE245825 Benjamini--Hochberg family to the nine unique planned target/comparator combinations (3 targets CTHRC1/ASPN/WNT5A by 3 comparators COL1A1/POSTN/FSTL3). The prior ED3 replay enumerated 13 comparisons including redundant reversed pairs. The manuscript already reported the nine-comparison family, so ED3R1 brings code and output into agreement without changing Spearman rho or its raw P-value. The nine-comparison CTHRC1--COL1A1 q value is 3.455467599044716e-05.
+
+For an internet-enabled run: `python external_validation/gse_fourcase_r2/download_sources.py --out source_data`; `python external_validation/gse_fourcase_r2/replay.py --sources source_data --out replay_results`; then copy `additional_tests.py` into `replay_results` and execute it there. The seven source gzip files are downloaded from official GEO only, SHA-256 checked, and excluded from manuscript release archives.
+
+The ED3R1 reanalysis scripts and curated derived summaries were published with author authorization in the public project repository at `external_validation/gse_fourcase_r2/` (main commit `2fb9b47dd1a4d7c8e55e583ac5279e2ba4dd5eb8`). All three authors approved the ED3R1 BioSystems manuscript and submission, as reported by the corresponding author on 17 October 2026. The publication remains an author-controlled portal action; no submission tracking number has been issued.
+
+## BioSystems ED3R1 manuscript synchronized (18 October 2026)
+
+The named-author `main.tex` and `supplement.tex` at the default branch are the author-confirmed **BioSystems** pre-submission scientific source (22-page manuscript; 12-page Supplement in the verified local build). Ghassan Malkawi is first and corresponding author; Ahmed Elsayed and Hassan Y. Alfifi follow. This is **not** an accepted or already submitted manuscript.
+
+Curated source-replayed GEO extension code and selected **derived** summary tables: `external_validation/gse_fourcase_r2/`. Three contexts were admitted: GSE202714 human fibroblast TGF-beta1 response across cell sources, GSE246298 experimental organoid intervention, and GSE245825 within-DCM transcript coexpression. GSE234715 remains a sample-mapping HOLD; no quantitative injury conclusion is drawn.
+
+The GSE298023 tissue-histology comparison reads selected **published supplementary tables only**; it does **not** produce a new CTHRC1–histological fibrosis coefficient. Do not confuse transcript coexpression with collagen-fraction correlation or clinical prediction. Original GEO source files and publisher supplements must be fetched from their original hosts.
+
+The original reference audit is historical; the current key/DOI presence audit for the BioSystems source is `support/reference_audit_ED3R1.csv`. This audit does not independently validate each DOI. This repository is not a Zenodo DOI record; cite a project Zenodo DOI only if an existing, matching published record is independently confirmed.

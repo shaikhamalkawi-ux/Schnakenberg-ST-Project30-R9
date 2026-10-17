@@ -20,3 +20,13 @@ Third-party raw data are not redistributed in this repository. Obtain all data f
 PLOS ONE S1 table DOI: `10.1371/journal.pone.0162669.s005`.
 
 The manuscript distinguishes directly visible source-article results from target rows that have not been independently re-extracted from the original XLS in the current archive.
+
+## BioSystems exploratory extensions (source-specific, 2026-10-18)
+
+| Source | Added analytical role | Strict interpretation limit |
+|---|---|---|
+| GSE298023 / Youness et al. 2025 | Published supplementary S5/S6/S9 source-only histology context | No new patient-level analysis or CTHRC1-fibrosis coefficient |
+| GSE202714 | Three-source human cardiac fibroblast TGF-beta1 cultures | Culture-unit association; not independent donor validation or cardiac delay |
+| GSE246298 | Three engineered-human-organoid source lines, fibrosis/vehicle/inhibitor conditions | Within-line descriptive intervention context; not clinical drug efficacy |
+| GSE245825 | 58 right-ventricular-septum DCM biopsy expression profiles | Coexpression only; no biopsy-keyed collagen histology; historical left-ventricular controls excluded |
+| GSE234715 | Cryoinjured engineered tissue source inspection | HOLD: published sample-column alignment not fully admissible; no group effect reported |

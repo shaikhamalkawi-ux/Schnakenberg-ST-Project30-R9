@@ -1,0 +1,54 @@
+{
+  "classification": "exploratory_posthoc_sensitivity_only",
+  "dataset": "GSE152250",
+  "input_csv_sha256": "0443919b35b8a5ba0ad27018e182e3a5ff02d51c98c52ed133d2c4790bcbbb3c",
+  "sample_level_units": "18 independent culture records; three per arm at each of 6, 24, 48 h",
+  "no_donor_pairing_assumed": true,
+  "no_cross_study_pooling": true,
+  "interaction_test": {
+    "time_comparison": "24h minus 6h",
+    "estimand": "difference of arm-mean log2(FPKM+0.5) treatment contrasts",
+    "delta": 0.6042583758578033,
+    "reference": "conditional within-timepoint 3/3 label exchangeability",
+    "enumerated_permutations": 400,
+    "absolute_extreme_count": 26,
+    "two_sided_exact_P": 0.065,
+    "not_prespecified": true,
+    "not_mechanistic_delay_or_onset": true
+  },
+  "timepoint_sensitivity": [
+    {
+      "time_h": 6,
+      "n_control": 3,
+      "n_treated": 3,
+      "reference_log2_ratio_of_means": 0.04345747605376526,
+      "leave_one_each_arm_n": 9,
+      "loo_min_log2_ratio": -0.06289088561674744,
+      "loo_max_log2_ratio": 0.13504496908161506,
+      "loo_all_positive": false,
+      "mean_difference_of_log2_FPKM_plus_0_5": 0.047228470352259855
+    },
+    {
+      "time_h": 24,
+      "n_control": 3,
+      "n_treated": 3,
+      "reference_log2_ratio_of_means": 0.6549055617572603,
+      "leave_one_each_arm_n": 9,
+      "loo_min_log2_ratio": 0.5934459539752814,
+      "loo_max_log2_ratio": 0.7036060655470063,
+      "loo_all_positive": true,
+      "mean_difference_of_log2_FPKM_plus_0_5": 0.6514868462100631
+    },
+    {
+      "time_h": 48,
+      "n_control": 3,
+      "n_treated": 3,
+      "reference_log2_ratio_of_means": 0.2611914308488943,
+      "leave_one_each_arm_n": 9,
+      "loo_min_log2_ratio": 0.2043789343590883,
+      "loo_max_log2_ratio": 0.30201471258894746,
+      "loo_all_positive": true,
+      "mean_difference_of_log2_FPKM_plus_0_5": 0.25922253573959697
+    }
+  ]
+}

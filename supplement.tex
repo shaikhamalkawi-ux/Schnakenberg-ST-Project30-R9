@@ -21,7 +21,7 @@ Ghassan Malkawi$^{1,*}$, Ahmed Elsayed$^{2}$, Hassan Y. Alfifi$^{3,4}$\\[4pt]
 \renewcommand{\theequation}{S\arabic{equation}}
 
 \section*{S1. Supplement scope}
-The main manuscript contains the complete analysis methods and statistical procedures. This Supplement provides extended numerical results, mathematical provenance, sensitivity results, study-specific supporting results, Saudi-center source provenance, reproducibility information, and measurement-design detail. It does not introduce additional analysis methods. Numeric effects from different species, platforms, or experimental units are never pooled. In Table~\ref{tab:sources}, MI denotes myocardial infarction, DCM dilated cardiomyopathy, LV left ventricle, KFSHRC King Faisal Specialist Hospital and Research Centre, and dpi days post-infarction. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
+The main manuscript contains the complete analysis methods and statistical procedures. This Supplement provides extended numerical results, mathematical provenance, sensitivity results, study-specific supporting results, Saudi-center source provenance, reproducibility information, and measurement-design detail. A new exploratory culture-deletion and treatment-by-time sensitivity in Section S5a and an independently rerun three-source/biopsy extension in Section S5b do not change any primary analysis or model claim boundary. Numeric effects from different species, platforms, or experimental units are never pooled. In Table~\ref{tab:sources}, MI denotes myocardial infarction, DCM dilated cardiomyopathy, LV left ventricle, KFSHRC King Faisal Specialist Hospital and Research Centre, and dpi days post-infarction. Table~\ref{tab:sources} records the study-specific inferential unit and boundary for each source.
 
 \begin{table}[H]\centering\caption{Dataset-level provenance and inferential unit.}\label{tab:sources}\scriptsize
 \begin{tabularx}{\linewidth}{p{2.0cm}p{2.7cm}YY}
@@ -39,6 +39,8 @@ GSE132143 & within-species sample/pair & disease direction & no cross-species po
 KFSHRC 2016 & 5 DCM + 5 non-failing whole LV & Saudi-center disease-tissue context & not population validation\\
 E-TABM-480 / 2009 & 5 DCM + 4 control whole LV & original accession disease direction & manifest not assumed identical to 2016\\\bottomrule
 \end{tabularx}\end{table}
+
+The three additional GEO sources (GSE202714 culture groups, GSE246298 organoid conditions, and GSE245825 biopsy coexpression) and their inferential units are specified in Section S5b and in the main source table. GSE234715 is a source-inspection-only HOLD, not an additional reported injury result.
 
 \section*{S2. Mathematical provenance and selected benchmark}
 Three mathematical objects remain distinct.
@@ -99,9 +101,52 @@ Table~\ref{tab:gse152250} reports the independent GSE152250 validation associate
 \end{tabularx}
 \end{table}
 
+\subsection*{S5a. Exploratory time-profile and culture-deletion sensitivity (new)}
+For GSE152250 only, the nine possible leave-one-culture-out-from-each-arm comparisons were calculated separately at 6, 24 and 48 h, each using the log$_2$ ratio of mean native FPKM among the remaining two cultures per arm. These are deterministic influence checks, not bootstrap confidence intervals or independent biological replication. The two-sided exploratory 6-to-24-h treatment-by-time statistic uses difference of the respective treatment-minus-control arm means of log$_2$(FPKM$+0.5$); this transformed-mean contrast must not be mistaken for the log$_2$ ratio of mean FPKM in Table~\ref{tab:gse152250}. At each time point, label exchangeability under the null yields $\binom{6}{3}=20$ allocations; the interaction uses all $20\times20=400$ pairwise timepoint allocations. Its unadjusted two-sided reference is the fraction with absolute contrast at least as large as observed. Because it was examined after the temporal pattern was available and original randomization is not demonstrated here, this is a descriptive, conditional exact permutation sensitivity, not a confirmatory randomized-treatment interaction test.
+
+\begin{table}[H]\centering
+\caption{New post-hoc GSE152250 culture-unit robustness diagnostics. All effects are within-study; the exact 6-to-24-h comparison uses a different transformed-mean estimand than the leave-one-out ratios.}
+\label{tab:externalrobust}
+\small
+\begin{tabularx}{\linewidth}{p{1.35cm}YYp{3.0cm}}
+\toprule
+\textbf{Time} & \textbf{Full 3-versus-3 log$_2$ ratio of means} & \textbf{9 leave-one-per-arm log$_2$ ratio range} & \textbf{Direction in all 9 checks}\\
+\midrule
+6 h & +0.043 & $-0.063$ to $+0.135$ & No\\
+24 h & +0.655 & $+0.593$ to $+0.704$ & Yes\\
+48 h & +0.261 & $+0.204$ to $+0.302$ & Yes\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The 24-minus-6-h transformed-mean treatment contrast was $+0.6043$ log$_2$(FPKM$+0.5$) units, with exact two-sided reference $P=26/400=0.065$. The data therefore show a descriptively larger contrast at 24 h but do not establish an interaction at 0.05. Neither the temporal contrast nor these deletion checks estimate a response onset, causal delay, or cardiac model parameter. Full sample values, executable enumeration and machine-readable outputs accompany the BioSystems editorial-strengthening source package under \texttt{external\_validation/}.
+
 Other supporting systems are kept on their native scales. GSE96991 mouse Cthrc1 increased in all three paired lines (+0.910 log$_2$). GSE225336 showed positive human-culture \cthrc{} effects at 24, 48, and 72 h (+1.512, +1.354, +1.389 log$_2$). GSE96975 remains a four-pair heterogeneity observation: mean +0.373 log$_2$, 3/4 positive, exact two-sided sign-flip $P=0.625$, and leave-one-out direction unstable. These systems are not combined into a meta-analytic magnitude. Figure~\ref{fig:s2perturb} displays the supporting systems without a pooled numerical scale.
 
 \begin{figure}[H]\centering\includegraphics[width=.95\linewidth]{figures/figS2_perturbation_support.pdf}\caption{Perturbation support displayed in separate study-specific scales and units. The purpose is direction/support, not a pooled effect size.}\label{fig:s2perturb}\end{figure}
+
+\subsection*{S5b. Independently rerun three additional public human contexts (post-hoc)}
+The downloaded, SHA-verified GEO matrices were re-read without using any Colab numerical output. All contrast magnitudes are transformed-mean differences of log$_2$(normalized count$+1$), computed within study. GSE202714 tested three culture sources, each with 3+3 samples; no cross-source donor pairing is assumed. The two-sided source-blocked exact permutation reference enumerated $20^3=8000$ balanced label assignments. The eight-gene multiple-testing adjustment was post-hoc and should not be confused with preregistration. The \cthrc{} source-specific two-sided exact values were $0.10$ each, despite a pooled blocked post-hoc $P=0.00025$ and $q=0.0005$ across eight explored genes.
+
+\begin{table}[H]\centering
+\caption{GSE202714 independent human culture-source contrasts (three control and three treated culture replicates per source). Mean treated-minus-control differences on log$_2$(normalized count$+1$), not normalized log$_2$ fold-change model coefficients. The 8-gene blocked permutation test is exploratory.}
+\label{tab:threeculture}\small
+\begin{tabularx}{\linewidth}{p{2.0cm}YYYY}
+\toprule
+\textbf{Gene} & \textbf{hiPSC-CF} & \textbf{Adult primary} & \textbf{Fetal primary} & \textbf{Blocked exact $P$ / $q_{8}$}\\\midrule
+\textit{CTHRC1} & $+0.853$ & $+1.347$ & $+1.387$ & $0.00025/0.00050$\\
+\textit{COL1A1} & $+1.851$ & $+1.321$ & $+1.460$ & $0.00025/0.00050$\\
+\textit{ASPN} & $-3.018$ & $-0.265$ & $-0.147$ & $0.03325/0.04433$\\
+\textit{POSTN} & $-0.816$ & $+3.830$ & $+1.062$ & $0.0615/0.0703$\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+In GSE246298, the three organoid source-line CTHRC1 fibrotic-vehicle-minus-control expression contrasts were $+1.516$, $+1.079$, $+0.971$; AZD4547-minus-fibrotic-vehicle contrasts were $-1.273$, $-1.017$, $-1.409$. Their source-line means were $+1.189$ and $-1.233$, respectively. These are expression changes under the authors' model and intervention, not treatment benefit or CTHRC1-specific manipulation.
+
+In GSE245825, 58 DCM right-ventricular-septal biopsies yielded \cthrc{}--\textit{COL1A1} Spearman $\rho=0.541$, unadjusted $P=1.1518\times10^{-5}$ and $q=3.455\times10^{-5}$ among nine targeted correlations. The 3000-bootstrap percentile interval was $[0.331,0.707]$; leave-one-out range $0.518$--$0.573$. \textit{ASPN}--\textit{COL1A1} had $\rho=0.804$ with bootstrap interval $[0.681,0.880]$, but neither correlation measures collagen fraction. Histology measured elsewhere in the source study was not provided as a verified per-biopsy join in the GEO matrix; moreover its historical non-failing controls came from a different ventricle and source. These co-expression signals can reflect cell-mixture or disease-state covariance and cannot establish a biochemical activator--substrate pair. GSE234715 source files were checked but injury labels could not be reliably joined from matrix columns to GSM records, so no injury contrast was calculated.\par
+
+All machine-readable input checks and analysis outputs, including the exact 8000-allocation calculation and deterministic 3000-resample sensitivity, are included in \texttt{external\_validation/gse\_fourcase\_r2/}. The detailed numbers above are independent rerun outputs, not new experiments.\par
 
 \section*{S6. Spatial and day-scale analyses}
 For the predefined GSE265828 TGFB1--TGFBR1--TGFBR2 axis, Moran's $I$ was 0.24, 0.17, and 0.26 in the three post-infarction sections ($q=0.013$ each) and $-0.02$ in control ($q=0.895$). The inference is spatial organization of a transcript covariate, not physical ligand diffusion. The permutation design and multiplicity control are specified in the main Methods; this result is not used to support a stronger physical claim. Figure~\ref{fig:s3spatial} shows the section-level Moran summaries.
