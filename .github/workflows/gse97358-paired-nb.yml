@@ -1,8 +1,9 @@
-name: GSE97358 donor-blocked Negative Binomial sensitivity
+name: GSE97358 donor-blocked Negative Binomial sensitivity / accelerated pilot
 on:
   push:
     branches:
       - analysis/gse97358-donor-nb-r1
+      - analysis/gse97358-donor-nb-accelerated-r1
     paths:
       - '.github/workflows/gse97358-paired-nb.yml'
       - 'analysis/gse97358_paired_nb/**'
