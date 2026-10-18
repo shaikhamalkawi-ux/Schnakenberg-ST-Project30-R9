@@ -51,6 +51,15 @@ keep <- filterByExpr(dge,group=group)
 if(sum(keep)<1000 || !keep[match(ids["CTHRC1"],rownames(dge))]) stop("Insufficient expressed genes")
 dge <- dge[keep,,keep.lib.sizes=FALSE]
 dge <- calcNormFactors(dge,method="TMM")
+full_filtered_genes <- nrow(dge)
+# Faster pre-declared dispersion-estimation pilot: a uniform quantile grid over mean
+# log-expression, together with all 7 prespecified genes. TMM scaling is computed
+# on the FULL filtered transcriptome before this subset is selected.
+ordered <- order(rowMeans(log1p(dge$counts)),seq_len(nrow(dge)))
+pilot_idx <- ordered[unique(as.integer(round(seq(1,length(ordered),length.out=min(2800,length(ordered))))))]
+pilot_idx <- sort(unique(c(pilot_idx, match(unname(ids),rownames(dge)))))
+if(anyNA(pilot_idx)) stop("Missing prespecified gene in pilot set")
+dge <- dge[pilot_idx,,keep.lib.sizes=TRUE]
 dge <- estimateDisp(dge,design,robust=TRUE)
 fit <- glmQLFit(dge,design,robust=TRUE)
 test <- glmQLFTest(fit,coef="conditionST")
@@ -62,7 +71,7 @@ if(anyNA(ix)) stop("Target filtered out by expression rule")
 sub <- all[ix,,drop=FALSE]
 result <- data.frame(gene=names(ids),EnsemblID=unname(ids),n_pairs=84,
   log2FC_NB_TMM=unname(sub$logFC),F_QL=unname(sub$F),p_unadjusted=unname(sub$PValue),
-  q_BH_all_filtered=unname(sub$q_BH_all),q_BH_7_prespecified=p.adjust(sub$PValue,"BH"),
+  q_BH_selected_pilot=unname(sub$q_BH_all),q_BH_7_prespecified=p.adjust(sub$PValue,"BH"),
   row.names=NULL)
 write.csv(result,"results/GSE97358_NB_7genes.csv",row.names=FALSE)
 status <- if(replay$positive==82 && abs(replay$mean-0.882)<0.015) "PRIMARY_REPLAY_APPROX_PASS" else "PRIMARY_REPLAY_MISMATCH_HOLD"
@@ -70,12 +79,12 @@ if(!is.finite(result$log2FC_NB_TMM[1]) || !is.finite(result$p_unadjusted[1])) st
 report <- list(status=status,source="Official NCBI GEO GSE97358",source_gzip_sha256=as.list(unname(observed)),
  n_samples=168,n_control=84,n_treated=84,n_complete_donor_pairs=84,
  original_replay=replay,original_expected=c(mean=0.882,positive=82),
- model="edgeR robust quasi-likelihood negative-binomial GLM, donor fixed effect + groupST, TMM normalization",
- filter="edgeR filterByExpr defaults, grouped BS/ST",filtered_genes=sum(keep),
+ model="exploratory scaled-dispersion pilot: edgeR robust quasi-likelihood negative-binomial GLM, donor fixed effect + groupST, TMM normalization",
+ filter="edgeR filterByExpr defaults, grouped BS/ST",filtered_genes_source=full_filtered_genes,dispersion_pilot_genes=nrow(dge),dispersion_selection="2800 evenly-spaced genes on the mean-log-expression rank + 7 predefined genes; full-transcriptome TMM",
  original_genes=nrow(counts),rank=qr(design)$rank,design_columns=ncol(design),
  R_version=R.version.string,edgeR_version=as.character(packageVersion("edgeR")),
  CTHRC1=list(log2FC_NB_TMM=as.numeric(result$log2FC_NB_TMM[1]),
- p_unadjusted=as.numeric(result$p_unadjusted[1]),q_BH_all_filtered=as.numeric(result$q_BH_all_filtered[1])),
+ p_unadjusted=as.numeric(result$p_unadjusted[1]),q_BH_selected_pilot=as.numeric(result$q_BH_selected_pilot[1])),
  estimand_boundary="NB model coefficient is not directly equal to the original mean donor-paired log2 normalized expression",
  raw_counts_redistributed=FALSE)
 jsonlite::write_json(report,"results/GSE97358_NB_summary.json",auto_unbox=TRUE,pretty=TRUE)
@@ -83,7 +92,7 @@ writeLines(c(paste("STATUS",status),paste("ORIGINAL_MEAN",signif(replay$mean,8))
  paste("ORIGINAL_POSITIVE",replay$positive,"of",replay$n),
  paste("NB_LOG2FC",signif(result$log2FC_NB_TMM[1],8)),
  paste("NB_PVALUE",signif(result$p_unadjusted[1],8)),
- paste("NB_Q_ALL",signif(result$q_BH_all_filtered[1],8)),
+ paste("NB_Q_ALL",signif(result$q_BH_selected_pilot[1],8)),
  paste("FILTERED",sum(keep)),"RAW_DATA_NOT_REDISTRIBUTED"),
  "results/console_summary.txt")
 pdf("results/CTHRC1_84_pair_changes.pdf",width=7.5,height=4.2,useDingbats=FALSE)
