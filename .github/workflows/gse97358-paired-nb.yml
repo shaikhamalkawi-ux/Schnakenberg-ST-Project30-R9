@@ -1,4 +1,4 @@
-name: GSE97358 paired-NB source profile
+name: GSE97358 donor-blocked Negative Binomial sensitivity
 on:
   push:
     branches:
@@ -9,18 +9,26 @@ on:
 permissions:
   contents: read
 jobs:
-  source-profile:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
+  paired-nb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Download and inspect original source layout
+      - name: Download official count and sample-info files, verify layout
         run: python analysis/gse97358_paired_nb/inspect.py
-      - name: Upload ONLY data layout and source hashes
+      - name: Install edgeR and R for negative-binomial quasi-likelihood analysis
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq r-base-core r-bioc-edger r-cran-statmod r-cran-jsonlite
+          Rscript -e 'cat(R.version.string, "\\n"); stopifnot(requireNamespace("edgeR"), requireNamespace("statmod"), requireNamespace("jsonlite"))'
+      - name: Run frozen donor-blocked NB and primary replay gates
+        working-directory: analysis/gse97358_paired_nb
+        run: Rscript paired_nb.R
+      - name: Upload derived analysis only (never original raw counts or metadata)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: gse97358-source-profile
+          name: gse97358-paired-nb-analysis
           path: analysis/gse97358_paired_nb/results/
           if-no-files-found: warn
           retention-days: 15
