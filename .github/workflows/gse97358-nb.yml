@@ -1,0 +1,58 @@
+name: GSE97358 donor-blocked count sensitivity
+on:
+  push:
+    branches: ['analysis/gse97358-donor-nb-20261018']
+    paths: ['.github/workflows/gse97358-nb.yml', 'sensitivity/gse97358_nb/**']
+permissions:
+  contents: read
+jobs:
+  analysis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and inspect official GEO inputs
+        run: |
+          mkdir -p nb_run/raw nb_run/results
+          python - <<'PY'
+          import urllib.request, gzip, hashlib, pathlib, json, csv, time
+          root=pathlib.Path('nb_run/raw')
+          manifest=[]
+          for filename in ['GSE97358_168_fibroblast_samples_gene_counts.txt.gz','GSE97358_fibroblasts_samples_info.txt.gz']:
+              urls=['https://ftp.ncbi.nlm.nih.gov/geo/series/GSE97nnn/GSE97358/suppl/'+filename,
+                    'https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE97358&format=file&file='+filename]
+              data=None
+              for url in urls:
+                  for attempt in range(3):
+                      try:
+                          with urllib.request.urlopen(url,timeout=90) as r: data=r.read()
+                          plain=gzip.decompress(data)
+                          break
+                      except Exception as exc:
+                          print(type(exc).__name__,str(exc),flush=True);data=None;time.sleep(2)
+                  if data is not None:break
+              if data is None: raise RuntimeError('No validated gzip obtained: '+filename)
+              (root/filename).write_bytes(data)
+              lines=plain.decode('utf-8-sig').splitlines()
+              print('SOURCE',filename,'BYTES',len(data),'LINES',len(lines),flush=True)
+              print('\n'.join(lines[:4]),flush=True)
+              if 'samples_info' in filename:print('\n'.join(lines),flush=True)
+              manifest.append(dict(file=filename,url=url,bytes=len(data),sha256=hashlib.sha256(data).hexdigest(),decompressed_sha256=hashlib.sha256(plain).hexdigest()))
+          (root/'source_manifest.json').write_text(json.dumps(manifest,indent=2))
+          PY
+      - name: Fit prespecified donor-blocked count model when supplied
+        if: hashFiles('sensitivity/gse97358_nb/run_analysis.R') != ''
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends r-base-core r-bioc-edger r-bioc-deseq2 r-cran-jsonlite
+          Rscript sensitivity/gse97358_nb/run_analysis.R nb_run/raw nb_run/results
+      - name: Upload complete run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gse97358-donor-nb-run
+          retention-days: 30
+          path: nb_run/
