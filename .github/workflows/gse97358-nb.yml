@@ -8,7 +8,7 @@ permissions:
 jobs:
   analysis:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 90
     env:
       OMP_NUM_THREADS: '1'
       OPENBLAS_NUM_THREADS: '1'
@@ -16,9 +16,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Download and inspect official GEO inputs
         run: |
-          mkdir -p nb_run/raw nb_run/results
+          mkdir -p nb_run/raw nb_run/results nb_run/code
+          cp sensitivity/gse97358_nb/run_analysis.R nb_run/code/
+          cp .github/workflows/gse97358-nb.yml nb_run/code/
+          printf 'Commit: %s\nRun: %s\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > nb_run/code/EXECUTION_ID.txt
           python - <<'PY'
-          import urllib.request, gzip, hashlib, pathlib, json, csv, time
+          import urllib.request, gzip, hashlib, pathlib, json, time
           root=pathlib.Path('nb_run/raw')
           manifest=[]
           for filename in ['GSE97358_168_fibroblast_samples_gene_counts.txt.gz','GSE97358_fibroblasts_samples_info.txt.gz']:
@@ -39,16 +42,16 @@ jobs:
               lines=plain.decode('utf-8-sig').splitlines()
               print('SOURCE',filename,'BYTES',len(data),'LINES',len(lines),flush=True)
               print('\n'.join(lines[:4]),flush=True)
-              if 'samples_info' in filename:print('\n'.join(lines),flush=True)
               manifest.append(dict(file=filename,url=url,bytes=len(data),sha256=hashlib.sha256(data).hexdigest(),decompressed_sha256=hashlib.sha256(plain).hexdigest()))
           (root/'source_manifest.json').write_text(json.dumps(manifest,indent=2))
           PY
-      - name: Fit prespecified donor-blocked count model when supplied
-        if: hashFiles('sensitivity/gse97358_nb/run_analysis.R') != ''
+      - name: Fit unchanged donor-blocked count model with optimized BLAS
         run: |
+          set -o pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends r-base-core r-bioc-edger r-bioc-deseq2 r-cran-jsonlite
-          Rscript sensitivity/gse97358_nb/run_analysis.R nb_run/raw nb_run/results
+          sudo apt-get install -y --no-install-recommends libopenblas0-pthread r-base-core r-bioc-edger r-bioc-deseq2 r-cran-jsonlite
+          Rscript -e 'print(sessionInfo())' | tee nb_run/results/BLAS_session_before_fit.txt
+          Rscript sensitivity/gse97358_nb/run_analysis.R nb_run/raw nb_run/results 2>&1 | tee nb_run/results/execution.log
       - name: Upload complete run evidence
         if: always()
         uses: actions/upload-artifact@v4
